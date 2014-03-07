@@ -1,8 +1,8 @@
 /**
-   @file Ordenaci髇 por inserci髇
-*/
+ *   @file Ordenaci贸n por inserci贸n
+ */
 
-   
+
 #include <iostream>
 using namespace std;
 #include <ctime>
@@ -10,96 +10,86 @@ using namespace std;
 #include <climits>
 #include <cassert>
 
-
-
-
-
-
 /* ************************************************************ */ 
-/*  M閠odo de ordenaci髇 por inserci髇  */
+/*  M茅todo de ordenaci贸n por inserci贸n  */
 
 /**
-   @brief Ordena un vector por el m閠odo de inserci髇.
-
-   @param T: vector de elementos. Debe tener num_elem elementos.
-             Es MODIFICADO.
-   @param num_elem: n鷐ero de elementos. num_elem > 0.
-
-   Cambia el orden de los elementos de T de forma que los dispone
-   en sentido creciente de menor a mayor.
-   Aplica el algoritmo de inserci髇.
-*/
+ *   @brief Ordena un vector por el m茅todo de inserci贸n.
+ * 
+ *   @param T: vector de elementos. Debe tener num_elem elementos.
+ *             Es MODIFICADO.
+ *   @param num_elem: n煤mero de elementos. num_elem > 0.
+ * 
+ *   Cambia el orden de los elementos de T de forma que los dispone
+ *   en sentido creciente de menor a mayor.
+ *   Aplica el algoritmo de inserci贸n.
+ */
 inline static 
 void insercion(int T[], int num_elem);
 
 
 
 /**
-   @brief Ordena parte de un vector por el m閠odo de inserci髇.
-
-   @param T: vector de elementos. Tiene un n鷐ero de elementos 
-                   mayor o igual a final. Es MODIFICADO.
-   @param inicial: Posici髇 que marca el incio de la parte del
-                   vector a ordenar.
-   @param final: Posici髇 detr醩 de la 鷏tima de la parte del
-                   vector a ordenar. 
-		   inicial < final.
-
-   Cambia el orden de los elementos de T entre las posiciones
-   inicial y final - 1de forma que los dispone en sentido creciente
-   de menor a mayor.
-   Aplica el algoritmo de inserci髇.
-*/
+ *   @brief Ordena parte de un vector por el m茅todo de inserci贸n.
+ * 
+ *   @param T: vector de elementos. Tiene un n煤mero de elementos 
+ *                   mayor o igual a final. Es MODIFICADO.
+ *   @param inicial: Posici贸n que marca el incio de la parte del
+ *                   vector a ordenar.
+ *   @param final: Posici贸n detr谩s de la 煤ltima de la parte del
+ *                   vector a ordenar. 
+ *		   inicial < final.
+ * 
+ *   Cambia el orden de los elementos de T entre las posiciones
+ *   inicial y final - 1de forma que los dispone en sentido creciente
+ *   de menor a mayor.
+ *   Aplica el algoritmo de inserci贸n.
+ */
 static void insercion_lims(int T[], int inicial, int final);
 
 
-
 /**
-   Implementaci髇 de las funciones
-**/
+ *   Implementaci贸n de las funciones
+ **/
 
-inline static void insercion(int T[], int num_elem)
-{
-  insercion_lims(T, 0, num_elem);
+inline static void insercion(int T[], int num_elem){
+    insercion_lims(T, 0, num_elem);
 }
 
 
-static void insercion_lims(int T[], int inicial, int final)
-{
-  int i, j;
-  int aux;
-  for (i = inicial + 1; i < final; i++) {
-    j = i;
-    while ((T[j] < T[j-1]) && (j > 0)) {
-      aux = T[j];
-      T[j] = T[j-1];
-      T[j-1] = aux;
-      j--;
-    };
-  };
+static void insercion_lims(int T[], int inicial, int final){
+    int i, j;
+    int aux;
+    for (i = inicial + 1; i < final; i++){
+        j = i;
+        while ((T[j] < T[j-1]) && (j > 0)){
+            aux = T[j];
+            T[j] = T[j-1];
+            T[j-1] = aux;
+            j--;
+        }
+    }
 }
 
 
 
-int main()
-{
-  int n;
-  cout << "Introduce n鷐ero de elementos del vector: ";
-  cin >> n;
-
-  int * T = new int[n];
-  assert(T);
-
-  srandom(time(0));
-
-  for (int i = 0; i < n; i++)
-    {
-      T[i] = random();
-    };
-
-  insercion(T, n);
-
-  delete [] T;
-
-  return 0;
-};
+int main(){
+    int n;
+    cout << "Introduce n煤mero de elementos del vector: ";
+    cin >> n;
+    
+    int * T = new int[n];
+    assert(T);
+    
+    srandom(time(0));
+    
+    for (int i = 0; i < n; i++){
+        T[i] = random();
+    }
+    
+    insercion(T, n);
+    
+    delete [] T;
+    
+    return 0;
+}

@@ -1,8 +1,8 @@
 /**
-   @file C醠culo del coste de los caminos m韓imos. Algoritmo de Floyd.
-*/
+ *   @file C谩lculo del coste de los caminos m铆nimos. Algoritmo de Floyd.
+ */
 
-   
+
 #include <iostream>
 using namespace std;
 #include <ctime>
@@ -13,160 +13,154 @@ using namespace std;
 
 
 static int const MAX_LONG  = 10;
-            
+
 /**********************************************************************/
 
 /**
-   @brief Reserva espacio en memoria din醡ica para una matriz cuadrada.
-   
-   @param dim: dimensi髇 de la matriz. dim > 0.
-
-   @returns puntero a la zona de memoria reservada.
-*/
+ *   @brief Reserva espacio en memoria din谩mica para una matriz cuadrada.
+ *   
+ *   @param dim: dimensi贸n de la matriz. dim > 0.
+ * 
+ *   @returns puntero a la zona de memoria reservada.
+ */
 int ** ReservaMatriz(int dim);
 
 
 /**********************************************************************/
 
 /**
-   @brief Libera el espacio asignado a una matriz cuadrada.
-   
-   @param M: puntero a la zona de memoria reservada. Es MODIFICADO.
-   @param dim: dimensi髇 de la matriz. dim > 0.
-
-   Liberar la zona memoria asignada a M y lo pone a NULL.
-*/
+ *   @brief Libera el espacio asignado a una matriz cuadrada.
+ *   
+ *   @param M: puntero a la zona de memoria reservada. Es MODIFICADO.
+ *   @param dim: dimensi贸n de la matriz. dim > 0.
+ * 
+ *   Liberar la zona memoria asignada a M y lo pone a NULL.
+ */
 void LiberaMatriz(int ** & M, int dim);
 
 /**********************************************************************/
 
 /**
-   @brief Rellena una matriz cuadrada con valores aleaotorias.
-   
-   @param M: puntero a la zona de memoria reservada. Es MODIFICADO.
-   @param dim: dimensi髇 de la matriz. dim > 0.
-
-   Asigna un valor aleatorio entero de [0, MAX_LONG - 1] a cada
-   elemento de la matriz M, salvo los de la diagonal principal
-   que quedan a 0..
-*/
+ *   @brief Rellena una matriz cuadrada con valores aleaotorias.
+ *   
+ *   @param M: puntero a la zona de memoria reservada. Es MODIFICADO.
+ *   @param dim: dimensi贸n de la matriz. dim > 0.
+ * 
+ *   Asigna un valor aleatorio entero de [0, MAX_LONG - 1] a cada
+ *   elemento de la matriz M, salvo los de la diagonal principal
+ *   que quedan a 0..
+ */
 void RellenaMatriz(int **M, int dim);
 
-/**********************************************************************/	
+/**********************************************************************/    
 /**
-   @brief C醠culo de caminos m韓imos.
-   
-   @param M: Matriz de longitudes de los caminos. Es MODIFICADO.
-   @param dim: dimensi髇 de la matriz. dim > 0.
-
-   Calcula la longitud del camino m韓imo entre cada par de nodos (i,j),
-   que se almacena en M[i][j].
-*/
+ *   @brief C谩lculo de caminos m铆nimos.
+ *   
+ *   @param M: Matriz de longitudes de los caminos. Es MODIFICADO.
+ *   @param dim: dimensi贸n de la matriz. dim > 0.
+ * 
+ *   Calcula la longitud del camino m铆nimo entre cada par de nodos (i,j),
+ *   que se almacena en M[i][j].
+ */
 void Floyd(int **M, int dim);
 
 /**********************************************************************/
 
 
 /**
-   Implementaci髇 de las funciones
-**/
+ *   Implementaci贸n de las funciones
+ **/
 
 
-int ** ReservaMatriz(int dim)
-{
-  int **M;
-  if (dim  <= 0)
+int ** ReservaMatriz(int dim){
+    int **M;
+    if (dim  <= 0)
     {
-      cerr<< "\n ERROR: Dimension de la matriz debe ser mayor que 0" << endl;
-      exit(1);
+        cerr<< "\n ERROR: Dimension de la matriz debe ser mayor que 0" << endl;
+        exit(1);
     }
-  M = new (int *) [dim];
-  if (M == NULL)
+    M = new (int *) [dim];
+    if (M == NULL)
     {
-      cerr << "\n ERROR: No puedo reservar memoria para un matriz de "
-	   << dim << " x " << dim << "elementos" << endl;
-      exit(1);
+        cerr << "\n ERROR: No puedo reservar memoria para un matriz de "
+        << dim << " x " << dim << "elementos" << endl;
+        exit(1);
     }
-  for (int i = 0; i < dim; i++)
+    for (int i = 0; i < dim; i++)
     {
-      M[i]= new int [dim];
-      if (M[i] == NULL)
-	{
-	  cerr << "ERROR: No puedo reservar memoria para un matriz de "
-	       << dim << " x " << dim << endl;
-	  for (int j = 0; j < i; j++)
-	    delete [] M[i];
-	  delete [] M;
-	  exit(1);
-	} 
+        M[i]= new int [dim];
+        if (M[i] == NULL)
+        {
+            cerr << "ERROR: No puedo reservar memoria para un matriz de "
+            << dim << " x " << dim << endl;
+            for (int j = 0; j < i; j++)
+                delete [] M[i];
+            delete [] M;
+            exit(1);
+        } 
     }
-  return M;
-}	
+    return M;
+}   
 
 
 /**********************************************************************/
 
-void LiberaMatriz(int ** & M, int dim)
-{
-  for (int i = 0; i < dim; i++)
-    delete [] M[i];
-  delete [] M;
-  M = NULL;
-}		
+void LiberaMatriz(int ** & M, int dim){
+    for (int i = 0; i < dim; i++)
+        delete [] M[i];
+    delete [] M;
+    M = NULL;
+}       
 
 
 /**********************************************************************/
-void RellenaMatriz(int **M, int dim)
-{
-  for (int i = 0; i < dim; i++)
-    for (int j = 0; j < dim; j++)
-      if (i != j)
-	M[i][j]= (rand() % MAX_LONG);
-}			
+void RellenaMatriz(int **M, int dim){
+    for (int i = 0; i < dim; i++)
+        for (int j = 0; j < dim; j++)
+            if (i != j)
+                M[i][j]= (rand() % MAX_LONG);
+}           
 
 
-/**********************************************************************/	
-void Floyd(int **M, int dim)
-{
-	for (int k = 0; k < dim; k++)
-	  for (int i = 0; i < dim;i++)
-	    for (int j = 0; j < dim;j++)
-	      {
-		int sum = M[i][k] + M[k][j];    	
-	    	M[i][j] = (M[i][j] > sum) ? sum : M[i][j];
-	      }
-}	     	
+/**********************************************************************/    
+void Floyd(int **M, int dim){
+    for (int k = 0; k < dim; k++)
+        for (int i = 0; i < dim;i++)
+            for (int j = 0; j < dim;j++)
+            {
+                int sum = M[i][k] + M[k][j];        
+                M[i][j] = (M[i][j] > sum) ? sum : M[i][j];
+            }
+}           
 
 
-/**********************************************************************/	
-int main (int argc, char **argv)
-{
-  clock_t tantes;    // Valor del reloj antes de la ejecuci髇
-  clock_t tdespues;  // Valor del reloj despu閟 de la ejecuci髇
-  int dim;           // Dimensi髇 de la matriz
+/**********************************************************************/    
+int main (int argc, char **argv){
+    clock_t tantes;    // Valor del reloj antes de la ejecuci贸n
+    clock_t tdespues;  // Valor del reloj despu茅s de la ejecuci贸n
+    int dim;           // Dimensi贸n de la matriz
+    
+    //Lectura de los parametros de entrada
+    if (argc != 2){
+        cout << "Par谩metros de entrada: " << endl
+        << "1.- N煤mero de nodos" << endl << endl;
+        return 1; 
+    }   
+    
+    dim = atoi(argv[1]);  
+    int ** M = ReservaMatriz(dim);
+    
+    RellenaMatriz(M,dim);
+    
+    
+    // Empieza el algoritmo de floyd
+    tantes = clock();
+    Floyd(M,dim);
+    tdespues = clock();
+    cout << "Tiempo: " << ((double)(tdespues-tantes))/CLOCKS_PER_SEC
+    << " s" << endl;
+    LiberaMatriz(M,dim);
+    
+    return 0;
+}   
 
-  //Lectura de los parametros de entrada
-  if (argc != 2)
-    {
-      cout << "Par醡etros de entrada: " << endl
-	   << "1.- N鷐ero de nodos" << endl << endl;
-      return 1;	
-    }	
-
-  dim = atoi(argv[1]);	
-  int ** M = ReservaMatriz(dim);
-
-  RellenaMatriz(M,dim);
-		
-			
-  // Empieza el algoritmo de floyd
-  tantes = clock();
-  Floyd(M,dim);
-  tdespues = clock();
-  cout << "Tiempo: " << ((double)(tdespues-tantes))/CLOCKS_PER_SEC
-       << " s" << endl;
-  LiberaMatriz(M,dim);
-
-  return 0;
-}	
-	

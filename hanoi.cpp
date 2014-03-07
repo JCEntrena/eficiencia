@@ -1,53 +1,45 @@
 /**
-   @file Resolución del problema de las Torres de Hanoi
+@file ResoluciÃ³n del problema de las Torres de Hanoi
 */
 
-   
 #include <iostream>
 using namespace std;
 #include <ctime>
 
 
 /**
-   @brief Resuelve el problema de las Torres de Hanoi
-   @param M: número de discos. M > 1.
-   @param i: número de columna en que están los discos.
-             i es un valor de {1, 2, 3}. i != j.
-   @param j: número de columna a que se llevan los discos.
-             j es un valor de {1, 2, 3}. j != i.
+@ *brief Resuelve el problema de las Torres de Hanoi
+@param M: nÃºmero de discos. M > 1.
+@param i: nÃºmero de columna en que estÃ¡n los discos.
+i es un valor de {1, 2, 3}. i != j.
+@param j: nÃºmero de columna a que se llevan los discos.
+j es un valor de {1, 2, 3}. j != i.
 
-   Esta función imprime en la salida estándar la secuencia de 
-   movimientos necesarios para desplazar los M discos de la
-   columna i a la j, observando la restricción de que ningún
-   disco se puede situar sobre otro de tamaño menor. Utiliza
-   una única columna auxiliar.
+Esta funciÃ³n imprime en la salida estÃ¡ndar la secuencia de
+movimientos necesarios para desplazar los M discos de la
+columna i a la j, observando la restricciÃ³n de que ningÃºn
+disco se puede situar sobre otro de tamaÃ±o menor. Utiliza
+una Ãºnica columna auxiliar.
 */
 void hanoi (int M, int i, int j);
 
-
-
-
-void hanoi (int M, int i, int j)
-{
-  if (M > 0)
-    {
-      hanoi(M-1, i, 6-i-j);
-      cout << i << " -> " << j << endl;
-      hanoi (M-1, 6-i-j, j);
-  }
+void hanoi (int M, int i, int j){
+    if (M > 0){
+        hanoi(M-1, i, 6-i-j);
+        cout << i << " -> " << j << endl;
+        hanoi (M-1, 6-i-j, j);
+    }
 }
 
-void main()
-{
-
-  int M;
-  do
-    {
-      cout << "Número de discos: ";
-      cin >> M;
-    } while (M <= 0);
-
-  hanoi(M, 1, 2);
-
-  return 0;
+void main(){
+    
+    int M;
+    do{
+        cout << "NÃºmero de discos: ";
+        cin >> M;
+    }while (M <= 0);
+    
+    hanoi(M, 1, 2);
+    
+    return 0;
 }
