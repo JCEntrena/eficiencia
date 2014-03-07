@@ -1,7 +1,9 @@
 # Latex
 *.log
 *.aux
+*.pdf
 
 # Ejecutables
 burbuja
 fibonacci
+*.dat
