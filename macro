@@ -1,0 +1,8 @@
+#!/bin/csh -f
+set i = 10
+echo -n "" > burbuja.dat
+while ($i < 10000)
+echo -n "$i " >> burbuja.dat
+./burbuja $i >> burbuja.dat
+@ i += 100
+end
