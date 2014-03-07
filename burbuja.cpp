@@ -11,7 +11,7 @@
 #include <unistd.h>
 using namespace std;
 
-#define NUM_VECES 10000
+#define NUM_VECES 50
 
 /**
  * @brief Ordena un vector por el método de la burbuja.
@@ -96,7 +96,7 @@ int main(int argc, char* argv[]){
     for (int i=0; i<NUM_VECES; ++i){
         t_a=clock();
         duplicaVector(T,U,n);
-        t_b+=(clock()-t_a);
+        t_b+=(clock()-t_a); // Esto acaba siendo 0 siempre
         burbuja(U, n);
     }
     t_despues = clock();
@@ -104,6 +104,6 @@ int main(int argc, char* argv[]){
     delete [] T;
     delete [] U;
     
-    cout << (double)(t_despues-t_antes-t_b)/(CLOCKS_PER_SEC*(double)(NUM_VECES));
+    cout << (double)(t_despues-t_antes-t_b)/(CLOCKS_PER_SEC*(double)(NUM_VECES)) << endl;
     return 0;
 }
