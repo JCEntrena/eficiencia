@@ -7,3 +7,7 @@
 burbuja
 fibonacci
 *.dat
+
+#Archivos de respaldo
+*~
+*fuse_hidden*   
