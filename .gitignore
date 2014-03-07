@@ -1,0 +1,7 @@
+# Latex
+*.log
+*.aux
+
+# Ejecutables
+burbuja
+fibonacci
