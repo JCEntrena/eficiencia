@@ -23,10 +23,12 @@ int fibo(int n){
 
 int main(int argc, char* argv[]){
     if (argc !=2){
-        cerr << "Uso del programa: " + (string)(argv[0]) + " <número entero>" << endl;  
+        cerr << "Uso del programa: " + (string)(argv[0]) + " <número positivo>" << endl;  
         return -1;
     }
-    int n = atoi(argv[1]);
+    int n = atoi(argv[1]);    
+    if (n<0) return -1;
+    
     clock_t t_antes, t_despues;
     
     t_antes = clock();
@@ -35,6 +37,6 @@ int main(int argc, char* argv[]){
         fibo(n);
 
     t_despues = clock();
-    cout << (double)(t_despues-t_antes)/(CLOCKS_PER_SEC*(double)(NUM_VECES));
+    cout << (double)(t_despues-t_antes)/(CLOCKS_PER_SEC*(double)(NUM_VECES)) << endl;
     return 0;
 }

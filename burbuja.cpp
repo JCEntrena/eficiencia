@@ -5,13 +5,10 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
-#include <climits>
-#include <cassert>
 #include <ctime>
-#include <unistd.h>
 using namespace std;
 
-#define NUM_VECES 50
+#define NUM_VECES 1000
 
 /**
  * @brief Ordena un vector por el método de la burbuja.
@@ -79,10 +76,12 @@ void duplicaVector(int* T,int* U,int tam){
 
 int main(int argc, char* argv[]){
     if (argc !=2){
-        cerr << "Uso del programa: " + (string)(argv[0]) + " <número entero>" << endl;  
+        cerr << "Uso del programa: " + (string)(argv[0]) + " <número positivo>" << endl;  
         return -1;
     }
-    int n = atoi(argv[1]);
+    int n = atoi(argv[1]);    
+    if (n<0) return -1;
+    
     int * T = new int[n], *U=new int[n];
     clock_t t_antes, t_despues, t_a, t_b(0);
     
@@ -97,6 +96,7 @@ int main(int argc, char* argv[]){
         t_a=clock();
         duplicaVector(T,U,n);
         t_b+=(clock()-t_a); // Esto acaba siendo 0 siempre
+        //cerr << t_b << endl;  // Quitar esta línea cuando se compruebe que funciona
         burbuja(U, n);
     }
     t_despues = clock();
