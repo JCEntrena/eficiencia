@@ -2,7 +2,8 @@
 
 # Variables de ejecución
 SCRIPT=plot
-SOURCES="burbuja fibonacci floyd hanoi heapsort insercion mergesort quicksort seleccion"
+#SOURCES="burbuja fibonacci floyd hanoi heapsort insercion mergesort quicksort seleccion"
+SOURCES=`ls *.cpp | rev | cut -f2 -d. | rev`
 
 printf  'set xlabel "Talla del problema(n)"
         set ylabel "Tiempo(s)"
@@ -13,14 +14,14 @@ printf  'set xlabel "Talla del problema(n)"
 for i in $SOURCES
 do
     echo -n "" > $i.dat
-    j=10
     
-    [[ -f $i ]] && g++ ./$i.cpp -o $i
+    g++ ./$i.cpp -o $i # Recompila siempre para utilizar la última versión de los .cpp
     
-    while [[ $j -lt 1000 ]]; do
+    echo "Ejecutando $i"
+
+    for (( j = 10; j < 1000; j+=50 )); do
         echo -n "$j " >> $i.dat
         ./$i $j >> $i.dat
-        let j=$j+10
     done
     
     gnuplot -e "basename='$i'" $SCRIPT
