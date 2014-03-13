@@ -2,7 +2,7 @@
 
 # Variables de ejecución
 SCRIPT=plot
-SOURCES=(burbuja fibonacci floyd hanoi heapsort insercion mergesort quicksort seleccion)
+SOURCES=`ls *.cpp | rev | cut -f2 -d. | rev`
 LIMITS=(10000 50 1000 35 10000 10000 10000 10000 10000)
 INC=(100 1 5 1 100 100 100 100 100)
 N_ITER=5
@@ -17,15 +17,14 @@ for i in `seq 0 $((${#SOURCES[*]}-1))`
 do
     src=${SOURCES[$i]}
     inc=${INC[$i]}
-    #echo ${LIMITS[$i]}
-    
-    
+ 
     echo -n "" > $src.dat
     [[ $inc -eq 1 ]] && j=1 || j=10
     
-    ! [[ -f $src ]] && g++ ./$src.cpp -o $src
+    g++ ./$src.cpp -o $src
 
-    while [[ $j -lt ${LIMITS[$i]} ]]; do
+    while [[ $j -lt ${LIMITS[$i]} ]]; 
+    do
         echo -n "$j " >> $src.dat
         sum=0
         
