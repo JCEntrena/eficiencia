@@ -6,6 +6,13 @@
 # Ejecutables
 burbuja
 fibonacci
+hanoi
+floyd
+heapsort
+mergesort
+quicksort
+insercion
+seleccion
 *.dat
 
 #Archivos de respaldo
