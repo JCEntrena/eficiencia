@@ -70,20 +70,6 @@ static void reajustar(int T[], int num_elem, int k){
     T[k] = v;
 }
 
-/**
- * @brief Permite duplicar un vector de enteros
- * @param T puntero a un vector de enteros
- * @param U puntero a otro vector de enteros
- * @param n tamanio de ambos vectores
- * @pre Han de tener el mismo tamanio
- */
-
-void duplicaVector(int* T,int* U,int tam){
-    for (int i=0; i<tam; ++i){
-        U[i]=T[i];
-    }
-}
-
 int main(int argc, char* argv[]){
     if (argc !=2){
         cerr << "Uso del programa: " + (string)(argv[0]) + " <número positivo>" << endl;  
@@ -92,8 +78,8 @@ int main(int argc, char* argv[]){
     int n = atoi(argv[1]);    
     if (n<0) return -1;
     
-    int * T = new int[n], *U=new int[n];
-    clock_t t_antes, t_despues, t_a, t_b(0);
+    int * T = new int[n];
+    struct timespec t_antes, t_despues;
     
     srandom(time(0));
     
@@ -101,18 +87,16 @@ int main(int argc, char* argv[]){
         T[i] = random();
     }
     
-    t_antes = clock();    
-    for (int i=0; i<NUM_VECES; ++i){
-        t_a=clock();
-        duplicaVector(T,U,n);
-        t_b+=(clock()-t_a);
-        heapsort(U, n);
-    }
-    t_despues = clock();
+    clock_gettime(CLOCK_REALTIME,&t_antes);
+    heapsort (T,n);
+    clock_gettime(CLOCK_REALTIME,&t_despues);
+    
+    cout.precision(3);
+    cout << (double) (t_despues.tv_sec-t_antes.tv_sec)+
+        (double) ((t_despues.tv_nsec-t_antes.tv_nsec)/(1.e+9)) << endl;
+
     
     delete [] T;
-    delete [] U;
     
-    cout << (double)(t_despues-t_antes-t_b)/(CLOCKS_PER_SEC*(double)(NUM_VECES)) << endl;
     return 0;
 }

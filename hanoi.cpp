@@ -39,12 +39,16 @@ int main(int argc, char* argv[]){
     }
     int n = atoi(argv[1]);    
     if (n<0) return -1;
+
+    struct timespec t_antes, t_despues;
     
-    clock_t t_antes, t_despues;
-    t_antes = clock();
-    hanoi(n, 1, 2);
-    t_despues = clock();
-    cout << (double)(t_despues-t_antes)/(CLOCKS_PER_SEC);
+    clock_gettime(CLOCK_REALTIME,&t_antes);
+    hanoi (n,1,2);
+    clock_gettime(CLOCK_REALTIME,&t_despues);
+    
+    cout.precision(3);
+    cout << (double) (t_despues.tv_sec-t_antes.tv_sec)+
+        (double) ((t_despues.tv_nsec-t_antes.tv_nsec)/(1.e+9)) << endl;
     
     return 0;
 }

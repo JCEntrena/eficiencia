@@ -6,7 +6,6 @@
 #include <ctime>
 #include <cstdlib>
 using namespace std;
-#define NUM_VECES 100
 
 /**
  * @brief Calcula el término n-ésimo de la sucesión de Fibonacci.
@@ -28,15 +27,16 @@ int main(int argc, char* argv[]){
     }
     int n = atoi(argv[1]);    
     if (n<0) return -1;
-    
-    clock_t t_antes, t_despues;
-    
-    t_antes = clock();
-    
-    for (int i=0; i<NUM_VECES; ++i)
-        fibo(n);
 
-    t_despues = clock();
-    cout << (double)(t_despues-t_antes)/(CLOCKS_PER_SEC*(double)(NUM_VECES)) << endl;
+    struct timespec t_antes, t_despues;
+    
+    clock_gettime(CLOCK_REALTIME,&t_antes);
+    fibo (n);
+    clock_gettime(CLOCK_REALTIME,&t_despues);
+    
+    cout.precision(3);
+    cout << (double) (t_despues.tv_sec-t_antes.tv_sec)+
+        (double) ((t_despues.tv_nsec-t_antes.tv_nsec)/(1.e+9)) << endl;
+    
     return 0;
 }

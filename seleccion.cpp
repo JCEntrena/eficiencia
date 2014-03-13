@@ -10,9 +10,6 @@
 #include <climits>
 using namespace std;
 
-#define NUM_VECES 50
-
-
 /**
  * @brief Ordena un vector por el método de selección.
  * @param T: vector de elementos. Debe tener num_elem elementos.
@@ -89,8 +86,8 @@ int main(int argc, char* argv[]){
     int n = atoi(argv[1]);    
     if (n<0) return -1;
     
-    int * T = new int[n], *U=new int[n];
-    clock_t t_antes, t_despues, t_a, t_b(0);
+    int * T = new int[n];
+    struct timespec t_antes, t_despues;
     
     srandom(time(0));
     
@@ -98,18 +95,16 @@ int main(int argc, char* argv[]){
         T[i] = random();
     }
     
-    t_antes = clock();    
-    for (int i=0; i<NUM_VECES; ++i){
-        t_a=clock();
-        duplicaVector(T,U,n);
-        t_b+=(clock()-t_a);
-        seleccion(U, n);
-    }
-    t_despues = clock();
+    clock_gettime(CLOCK_REALTIME,&t_antes);
+    seleccion (T,n);
+    clock_gettime(CLOCK_REALTIME,&t_despues);
+    
+    cout.precision(3);
+    cout << (double) (t_despues.tv_sec-t_antes.tv_sec)+
+        (double) ((t_despues.tv_nsec-t_antes.tv_nsec)/(1.e+9)) << endl;
+
     
     delete [] T;
-    delete [] U;
     
-    cout << (double)(t_despues-t_antes-t_b)/(CLOCKS_PER_SEC*(double)(NUM_VECES)) << endl;
     return 0;
 }

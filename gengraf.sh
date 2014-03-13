@@ -2,7 +2,10 @@
 
 # Variables de ejecución
 SCRIPT=plot
-SOURCES="burbuja fibonacci floyd hanoi heapsort insercion mergesort quicksort seleccion"
+SOURCES=(burbuja fibonacci floyd hanoi heapsort insercion mergesort quicksort seleccion)
+LIMITS=(10000 50 1000 35 10000 10000 10000 10000 10000)
+INC=(100 1 5 1 100 100 100 100 100)
+N_ITER=5
 
 printf  'set xlabel "Talla del problema(n)"
         set ylabel "Tiempo(s)"
@@ -10,20 +13,35 @@ printf  'set xlabel "Talla del problema(n)"
         set output basename.".jpg"
         plot basename.".dat" title "Eficiencia " .basename with linespoints' > $SCRIPT
         
-for i in $SOURCES
+for i in `seq 0 $((${#SOURCES[*]}-1))`
 do
-    echo -n "" > $i.dat
-    j=10
+    src=${SOURCES[$i]}
+    inc=${INC[$i]}
+    #echo ${LIMITS[$i]}
     
-    [[ -f $i ]] && g++ ./$i.cpp -o $i
     
-    while [[ $j -lt 1000 ]]; do
-        echo -n "$j " >> $i.dat
-        ./$i $j >> $i.dat
-        let j=$j+10
+    echo -n "" > $src.dat
+    [[ $inc -eq 1 ]] && j=1 || j=10
+    
+    ! [[ -f $src ]] && g++ ./$src.cpp -o $src
+
+    while [[ $j -lt ${LIMITS[$i]} ]]; do
+        echo -n "$j " >> $src.dat
+        sum=0
+        
+        for k in `seq 0 $N_ITER`
+        do
+            exc=`./$src $j`
+            sum=`echo "$sum+${exc/e/*10^}" | bc -l`
+        done
+        
+        echo `echo $sum/$N_ITER |bc -l` >> $src.dat
+        let j=$j+$inc
     done
     
-    gnuplot -e "basename='$i'" $SCRIPT
+    echo -n "$src generado..."
+    
+    gnuplot -e "basename='$src'" $SCRIPT
     
 done
 

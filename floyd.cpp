@@ -110,8 +110,7 @@ void Floyd(int **M, int dim){
 }           
 
 int main (int argc, char *argv[]){
-    clock_t t_antes;    // Valor del reloj antes de la ejecución
-    clock_t t_despues;  // Valor del reloj después de la ejecución
+    struct timespec t_antes, t_despues;
     int dim;            // Dimensión de la matriz
     
     //Lectura de los parametros de entrada
@@ -128,10 +127,15 @@ int main (int argc, char *argv[]){
     
     
     // Empieza el algoritmo de floyd
-    t_antes = clock();
-    Floyd(M,dim);
-    t_despues = clock();
-    cout << ((double)(t_despues-t_antes))/CLOCKS_PER_SEC << endl;
+    
+    clock_gettime(CLOCK_REALTIME,&t_antes);
+    Floyd (M,dim);
+    clock_gettime(CLOCK_REALTIME,&t_despues);
+    
+    cout.precision(3);
+    cout << (double) (t_despues.tv_sec-t_antes.tv_sec)+
+        (double) ((t_despues.tv_nsec-t_antes.tv_nsec)/(1.e+9)) << endl;
+
     LiberaMatriz(M,dim);
     
     return 0;
