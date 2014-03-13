@@ -2,7 +2,7 @@
 
 # Variables de ejecución
 SCRIPT=plot
-SOURCES=`ls *.cpp | rev | cut -f2 -d. | rev`
+SOURCES=(burbuja fibonacci floyd hanoi heapsort insercion mergesort quicksort seleccion)
 LIMITS=(10000 50 1000 35 10000 10000 10000 10000 10000)
 INC=(100 1 5 1 100 100 100 100 100)
 N_ITER=5
