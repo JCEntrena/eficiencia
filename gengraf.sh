@@ -7,11 +7,7 @@ LIMITS=(10000 50 1000 35 10000 10000 10000 10000 10000)
 INC=(100 1 5 1 100 100 100 100 100)
 N_ITER=5
 
-printf  'set xlabel "Talla del problema(n)"
-        set ylabel "Tiempo(s)"
-        set terminal jpeg size 800,480
-        set output basename.".jpg"
-        plot basename.".dat" title "Eficiencia " .basename with linespoints' > $SCRIPT
+
         
 for i in `seq 0 $((${#SOURCES[*]}-1))`
 do
@@ -43,5 +39,3 @@ do
     gnuplot -e "basename='$src'" $SCRIPT
     
 done
-
-rm -r $SCRIPT
