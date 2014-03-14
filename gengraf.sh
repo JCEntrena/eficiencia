@@ -40,8 +40,7 @@ function gendata() {
     
     echo -n "" > $1.dat
 
-    for (( i = $ini; i < $lim; i+=$inc )); 
-    do
+    for i in `seq $ini $inc $lim`; do #(( i = $ini; i < $lim; i += $inc )); do
         echo -n "$i " >> $1.dat
         sum=0
         
