@@ -46,7 +46,7 @@ function gendata() {
         
         for k in `seq 0 $N_ITER`
         do
-            exc=`./$1 $i`
+            exc=`bin/$1 $i`
             sum=`echo "$sum+${exc/e/*10^}" | bc -l`
         done
         
@@ -101,9 +101,9 @@ function genajuste() {
 
 }
 
+PN=`echo $1 | rev | cut -f1 -d/ | rev`
+[[ $2 -eq 0 ]] && genplot $PN
 
-[[ $2 -eq 0 ]] && genplot $1
+[[ $2 -eq 1 ]] && gendata $PN
 
-[[ $2 -eq 1 ]] && gendata $1
-
-[[ $2 -eq 2 ]] && genajuste $1
+[[ $2 -eq 2 ]] && genajuste $PN
