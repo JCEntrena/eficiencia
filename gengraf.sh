@@ -59,7 +59,7 @@ function gendata() {
 function bondadajuste() {
     echo "f(x)=$2; fit f(x) '$1.dat' via $3" | gnuplot 2> $1_fit
     result=`cat $1_fit | grep "rms" | grep -o "[[:digit:]]*\.[[:digit:]]*"`
-    echo "$2; $result"; sleep 1
+    # echo "$2; $result"; sleep 1
 }
 
 function plotajuste() {
