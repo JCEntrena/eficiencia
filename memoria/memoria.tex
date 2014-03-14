@@ -71,6 +71,32 @@ Análisis de eficiencia} % Subtitle
 
 \maketitle % Print the title section
 
+\section {Preparación del código}
+Hemos creado un makefile.
+Hemos escrito código en bash para generar las gráficas.
+Hemos reescrito partes del código para que sea legible.
+Hemos cambiado la medición de tiempo, por una más precisa.
+
+\section {Análisis teórico}
+\subsection {Ordenación de la burbuja}
+El algoritmo lo forman dos bucles anidados ejecutando un conjunto de sentencias elementales, $\mathcal{O}(1)$.
+El bucle externo se repite $n$ veces y el interno depende del índice del bucle externo. Ejecutándose en total:
+\begin{equation}
+ T(n) = \sum_{i=0}^n i = \frac{n(n+1)}{2} = \frac{n^2}{2} + \frac{n}{2}
+\end{equation}
+por lo que el algoritmo es $\mathcal{O}(n^2)$.
+
+\subsection {Sucesión de Fibonacci}
+El algoritmo está escrito recursivamente y sin memoización. La llamada a la función con tamaño $n$ produce 
+dos llamadas recursivas con tamaños $n-1$ y $n-2$.
+
+
+\section {Análisis práctico}
+
+\section {Conclusiones}
+\subsection {Gráficas}
+
+
 %----------------------------------------------------------------------------------------
 %	ABSTRACT AND KEYWORDS
 %----------------------------------------------------------------------------------------

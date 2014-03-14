@@ -1,9 +1,0 @@
-#!/bin/csh -f
-set i = 10
-echo -n "" > $1.dat
-while ($i < 10000)
-	echo -n "$i | "
-	echo -n "$i " >> $1.dat
-	./$1 $i >> $1.dat
-	@ i += 100
-end
