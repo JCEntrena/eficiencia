@@ -42,13 +42,14 @@ static void reajustar(int T[], int num_elem, int k);
 
 static void heapsort(int T[], int num_elem){
     int i;
-    for (i = num_elem/2; i >= 0; i--)
+    for (i = num_elem/2; i >= 0; i--){
         reajustar(T, num_elem, i);
-    for (i = num_elem - 1; i >= 1; i--){
-        int aux = T[0];
-        T[0] = T[i];
-        T[i] = aux;
-        reajustar(T, i, 0);
+        for (j = num_elem - 1; j >= 1; j--){
+            int aux = T[0];
+            T[0] = T[j];
+            T[j] = aux;
+            reajustar(T, j, 0);
+        }
     }
 }
 
@@ -59,8 +60,8 @@ static void reajustar(int T[], int num_elem, int k){
     v = T[k];
     bool esAPO = false;
     while ((k < num_elem/2) && !esAPO){
-        j = k + k + 1;
-        if ((j < (num_elem - 1)) && (T[j] < T[j+1]))
+        j = 2*k + 1;    //hijo a la izquierda de k
+        if ((j < (num_elem - 1)) && (T[j] < T[j+1]))   //Si existe el hijo izquierda, coge el mayor de los hijos de k
             j++;
         if (v >= T[j])
             esAPO = true;
