@@ -4,10 +4,10 @@
 
 CMPLINE=g++ $< -o $@ -std=c++0x -Wall
 
-all: $(patsubst src/%.cpp, %.out, $(wildcard src/*.cpp))
+# RECORDAD CREAR UN DIRECTORIO bin/
+all: $(patsubst src/%.cpp, bin/%, $(wildcard src/*.cpp))
 
-# genera ejecutables en el directorio actual (bin/% no me funciona...)
-%: src/%.cpp
+bin/%: src/%.cpp
 	$(CMPLINE)
 
 # make plot generará todas las imágenes a partir de los archivos .dat
@@ -18,10 +18,10 @@ data: all gengraf.sh $(patsubst src/%.cpp, %.dat, $(wildcard src/*.cpp))
 
 fit: all gengraf.sh $(patsubst src/%.cpp, %_fit.jpg, $(wildcard src/*.cpp))
 
-%.jpg: % %.dat
+%.jpg: bin/% %.dat
 	./gengraf.sh $< 0
 
-%.dat: %
+%.dat: bin/%
 	./gengraf.sh $< 1
 
 %_fit.jpg: bin/%
