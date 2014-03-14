@@ -2,43 +2,49 @@
 
 # Variables de ejecución
 SCRIPT=plot
-SOURCES=(burbuja fibonacci floyd hanoi heapsort insercion mergesort quicksort seleccion)
 # Límite e incremento de tamaño.
-LIMITS=(10000 50 1000 35 10000 10000 10000 10000 10000)
-INC=(100 1 5 1 100 100 100 100 100)
+MAP="burbuja 10000 100
+fibonacci 50 1
+floyd 1000 5
+hanoi 35 1
+heapsort 10000 100
+insercion 10000 100
+mergesort 10000 100
+quicksort 10000 100
+seleccion 10000 100"
 N_ITER=5
 
+function genplot() {
+    echo 'set xlabel "Talla del problema(n)"
+        set ylabel "Tiempo(s)"
+        set terminal jpeg size 800,480
+        set output basename.".jpg"
+        plot basename.".dat" title "Eficiencia " .basename with linespoints' > $SCRIPT
+    gnuplot -e "basename='$1'" $SCRIPT
+    rm $SCRIPT
+}
 
-# Genera todos los ejecutables.
-make
+function gendata() {
+    lim=`echo $MAP | grep $1 | cut -f2 -d" "`
+    inc=`echo $MAP | grep $1 | cut -f3 -d" "`
+    ini=`[[ $inc -eq 1 ]] && echo 1 || echo 10`
+    
+    echo -n "" > $1.dat
 
-# Para cada uno de los programas, ejecuta hasta el límite con el incremento dado.
-# Vuelca los datos obtenidos en un .dat y genera el gráfico con gnuplot. 
-for i in `seq 0 $((${#SOURCES[*]}-1))`
-do
-    src=${SOURCES[$i]}
-    inc=${INC[$i]}
- 
-    echo -n "" > $src.dat
-    [[ $inc -eq 1 ]] && j=1 || j=10
-
-    while [[ $j -lt ${LIMITS[$i]} ]];
-    do
-        echo -n "$j " >> $src.dat
+    for (( i = ini; i < $lim; i+=$inc )); do
+        echo -n "$i " >> $1.dat
         sum=0
         
         for k in `seq 0 $N_ITER`
         do
-            exc=`./$src $j`
+            exc=`./$1 $i`
             sum=`echo "$sum+${exc/e/*10^}" | bc -l`
         done
         
-        echo `echo $sum/$N_ITER |bc -l` >> $src.dat
-        let j=$j+$inc
+        echo `echo $sum/$N_ITER | bc -l` >> $1.dat
     done
-    
-    echo -n "$src generado..."
-    
-    gnuplot -e "basename='$src'" $SCRIPT
-    
-done
+}
+
+[[ $2 -eq 1 ]] && gendata $1
+
+genplot $1
