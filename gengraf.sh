@@ -15,7 +15,8 @@ seleccion 10000 100"
 # Constante del número áureo
 aur=`echo "(1+sqrt(5))/2" | bc -l`
 # Funciones de ajuste posibles
-FUNCS=("a0*(x**3)+a1*(x**2)+a2*x+a3                 a0,a1,a2,a3" 
+FUNCS=("a0*(x**3)+a1*(x**2)+a2*x+a3                 a0,a1,a2,a3"
+       #"a0*exp(log(a)*x)                            a0"
        #"a0*(($aur)**x)+a1*((1/$aur)**x)+a2*x+a3    a0,a1,a2,a3"
        "a0*x*log(x)+a1*x+a2*log(x)+a3               a0,a1,a2,a3"
        )
@@ -58,7 +59,8 @@ function gendata() {
 function bondadajuste() {
     echo "f(x)=$2; fit f(x) '$1.dat' via $3" | gnuplot 2> $1_fit
     result=`cat $1_fit | grep "rms" | grep -o "[[:digit:]]*\.[[:digit:]]*"`
-    }
+    echo "$2; $result"; sleep 1
+}
 
 function plotajuste() {
     echo "set xlabel 'Talla del problema(n)'
@@ -83,7 +85,7 @@ function genajuste() {
     mejor=$result
     chosen=0
     
-    for i in $FUNCS; 
+    for i in `seq 1 $((${#FUNCS[*]}-1))`
     do
         extrae_f $i
         bondadajuste $1 ${func} ${coefs}
