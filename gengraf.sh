@@ -3,7 +3,7 @@
 # Variables de ejecución
 SCRIPT=plot
 # Límite e incremento de tamaño.
-MAP="burbuja 10000 100
+MAP="burbuja 5000 100
 fibonacci 50 1
 floyd 1000 5
 hanoi 35 1
@@ -12,6 +12,14 @@ insercion 10000 100
 mergesort 10000 100
 quicksort 10000 100
 seleccion 10000 100"
+# Constante del número áureo
+aur=`echo "(1+sqrt(5))/2" | bc -l`
+# Funciones de ajuste posibles
+FUNCS=("a0*(x**3)+a1*(x**2)+a2*x+a3                 a0,a1,a2,a3" 
+       #"a0*(($aur)**x)+a1*((1/$aur)**x)+a2*x+a3    a0,a1,a2,a3"
+       "a0*x*log(x)+a1*x+a2*log(x)+a3               a0,a1,a2,a3"
+       )
+# Número de ejecuciones con las que se obtendrá el promedio
 N_ITER=5
 
 function genplot() {
@@ -46,6 +54,55 @@ function gendata() {
     done
 }
 
+     
+function bondadajuste() {
+    echo "f(x)=$2; fit f(x) '$1.dat' via $3" | gnuplot 2> $1_fit
+    result=`cat $1_fit | grep "rms" | grep -o "[[:digit:]]*\.[[:digit:]]*"`
+    }
+
+function plotajuste() {
+    echo "set xlabel 'Talla del problema(n)'
+        set ylabel 'Tiempo(s)'
+        set terminal jpeg size 800,480
+        set output '$1_fit.jpg'
+        f(x)=$2
+        fit f(x) '$1.dat' via $3
+        plot '$1.dat',f(x) title 'Curva ajustada' with linespoints" > $SCRIPT
+    gnuplot $SCRIPT 2> $1_fit
+    rm $SCRIPT
+}
+
+function extrae_f(){
+    func=`echo ${FUNCS[$1]} | cut -f1 -d " "`
+    coefs=`echo ${FUNCS[$1]}| cut -f2 -d " "`
+}    
+
+function genajuste() {
+    extrae_f 0
+    bondadajuste $1 ${func} ${coefs}
+    mejor=$result
+    chosen=0
+    
+    for i in $FUNCS; 
+    do
+        extrae_f $i
+        bondadajuste $1 ${func} ${coefs}
+         
+        if [[ `echo "($result < $mejor)" | bc -l` -eq 1 ]]
+        then
+            
+            mejor=$result
+            chosen=0
+        fi
+    done
+    
+    plotajuste $1 $(echo ${FUNCS[$chosen]} | cut -f1 -d " ") $(echo ${FUNCS[$chosen]} | cut -f2 -d " ")
+
+}
+
+
+[[ $2 -eq 0 ]] && genplot $1
+
 [[ $2 -eq 1 ]] && gendata $1
 
-genplot $1
+[[ $2 -eq 2 ]] && genajuste $1
