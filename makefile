@@ -6,3 +6,13 @@ all: $(patsubst %.cpp, %, $(wildcard *.cpp))
 
 %: %.cpp Makefile
     g++ $< -o $@ -std=c++0x --Wall
+
+plot: all gengraf.sh $(patsubst %.cpp, %.jpg, $(wildcard *.cpp))
+
+data: all gengraf.sh $(patsubst %.cpp, %.dat, $(wildcard *.cpp))
+
+%.dat: %
+	./gengraf.sh $< 1
+
+%.jpg: %
+	./gengraf.sh $<
