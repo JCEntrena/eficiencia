@@ -25,13 +25,14 @@ function genplot() {
 }
 
 function gendata() {
-    lim=`echo $MAP | grep $1 | cut -f2 -d" "`
-    inc=`echo $MAP | grep $1 | cut -f3 -d" "`
+    lim=`echo $MAP | grep "$1 [[:digit:]]* [[:digit:]]*"| cut -f2 -d" "`
+    inc=`echo $MAP | grep "$1 [[:digit:]]* [[:digit:]]*" | cut -f3 -d" "`
     ini=`[[ $inc -eq 1 ]] && echo 1 || echo 10`
     
     echo -n "" > $1.dat
 
-    for (( i = ini; i < $lim; i+=$inc )); do
+    for (( i = $ini; i < $lim; i+=$inc )); 
+    do
         echo -n "$i " >> $1.dat
         sum=0
         
