@@ -2,11 +2,13 @@
 # Written by Haatschii in StackOverflow:
 #  http://stackoverflow.com/questions/9787160/makefile-that-compiles-all-cpp-files-in-a-directory-into-separate-executable
 
-all: $(patsubst src/%.cpp, %, $(wildcard src/*.cpp))
+CMPLINE=g++ $< -o $@ -std=c++0x -Wall
+
+all: $(patsubst src/%.cpp, %.out, $(wildcard src/*.cpp))
 
 # genera ejecutables en el directorio actual (bin/% no me funciona...)
-%: src/%.cpp Makefile
-	g++ $< -o $@ -std=c++0x --Wall
+%: src/%.cpp
+	$(CMPLINE)
 
 # make plot generará todas las imágenes a partir de los archivos .dat
 plot: all gengraf.sh $(patsubst src/%.cpp, %.jpg, $(wildcard src/*.cpp))
