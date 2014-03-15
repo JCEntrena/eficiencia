@@ -2,7 +2,7 @@
 # makefile.
 # Basado en: http://stackoverflow.com/questions/9787160/makefile-that-compiles-all-cpp-files-in-a-directory-into-separate-executable
 
-CMPLINE=g++ $< -o $@ -std=c++0x -Wall
+CMPLINE=g++ $< -o $@ -std=c++0x -Wall -O2
 
 # RECORDAD CREAR UN DIRECTORIO bin/
 all: $(patsubst src/%.cpp, bin/%, $(wildcard src/*.cpp))
