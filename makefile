@@ -1,6 +1,6 @@
-# Minimal makefile. 
-# Written by Haatschii in StackOverflow:
-#  http://stackoverflow.com/questions/9787160/makefile-that-compiles-all-cpp-files-in-a-directory-into-separate-executable
+# Eficiencia de algoritmos.
+# makefile.
+# Basado en: http://stackoverflow.com/questions/9787160/makefile-that-compiles-all-cpp-files-in-a-directory-into-separate-executable
 
 CMPLINE=g++ $< -o $@ -std=c++0x -Wall
 
@@ -28,4 +28,7 @@ fit: all gengraf.sh $(patsubst src/%.cpp, %_fit.jpg, $(wildcard src/*.cpp))
 	./gengraf.sh $< 2
 
 
+# Limpieza de los ejecutables
+clean:
+	rm -f $(patsubst src/%.cpp, bin/%, $(wildcard src/*.cpp))
 
