@@ -15,10 +15,13 @@ seleccion 10000 100"
 # Constante del número áureo
 aur=`echo "(1+sqrt(5))/2" | bc -l`
 # Funciones de ajuste posibles
-FUNCS=("a0*(x**3)+a1*(x**2)+a2*x+a3                 a0,a1,a2,a3"
+FUNCS=("a0                                          a0"
+       "a0*x+a1                                     a0,a1"
+       "a0*(x**2)+a1*x+a0                           a0,a1,a2"      
+       "a0*(x**3)+a1*(x**2)+a2*x+a3                 a0,a1,a2,a3"
+       "a0*x*log(x)+a1*x+a2*log(x)+a3               a0,a1,a2,a3"
        #"a0*exp(log(a)*x)                            a0"
        #"a0*(($aur)**x)+a1*((1/$aur)**x)+a2*x+a3    a0,a1,a2,a3"
-       "a0*x*log(x)+a1*x+a2*log(x)+a3               a0,a1,a2,a3"
        )
 EXCL="fibonacci hanoi"
 # Número de ejecuciones con las que se obtendrá el promedio
@@ -78,8 +81,11 @@ function gendata() {
 # return result "Residuos del ajuste"
 #
 function bondadajuste() {
-    echo "f(x)=$2; fit f(x) '$1.dat' via $3" | gnuplot 2> $1_fit
-    result=`cat $1_fit | grep "rms" | grep -o "[[:digit:]]*\.[[:digit:]]*"`
+    echo "f(x)=$2; fit f(x) '$1.dat' via $3" | gnuplot 2> tmp
+    result=`cat tmp | grep "rms" | grep -o "[[:digit:]]*\.[[:digit:]]*"`
+    echo -e "Ajuste: f(x)=$2\n" >> $1_fit
+    cat tmp >> $1_fit
+    echo -e "\n\n##########################################################################\n\n" >> $1_fit
 }
 
 
@@ -98,8 +104,8 @@ function plotajuste() {
         f(x)=$2
         fit f(x) '$1.dat' via $3
         plot '$1.dat',f(x) title 'Curva ajustada' with linespoints" > $SCRIPT
-    echo "****   Función de ajuste: $2   *****" > $1_fit
-    gnuplot $SCRIPT 2>> $1_fit
+    echo "****   Función de mejor ajuste: $2   *****" >> $1_fit
+    gnuplot $SCRIPT 2> /dev/null
     rm $SCRIPT
 }
 
@@ -121,6 +127,8 @@ function extrae_f(){
 #
 function genajuste() {
     [[ `echo $EXCL | grep $1` ]] && exit 0
+    
+    echo -n "" > $1_fit
     # Suponemos FUNCS no vacío
     extrae_f 0
     bondadajuste $1 ${func} ${coefs}
@@ -140,7 +148,7 @@ function genajuste() {
         then
             
             mejor=$result
-            chosen=0
+            chosen=$i
         fi
     done
     

@@ -1,0 +1,240 @@
+Ajuste: f(x)=a0*(x**3)+a1*(x**2)+a2*x+a3
+	 Residuos (cuadráticos medios??): 0.000877862
+
+Ajuste: f(x)=a0*x*log(x)+a1*x+a2*log(x)+a3
+	 Residuos (cuadráticos medios??): 0.00230142
+
+****   Función de ajuste: a0*(x**3)+a1*(x**2)+a2*x+a3   *****
+
+
+ Iteration 0
+ WSSR        : 1.38913e+25       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 1.86333e+11
+
+initial set of free parameter values
+
+a0              = 1
+a1              = 1
+a2              = 1
+a3              = 1
+/
+
+ Iteration 1
+ WSSR        : 8.63935e+19       delta(WSSR)/WSSR   : -160790
+ delta(WSSR) : -1.38912e+25      limit for stopping : 1e-05
+ lambda	  : 1.86333e+10
+
+resultant parameter values
+
+a0              = 0.00237692
+a1              = 0.999883
+a2              = 1
+a3              = 1
+/
+
+ Iteration 2
+ WSSR        : 5.44516e+15       delta(WSSR)/WSSR   : -15865.1
+ delta(WSSR) : -8.63881e+19      limit for stopping : 1e-05
+ lambda	  : 1.86333e+09
+
+resultant parameter values
+
+a0              = -0.000117077
+a1              = 0.999867
+a2              = 1
+a3              = 1
+/
+
+ Iteration 3
+ WSSR        : 5.42807e+15       delta(WSSR)/WSSR   : -0.00314792
+ delta(WSSR) : -1.70871e+13      limit for stopping : 1e-05
+ lambda	  : 1.86333e+08
+
+resultant parameter values
+
+a0              = -0.000116956
+a1              = 0.998301
+a2              = 1
+a3              = 1
+/
+
+ Iteration 4
+ WSSR        : 4.05646e+15       delta(WSSR)/WSSR   : -0.33813
+ delta(WSSR) : -1.37161e+15      limit for stopping : 1e-05
+ lambda	  : 1.86333e+07
+
+resultant parameter values
+
+a0              = -0.000101103
+a1              = 0.862962
+a2              = 0.999959
+a3              = 1
+/
+
+ Iteration 5
+ WSSR        : 1.45842e+13       delta(WSSR)/WSSR   : -277.141
+ delta(WSSR) : -4.04187e+15      limit for stopping : 1e-05
+ lambda	  : 1.86333e+06
+
+resultant parameter values
+
+a0              = -6.04227e-06
+a1              = 0.0514607
+a2              = 0.999714
+a3              = 1
+/
+
+ Iteration 6
+ WSSR        : 3.88792e+07       delta(WSSR)/WSSR   : -375114
+ delta(WSSR) : -1.45841e+13      limit for stopping : 1e-05
+ lambda	  : 186333
+
+resultant parameter values
+
+a0              = 1.73081e-08
+a1              = -0.000268218
+a2              = 0.999689
+a3              = 1
+/
+
+ Iteration 7
+ WSSR        : 3.28907e+07       delta(WSSR)/WSSR   : -0.182073
+ delta(WSSR) : -5.9885e+06       limit for stopping : 1e-05
+ lambda	  : 18633.3
+
+resultant parameter values
+
+a0              = 2.11532e-08
+a1              = -0.000300927
+a2              = 0.998741
+a3              = 0.999999
+/
+
+ Iteration 8
+ WSSR        : 2.74399e+07       delta(WSSR)/WSSR   : -0.198646
+ delta(WSSR) : -5.45083e+06      limit for stopping : 1e-05
+ lambda	  : 1863.33
+
+resultant parameter values
+
+a0              = 1.93203e-08
+a1              = -0.00027485
+a2              = 0.912171
+a3              = 0.999934
+/
+
+ Iteration 9
+ WSSR        : 249716            delta(WSSR)/WSSR   : -108.884
+ delta(WSSR) : -2.71902e+07      limit for stopping : 1e-05
+ lambda	  : 186.333
+
+resultant parameter values
+
+a0              = 1.83506e-09
+a1              = -2.60814e-05
+a2              = 0.0863366
+a3              = 0.99931
+/
+
+ Iteration 10
+ WSSR        : 6.89918           delta(WSSR)/WSSR   : -36194.1
+ delta(WSSR) : -249709           limit for stopping : 1e-05
+ lambda	  : 18.6333
+
+resultant parameter values
+
+a0              = -6.89835e-12
+a1              = 1.24808e-07
+a2              = -0.000660077
+a3              = 0.999054
+/
+
+ Iteration 11
+ WSSR        : 6.37623           delta(WSSR)/WSSR   : -0.0820147
+ delta(WSSR) : -0.522945         limit for stopping : 1e-05
+ lambda	  : 1.86333
+
+resultant parameter values
+
+a0              = -8.67492e-12
+a1              = 1.49612e-07
+a2              = -0.000737717
+a3              = 0.980328
+/
+
+ Iteration 12
+ WSSR        : 0.753283          delta(WSSR)/WSSR   : -7.46459
+ delta(WSSR) : -5.62295          limit for stopping : 1e-05
+ lambda	  : 0.186333
+
+resultant parameter values
+
+a0              = -2.9748e-12
+a1              = 5.22915e-08
+a2              = -0.00025308
+a3              = 0.336707
+/
+
+ Iteration 13
+ WSSR        : 9.44238e-05       delta(WSSR)/WSSR   : -7976.68
+ delta(WSSR) : -0.753189         limit for stopping : 1e-05
+ lambda	  : 0.0186333
+
+resultant parameter values
+
+a0              = -5.24221e-15
+a1              = 1.59123e-09
+a2              = -6.01106e-07
+a3              = 0.00140487
+/
+
+ Iteration 14
+ WSSR        : 7.39816e-05       delta(WSSR)/WSSR   : -0.276316
+ delta(WSSR) : -2.04423e-05      limit for stopping : 1e-05
+ lambda	  : 0.00186333
+
+resultant parameter values
+
+a0              = 1.03083e-14
+a1              = 1.32574e-09
+a2              = 7.21033e-07
+a3              = -0.000350982
+/
+
+ Iteration 15
+ WSSR        : 7.39816e-05       delta(WSSR)/WSSR   : -7.5772e-10
+ delta(WSSR) : -5.60573e-14      limit for stopping : 1e-05
+ lambda	  : 0.000186333
+
+resultant parameter values
+
+a0              = 1.03091e-14
+a1              = 1.32572e-09
+a2              = 7.21102e-07
+a3              = -0.000351074
+
+After 15 iterations the fit converged.
+final sum of squares of residuals : 7.39816e-05
+rel. change during last iteration : -7.5772e-10
+
+degrees of freedom    (FIT_NDF)                        : 96
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000877862
+variance of residuals (reduced chisquare) = WSSR/ndf   : 7.70641e-07
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a0              = 1.03091e-14      +/- 4.648e-15    (45.09%)
+a1              = 1.32572e-09      +/- 7.017e-11    (5.293%)
+a2              = 7.21102e-07      +/- 2.989e-07    (41.44%)
+a3              = -0.000351074     +/- 0.0003409    (97.11%)
+
+
+correlation matrix of the fit parameters:
+
+               a0     a1     a2     a3     
+a0              1.000 
+a1             -0.986  1.000 
+a2              0.915 -0.967  1.000 
+a3             -0.650  0.735 -0.859  1.000 
