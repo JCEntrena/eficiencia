@@ -24,7 +24,7 @@ fit: all gengraf.sh $(patsubst src/%.cpp, %_fit.jpg, $(wildcard src/*.cpp))
 %.dat: bin/%
 	./gengraf.sh $< 1
 
-%_fit.jpg: bin/%
+%_fit.jpg: bin/% %.dat
 	./gengraf.sh $< 2
 
 
