@@ -85,6 +85,7 @@ function bondadajuste() {
     result=`cat tmp | grep "rms" | grep -o "[[:digit:]]*\.[[:digit:]]*"`
     echo -e "Ajuste: f(x)=$2\n" >> $1_fit
     cat tmp >> $1_fit
+    rm -f tmp
     echo -e "\n\n##########################################################################\n\n" >> $1_fit
 }
 
@@ -106,7 +107,7 @@ function plotajuste() {
         plot '$1.dat',f(x) title 'Curva ajustada' with linespoints" > $SCRIPT
     echo "****   Función de mejor ajuste: $2   *****" >> $1_fit
     gnuplot $SCRIPT 2> /dev/null
-    rm $SCRIPT
+    rm -f $SCRIPT
 }
 
 
