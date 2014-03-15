@@ -20,6 +20,7 @@ FUNCS=("a0*(x**3)+a1*(x**2)+a2*x+a3                 a0,a1,a2,a3"
        #"a0*(($aur)**x)+a1*((1/$aur)**x)+a2*x+a3    a0,a1,a2,a3"
        "a0*x*log(x)+a1*x+a2*log(x)+a3               a0,a1,a2,a3"
        )
+EXCL="fibonacci hanoi"
 # Número de ejecuciones con las que se obtendrá el promedio
 N_ITER=5
 
@@ -119,6 +120,7 @@ function extrae_f(){
 # para $1.dat
 #
 function genajuste() {
+    [[ `echo $EXCL | grep $1` ]] && exit 0
     # Suponemos FUNCS no vacío
     extrae_f 0
     bondadajuste $1 ${func} ${coefs}
