@@ -82,7 +82,7 @@ function gendata() {
 #
 function bondadajuste() {
     echo "f(x)=$2; fit f(x) '$1.dat' via $3" | gnuplot 2> tmp
-    result=`cat tmp | grep "rms" | grep -o "[[:digit:]]*\.[[:digit:]]*"`
+    result=`cat tmp | grep "rms" | grep -o "[[:digit:]]\+.*$"`
     echo -e "Ajuste: f(x)=$2\n" >> $1_fit
     cat tmp >> $1_fit
     rm -f tmp
@@ -144,11 +144,12 @@ function genajuste() {
     do
         extrae_f $i
         bondadajuste $1 ${func} ${coefs}
-         
-        if [[ `echo "($result < $mejor)" | bc -l` -eq 1 ]]
+        
+        
+        if [[ `echo "(${result/e/*10^} < $mejor)" | bc -l` -eq 1 ]]
         then
             
-            mejor=$result
+            mejor=${result/e/*10^}
             chosen=$i
         fi
     done
