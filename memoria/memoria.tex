@@ -116,10 +116,29 @@ El bucle externo se repite $n$ veces y el interno depende del índice del bucle 
 \end{equation}
 por lo que el algoritmo es $\mathcal{O}(n^2)$.
 
+\subsection{Ordenación por inserción}
+De nuevo, el algoritmo está compuesto por dos bucles anidados, de los cuales el primero ejecuta $n-1$ iteraciones y el segundo realiza como máximo $i$ (el índice del primer bucle). La función que nos da el tiempo de ejecución en el peor caso es, por tanto:
+\begin{equation}
+ T(n) = \sum_{i=0}^{n-1} i = \frac{(n-1)n}{2} = \frac{n^2}{2} - \frac{n}{2}
+\end{equation}
+y el algoritmo es $\mathcal{O}(n^2)$.
+\subsection{Ordenación por selección}
+Al igual que los anteriores, consta de dos bucles anidados. El exterior realiza $n-1$ iteraciones, y el interior tantas como indica el índice del primero, $i$, lo que nos da un tiempo de ejecución:
+\begin{equation}
+ T(n) = \sum_{i=0}^{n-1} i = \frac{(n-1)n}{2} = \frac{n^2}{2} - \frac{n}{2}
+\end{equation}
+por lo que este algoritmo también es $\mathcal{O}(n^2)$.
+
+\subsection{Ordenación \textit{heapsort}}
+\subsection{Ordenación por mezcla (\textit{mergesort})}
+\subsection{Algoritmo de Hoare (\textit{quicksort})}
+
 \subsection {Sucesión de Fibonacci}
 El algoritmo está escrito recursivamente y sin memoización. La llamada a la función con tamaño $n$ produce 
 dos llamadas recursivas con tamaños $n-1$ y $n-2$.
 
+\subsection{Algoritmo de Floyd}
+\subsection{Torres de Hanoi}
 
 \section {Análisis práctico}
 
