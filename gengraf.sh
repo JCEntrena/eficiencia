@@ -3,15 +3,15 @@
 # Variables de ejecución
 SCRIPT=plot
 # Límite e incremento de tamaño.
-MAP="burbuja 5000 100
+MAP="burbuja 10000 200
 fibonacci 50 1
 floyd 1000 5
 hanoi 35 1
 heapsort 10000 100
-insercion 10000 100
+insercion 10000 200
 mergesort 10000 100
 quicksort 10000 100
-seleccion 10000 100"
+seleccion 10000 200"
 # Constante del número áureo
 aur=`echo "(1+sqrt(5))/2" | bc -l`
 # Funciones de ajuste posibles
@@ -159,17 +159,69 @@ function genajuste() {
 
 }
 
+# param $1 "nombre del/los algoritmo(s) (mergesort, heapsort,...)"
+# 
+# Genera una tabla de datos a partir del .dat de los algoritmos dados 
+#
+function gentable() {
+    #TEXFILE="table`date +%s`.tex"
+    TEXFILE="table.tex"
+    touch $TEXFILE || exit -1
+
+    echo -n "\\begin{center}
+    \\begin{longtabu} to \linewidth{ l | *{`echo $1 | wc -w`}{d{10}}}  % máx 10 decimales
+\rowfont\bfseries Tamaño " > $TEXFILE
+
+    NLINES=0
+
+    for file in $1; do
+        l=`cat $file.dat | wc -l`
+        [[ l -gt $NLINES ]] && NLINES=l
+        echo -n "& \multicolumn{1}{l}{$file} " >> $TEXFILE
+    done
+
+    echo "\\\\ \\hline
+    \endhead
+    \endfoot
+    \\\\ \\hline
+    \endlastfoot" >> $TEXFILE
+
+    for (( i = 1; i <= $NLINES; i++ )); do
+        first=0 # true
+        for file in $1; do
+            line=`sed "$i q;d" $file.dat`
+            time=`echo $line | cut -d" " -f2 | sed "s/0\{1,\}$//;s/^\./0\./"`
+            
+            [[ $first -eq 0 ]] && {
+                tam=`echo $line | cut -d" " -f1`
+                echo -n "$tam " >> $TEXFILE
+                first=1 # false
+            }
+
+            echo -n "& $time " >> $TEXFILE
+        done
+        echo "\\\\" >> $TEXFILE
+    done
+
+    echo "
+    \\end{longtabu}
+\\end{center}" >> $TEXFILE
+}
+
 # Extraemos el nombre del source a partir del path
 PN=${1##*/}
 
 # Si el argumento del script es 0, hacemos un plot de datos
 # Si es 1, generamos el .dat correspondiente al archivo pasado
 # Si es 2, generamos un plot del ajuste al .dat del archivo pasado
+# Si es 2, generamos una tabla LaTeX a partir de los .dat de los programas dados
 
 [[ $2 -eq 0 ]] && genplot $PN && exit 0
 
 [[ $2 -eq 1 ]] && gendata $PN && exit 0
 
 [[ $2 -eq 2 ]] && genajuste $PN && exit 0
+
+[[ $2 -eq 3 ]] && gentable "$1" && exit 0
 
 exit 1
