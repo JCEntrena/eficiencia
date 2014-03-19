@@ -96,6 +96,7 @@ Con motivo de facilitarnos un poco el trabajo a la hora de realizar esta prácti
 hemos añadido algunos archivos y realizado ciertas modificaciones en los códigos, que
 detallamos a continuación: 
 
+\medskip
 Inicialmente, hemos hecho algunos cambios léxicos en el código de los programas, con el
 objetivo de que sean más legibles para nosotros y poder comprenderlos mejor. También hemos
 cambiado la función que se utilizaba para medir el tiempo por una con más precisión, lo 
@@ -121,16 +122,29 @@ De nuevo, el algoritmo está compuesto por dos bucles anidados, de los cuales el
 \begin{equation}
  T(n) = \sum_{i=0}^{n-1} i = \frac{(n-1)n}{2} = \frac{n^2}{2} - \frac{n}{2}
 \end{equation}
-y el algoritmo es $\mathcal{O}(n^2)$.
+y el algoritmo es $\mathcal{O}(n^2)$ en el caso peor.
 \subsection{Ordenación por selección}
 Al igual que los anteriores, consta de dos bucles anidados. El exterior realiza $n-1$ iteraciones, y el interior tantas como indica el índice del primero, $i$, lo que nos da un tiempo de ejecución:
 \begin{equation}
  T(n) = \sum_{i=0}^{n-1} i = \frac{(n-1)n}{2} = \frac{n^2}{2} - \frac{n}{2}
 \end{equation}
-por lo que este algoritmo también es $\mathcal{O}(n^2)$.
+por lo que este algoritmo también es $\mathcal{O}(n^2)$ en el caso peor.
 
 \subsection{Ordenación \textit{heapsort}}
+En este algoritmo insertaremos los datos en un árbol tipo heap y los extraeremos de nuevo ya ordenados.
+La inserción en una estructura heap es del orden $\mathcal{O}(log n)$ y la extracción del mínimo, que involucra
+reajustar el árbol, es también $\mathcal{O}(log n)$. En conjunto, y sabiendo que insertaremos y extraeremos $n$ elementos,
+el orden del algoritmo es:
+\begin{equation}
+ T(n) = 2 n log(n)
+\end{equation}
+por lo que el algoritmo tiene complejidad $\mathcal{O}(log(n))$.
+
+
 \subsection{Ordenación por mezcla (\textit{mergesort})}
+El algoritmo mergesort es un algoritmo divide y vencerás para ordenación, basado en la ordenación de las dos mitades del
+array independientemente.
+
 \subsection{Algoritmo de Hoare (\textit{quicksort})}
 
 \subsection {Sucesión de Fibonacci}

@@ -41,10 +41,10 @@ static void reajustar(int T[], int num_elem, int k);
 // Implementación de las funciones
 
 static void heapsort(int T[], int num_elem){
-    int i;
-    for (i = num_elem/2; i >= 0; i--)
+    for (int i = num_elem/2; i >= 0; i--)
         reajustar(T, num_elem, i);
-    for (i = num_elem - 1; i >= 1; i--){
+
+    for (int i = num_elem - 1; i >= 1; i--){
         int aux = T[0];
         T[0] = T[i];
         T[i] = aux;
