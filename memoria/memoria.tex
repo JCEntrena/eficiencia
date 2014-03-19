@@ -153,6 +153,13 @@ Que tiene soluciones del tipo $an + bnlog(n)$, el algoritmo es de complejidad $\
 
 
 \subsection{Algoritmo de Hoare (\textit{quicksort})}
+El algoritmo quicksort toma un pivote para partir los elementos a ordenar en aquellos mayores y aquellos menores que el pivote.
+En su caso medio, promediaremos las elecciones del pivote. Siempre se tendrá una fase de complejidad lineal previa en la que los
+elementos se particionan por el pivote, y, posteriormente, habrá una fase en la que se analizarán las otras dos mitades. Tenemos:
+\begin{equation}
+ T(n) = n - 1 + \frac{1}{n}\left(\sum_{i=0}^{n-1} T(i) + T(n-1-i) \right)
+\end{equation}
+Que tiene una solución de complejidad $\mathcal{O}(nlog(n))$.
 
 
 \subsection {Sucesión de Fibonacci}
