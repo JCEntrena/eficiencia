@@ -57,8 +57,9 @@ function gendata() {
     inc=`echo $MAP | grep -o "$1 [[:digit:]]* [[:digit:]]*" | cut -f3 -d" "`
     ini=`[[ $inc -eq 1 ]] && echo 1 || echo 10`
     
+    # Se genera el archivo de datos del problema. 
+    # Sigue el formato: <Talla> <Tiempo consumido>
     echo -n "" > $1.dat
-    
     for i in `seq $ini $inc $lim`; do #(( i = $ini; i < $lim; i += $inc )); do
         echo -n "$i " >> $1.dat
         sum=0
@@ -119,7 +120,7 @@ function plotajuste() {
 function extrae_f(){
     func=`echo ${FUNCS[$1]} | cut -f1 -d " "`
     coefs=`echo ${FUNCS[$1]}| cut -f2 -d " "`
-}    
+} 
 
 
 # param $1 "nombre del algoritmo (mergesort, heapsort,...)"
@@ -156,7 +157,6 @@ function genajuste() {
     done
     
     plotajuste $1 $(echo ${FUNCS[$chosen]} | cut -f1 -d " ") $(echo ${FUNCS[$chosen]} | cut -f2 -d " ")
-
 }
 
 # param $1 "nombre del/los algoritmo(s) (mergesort, heapsort,...)"
@@ -217,11 +217,8 @@ PN=${1##*/}
 # Si es 2, generamos una tabla LaTeX a partir de los .dat de los programas dados
 
 [[ $2 -eq 0 ]] && genplot $PN && exit 0
-
 [[ $2 -eq 1 ]] && gendata $PN && exit 0
-
 [[ $2 -eq 2 ]] && genajuste $PN && exit 0
-
 [[ $2 -eq 3 ]] && gentable "$1" && exit 0
 
 exit 1
