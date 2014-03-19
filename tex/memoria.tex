@@ -96,23 +96,23 @@ finales.
 
 \pagebreak
 
-\section {Preparación del código}
+\section {Introducción}
 %Hay un problema con el espacio entre estos párrafos, que no deja separación enre ambos. Vale asi?
-Con motivo de facilitarnos un poco el trabajo a la hora de realizar esta práctica,
+Con motivo de facilitar el trabajo a la hora de realizar esta práctica,
 hemos añadido algunos archivos y realizado ciertas modificaciones en los códigos, que
-detallamos a continuación: 
+introducimos a continuación y detallaremos en las siguientes secciones: 
 
 \medskip
 Inicialmente, hemos hecho algunos cambios léxicos en el código de los programas, con el
-objetivo de que sean más legibles para nosotros y poder comprenderlos mejor. También hemos
+objetivo de que sean más legibles y poder comprenderlos mejor. También hemos
 cambiado la función que se utilizaba para medir el tiempo por una con más precisión, lo 
 que nos permite ejecutar los algoritmos con un volumen de entrada menor. 
 
 Para facilitarnos la compilación y ejecución de los programas, hemos creado un archivo 
-makefile que compila los códigos y genera los datos y gráficas necesarios para la práctica.
+Makefile que compila los códigos y genera los datos y gráficas necesarios para la práctica.
 
-Además, para la generación de dichas gráficas, hemos escrito un programa en bash que usa gnuplot 
-para obtenerlas, al igual que los ajustes de la eficiencia. 
+Además, para la generación de dichas gráficas, hemos escrito un guion en bash que usa gnuplot 
+para obtenerlas, de la misma forma que se obtienen las funciones de ajuste de la eficiencia. 
 
 \section {Análisis teórico}
 \subsection {Ordenación de la burbuja}
@@ -194,6 +194,16 @@ Tendremos entonces como ecuación principal:
 Con soluciones de complejidad $\mathcal{O}(2^n)$.
 
 \section {Análisis práctico}
+\subsection{Modificaciones del código}
+A la hora de realizar un análisis empírico de la eficiencia de estos algoritmos, se ha estudiado el tiempo de ejecución de los programas que llevan a cabo cada tarea. Para ello, se ha utilizado la función \texttt{clock\_gettime()} de la biblioteca \texttt{time.h} de C. Esta función proporciona una resolución mayor que otras utilidades como \texttt{clock()} o \texttt{time()}. El código añadido para monitorear el tiempo de ejecución ha sido el siguiente:
+
+\texttt{\mbox{}\ \textbf{\textcolor{Blue}{struct}}\ \textcolor{TealBlue}{timespec}\ t$\_$antes\textcolor{BrickRed}{,}\ t$\_$despues\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$antes\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Brown}{/*** Ejecución del programa ***/}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$despues\textcolor{BrickRed}{);} \\}
+
+Una vez obtenidos los tiempos al inicio y finalización de la ejecución, se realiza el cálculo conveniente para hallar, mediante las estructuras \texttt{timespec}, los segundos y nanosegundos transcurridos.
+
 \subsection{Códigos modificados}
 A continuación se incluyen los códigos modificados que se han usado en la práctica.
 \scriptsize {
