@@ -94,7 +94,6 @@ function bondadajuste() {
     rm -f tmp
     
     echo -e "\n\n##########################################################################\n\n" >> "$1.fit"
-    echo "final de bondad"; sleep 2
 }
 
 
