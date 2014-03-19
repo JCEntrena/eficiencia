@@ -26,4 +26,5 @@ seleccion
 
 #Archivos de gráficos
 *.jpg
+!*_fit.jpg
 *_fit
