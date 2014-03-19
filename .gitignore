@@ -4,6 +4,7 @@
 *.pdf
 *.toc
 *.synctex.gz
+tex/*
 
 # Ejecutables
 bin
