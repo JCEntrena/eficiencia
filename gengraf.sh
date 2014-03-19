@@ -31,6 +31,36 @@ N_ITER=5
 
 
 
+# param $1 "programa a ejecutar"
+#
+# Genera un archivo de datos donde la primera columna correponde a tallas del problema,
+# y la segunda a tiempo que necesita el algoritmo para resolver un problema de esa
+# talla
+#
+function gendata() {
+    # Se extraen los valores de talla máxima del problema e incremento del número
+    # de datos que se introducirán al algoritmo, así como la talla inicial
+    lim=`echo $MAP | grep -o "${1##*/} [[:digit:]]* [[:digit:]]*"| cut -f2 -d" "`
+    inc=`echo $MAP | grep -o "${1##*/} [[:digit:]]* [[:digit:]]*" | cut -f3 -d" "`
+    ini=`[[ $inc -eq 1 ]] && echo 1 || echo 10`
+    
+    echo -n ""
+    for i in `seq $ini $inc $lim`; do #(( i = $ini; i < $lim; i += $inc )); do
+        echo -n "$i "
+        sum=0
+        
+        # Se obtiene un promedio en N_ITER ejecuciones para la talla dada
+        for k in `seq 0 $N_ITER`
+        do
+            exc=`$1 $i`
+            sum=`echo "$sum+${exc/e/*10^}" | bc -l`
+        done
+        
+        echo `echo $sum/$N_ITER | bc -l`
+    done
+}
+
+
 # param $1 "nombre del algoritmo (mergesort, heapsort,...)"
 #
 # Función que permite hacer un plot de un archivo $1.dat ya generado
@@ -39,41 +69,10 @@ function genplot() {
     echo 'set xlabel "Talla del problema(n)"
         set ylabel "Tiempo(s)"
         set terminal jpeg size 800,480
-        set output basename.".jpg"
-        plot basename.".dat" title "Eficiencia " .basename with linespoints' > $SCRIPT
+        set output "plots/".basename.".jpg"
+        plot "data/".basename.".dat" title "Eficiencia " .basename with linespoints' > $SCRIPT
     gnuplot -e "basename='$1'" $SCRIPT
     rm $SCRIPT
-}
-
-
-# param $1 "nombre del algoritmo (mergesort, heapsort,...)"
-#
-# Genera un archivo .dat donde la primera columna correponde a tallas del problema,
-# y la segunda a tiempo que necesita el algoritmo para resolver un problema de esa
-# talla
-#
-function gendata() {
-    # Se extraen los valores de talla máxima del problema e incremento del número
-    # de datos que se introducirán al algoritmo, así como la talla inicial
-    lim=`echo $MAP | grep -o "$1 [[:digit:]]* [[:digit:]]*"| cut -f2 -d" "`
-    inc=`echo $MAP | grep -o "$1 [[:digit:]]* [[:digit:]]*" | cut -f3 -d" "`
-    ini=`[[ $inc -eq 1 ]] && echo 1 || echo 10`
-    
-    echo -n "" > $1.dat
-    
-    for i in `seq $ini $inc $lim`; do #(( i = $ini; i < $lim; i += $inc )); do
-        echo -n "$i " >> $1.dat
-        sum=0
-        
-        # Se obtiene un promedio en N_ITER ejecuciones para la talla dada
-        for k in `seq 0 $N_ITER`
-        do
-            exc=`bin/$1 $i`
-            sum=`echo "$sum+${exc/e/*10^}" | bc -l`
-        done
-        
-        echo `echo $sum/$N_ITER | bc -l` >> $1.dat
-    done
 }
 
 
@@ -83,17 +82,17 @@ function gendata() {
 # return result "Residuos del ajuste"
 #
 function bondadajuste() {
-    echo "f(x)=$2; fit f(x) '$1.dat' via $3" | gnuplot 2> tmp
+    echo "f(x)=$2; fit f(x) '$1' via $3" | gnuplot 2> tmp
     
     result=`cat tmp | grep "rms" | grep -o "[[:digit:]]\+.*$"`
     result=`echo ${result/e/*10^} | tr -d "+"` 
     result=${result:--1}
     
-    [[ result != -1 ]] && echo -e "Ajuste: f(x)=$2\n" >> "$1.fit" && cat tmp >> "$1.fit"
+    [[ result != -1 ]] && echo -e "Ajuste: f(x)=$2\n" && cat tmp
     
     rm -f tmp
     
-    echo -e "\n\n##########################################################################\n\n" >> "$1.fit"
+    echo -e "\n\n##########################################################################\n\n"
 }
 
 
@@ -105,15 +104,14 @@ function bondadajuste() {
 # entre las disponibles en FUNCS
 #
 function plotajuste() {
-    # linea de depuración: echo "$1: $2"
     echo "set xlabel 'Talla del problema(n)'
         set ylabel 'Tiempo(s)'
         set terminal jpeg size 800,480
-        set output '$1_fit.jpg'
+        set output 'regressionPlots/`echo ${1##*/} | rev | cut -f2 -d. | rev`.fit.jpg'
         f(x)=$2
-        fit f(x) '$1.dat' via $3
-        plot '$1.dat',f(x) title 'Curva ajustada' with linespoints" > $SCRIPT
-    echo "****   Función de mejor ajuste: $2   *****" >> "$1.fit"
+        fit f(x) '$1' via $3
+        plot '$1',f(x) title 'Curva ajustada' with linespoints" > $SCRIPT
+    echo "****   Función de mejor ajuste: $2   *****"
     gnuplot $SCRIPT 2> /dev/null
     rm -f $SCRIPT
 }
@@ -129,13 +127,13 @@ function extrae_f(){
 }    
 
 
-# param $1 "nombre del algoritmo (mergesort, heapsort,...)"
+# param $1 "archivo de datos (mergesort.dat, heapsort.dat,...)"
 # 
 # Genera el plot del mejor ajuste posible de entre los de FUNCS
 # para $1.dat
 #
 function genajuste() {
-    echo -n "" > "$1.fit"
+    #echo -n "" > "$1.fit"
     # Suponemos FUNCS no vacío
     extrae_f 0
     bondadajuste $1 ${func} ${coefs}
@@ -157,7 +155,7 @@ function genajuste() {
             chosen=$i
         fi
     done
-    
+
     plotajuste $1 $(echo ${FUNCS[$chosen]} | cut -f1 -d " ") $(echo ${FUNCS[$chosen]} | cut -f2 -d " ")
 
 }
@@ -209,19 +207,16 @@ function gentable() {
 \\end{center}" >> $TEXFILE
 }
 
-# Extraemos el nombre del source a partir del path
-PN=${1##*/}
-
-# Si el argumento del script es 0, hacemos un plot de datos
-# Si es 1, generamos el .dat correspondiente al archivo pasado
+# Si el argumento del script es 0, generamos el .dat correspondiente al archivo pasado
+# Si es 1, hacemos un plot de datos
 # Si es 2, generamos un plot del ajuste al .dat del archivo pasado
 # Si es 3, generamos una tabla LaTeX a partir de los .dat de los programas dados
 
-[[ $2 -eq 0 ]] && genplot $PN && exit 0
+[[ $2 -eq 0 ]] && gendata $1 && exit 0
 
-[[ $2 -eq 1 ]] && gendata $PN && exit 0
+[[ $2 -eq 1 ]] && genplot `echo ${1##*/} | rev | cut -f2 -d. | rev` && exit 0
 
-[[ $2 -eq 2 ]] && genajuste $PN && exit 0
+[[ $2 -eq 2 ]] && genajuste $1 && exit 0
 
 [[ $2 -eq 3 ]] && gentable "$1" && exit 0
 

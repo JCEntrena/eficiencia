@@ -2,42 +2,51 @@
 # makefile.
 # Basado en: http://stackoverflow.com/questions/9787160/makefile-that-compiles-all-cpp-files-in-a-directory-into-separate-executable
 
-CMPLINE=g++ $< -o $@ -std=c++0x -Wall
+BIN=./bin
+SRC=./src
+DATA=./data
+PLOT=./plots
+FIT=./regressionPlots
+TEX=./tex
+FLAGS=-std=c++0x -Wall
 
 # make all: Compilar todos los programas 
-all: $(patsubst src/%.cpp, bin/%, $(wildcard src/*.cpp))
+all: $(patsubst $(SRC)/%.cpp, $(BIN)/%, $(wildcard $(SRC)/*.cpp))
 
 # make data: Recalcular el archivo .dat de todos los programas
-data: all gengraf.sh $(patsubst src/%.cpp, %.dat, $(wildcard src/*.cpp))
+data: all gengraf.sh $(patsubst $(SRC)/%.cpp, $(DATA)/%.dat, $(wildcard $(SRC)/*.cpp))
 
 # make plot: Generar todas las imágenes a partir de los archivos .dat
-plot: gengraf.sh $(patsubst src/%.cpp, %.jpg, $(wildcard src/*.cpp))
+plot: gengraf.sh $(patsubst $(SRC)/%.cpp, $(PLOT)/%.jpg, $(wildcard $(SRC)/*.cpp))
 
 # make fit: Crear las imágenes con las funciones de ajuste
-fit: gengraf.sh $(patsubst src/%.cpp, %_fit.jpg, $(wildcard src/*.cpp))
+fit: gengraf.sh $(patsubst $(SRC)/%.cpp, $(FIT)/%.fit, $(wildcard $(SRC)/*.cpp))
 
 # make codetex: Crear los archivos LaTeX de código resaltado
-codetex: $(patsubst src/%.cpp, tex/%.tex, $(wildcard src/*.cpp))
+codetex: $(patsubst $(SRC)/%.cpp, $(TEX)/%.tex, $(wildcard $(SRC)/*.cpp))
 
 # Opciones individuales 
-bin/%: src/%.cpp
-	$(CMPLINE)
+$(BIN)/%: $(SRC)/%.cpp
+	g++ $< -o $@ $(FLAGS)
 
-%.jpg: bin/% %.dat
-	./gengraf.sh $< 0
+$(DATA)/%.dat: $(BIN)/%
+	./gengraf.sh $< 0 > $@
 
-%.dat: bin/%
+$(PLOT)/%.jpg: $(DATA)/%.dat
 	./gengraf.sh $< 1
 
-%_fit.jpg: bin/% %.dat
-	./gengraf.sh $< 2
+$(FIT)/%.fit: $(DATA)/%.dat
+	./gengraf.sh $< 2 > $@
 
-tex/%.tex: src/%.cpp
+#$(FIT)/%.fit.jpg: $(DATA)/%.dat
+#	./gengraf.sh $< 2
+
+$(TEX)/%.tex: $(SRC)/%.cpp
 	source-highlight -f latexcolor -i $< -o $@
 
 # Limpieza de los ejecutables
 clean:
-	rm bin/*
+	rm $(BIN)/*
 
 cleanall: clean
 	rm *.jpg *.dat tex/*
