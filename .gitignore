@@ -5,6 +5,7 @@
 *.toc
 *.synctex.gz
 tex/*
+!tex/memoria.tex
 
 # Ejecutables
 bin
