@@ -138,12 +138,19 @@ el orden del algoritmo es:
 \begin{equation}
  T(n) = 2 n log(n)
 \end{equation}
-por lo que el algoritmo tiene complejidad $\mathcal{O}(log(n))$.
+por lo que el algoritmo tiene complejidad $\mathcal{O}(nlog(n))$.
 
 
 \subsection{Ordenación por mezcla (\textit{mergesort})}
 El algoritmo mergesort es un algoritmo divide y vencerás para ordenación, basado en la ordenación de las dos mitades del
-array independientemente. En nuestro caso usaremos insertion sort para los problemas que quedan por debajo de una talla umbral.
+array independientemente. En nuestro caso usaremos \textit{insertion sort} para los problemas que quedan por debajo de una talla umbral.
+Sabiendo que la ordenación en un caso suficientemente pequeño se acota por una constante y que el algoritmo recurre a la ordenación
+de dos casos de tamaño mitad y una mezcla de ambos lineal:
+\begin{equation}
+ T(n) = 2T\left(\frac{n}{2}\right) + n
+\end{equation}
+Que tiene soluciones del tipo $an + bnlog(n)$, el algoritmo es de complejidad $\mathcal{O}(nlog(n))$.
+
 
 \subsection{Algoritmo de Hoare (\textit{quicksort})}
 
@@ -153,7 +160,12 @@ El algoritmo está escrito recursivamente y sin memoización. La llamada a la fu
 dos llamadas recursivas con tamaños $n-1$ y $n-2$.
 
 \subsection{Algoritmo de Floyd}
+
+
+
 \subsection{Torres de Hanoi}
+
+
 
 \section {Análisis práctico}
 
