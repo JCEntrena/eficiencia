@@ -46,6 +46,8 @@
 \makeatletter
 \renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
 \renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+\newcommand{\imagen}[2]{\begin{figure*}[ht!] \centering \includegraphics[width=90mm]{#1} \caption{#2} \end{figure*}}
+
 
 \renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
 \begin{flushright} % Right align
@@ -227,8 +229,12 @@ A continuación se incluyen los códigos modificados que se han usado en la prá
 }
 
 
+
+
 \section {Conclusiones}
 \subsection {Gráficas}
+\imagen{../regressionPlots/burbuja_fit.jpg}{Ordenación por burbuja}
+
 
 \section{Apéndice: Tablas de datos}
 % TABLA DE PRUEBA (Cambiar por datos de verdad...)
