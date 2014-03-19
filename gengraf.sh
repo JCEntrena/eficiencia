@@ -15,15 +15,15 @@ seleccion 10000 200"
 # Constante del número áureo
 aur=`echo "(1+sqrt(5))/2" | bc -l`
 # Funciones de ajuste posibles
-FUNCS=("a0                                          a0"
-       "a0*x+a1                                     a0,a1"
-       "a0*(x**2)+a1*x+a0                           a0,a1,a2"      
-       "a0*(x**3)+a1*(x**2)+a2*x+a3                 a0,a1,a2,a3"
-       "a0*x*log(x)+a1*x+a2*log(x)+a3               a0,a1,a2,a3"
-       #"a0*exp(log(a)*x)                            a0"
-       #"a0*(($aur)**x)+a1*((1/$aur)**x)+a2*x+a3    a0,a1,a2,a3"
+FUNCS=( "a0                                                     a0"
+        "a0*x+a1                                                a0,a1"
+        "a0*(x**2)+a1*x+a0                                      a0,a1,a2"      
+        "a0*(x**3)+a1*(x**2)+a2*x+a3                            a0,a1,a2,a3"
+        "a0*x*log(x)+a1*x+a2*log(x)+a3                          a0,a1,a2,a3"
+        "a0*(2**x)+a1                                           a0,a1"
+        "a0*(($aur)**x)+a1*((1/$aur)**x)+a2*(x**2)+a3*x+a4      a0,a1,a2,a3,a4"
        )
-EXCL="fibonacci hanoi"
+#EXCL="fibonacci hanoi"
 # Número de ejecuciones con las que se obtendrá el promedio
 N_ITER=5
 
@@ -85,8 +85,8 @@ function bondadajuste() {
     echo "f(x)=$2; fit f(x) '$1.dat' via $3" | gnuplot 2> tmp
     result=`cat tmp | grep "rms" | grep -o "[[:digit:]]\+.*$"`
     result=${result/e/*10^}
-    echo -e "Ajuste: f(x)=$2\n" >> $1_fit
-    cat tmp >> $1_fit
+    result=${result:--1}
+    [[ result != -1 ]] && echo -e "Ajuste: f(x)=$2\n" >> $1_fit && cat tmp >> $1_fit
     rm -f tmp
     echo -e "\n\n##########################################################################\n\n" >> $1_fit
 }
@@ -129,7 +129,7 @@ function extrae_f(){
 # para $1.dat
 #
 function genajuste() {
-    [[ `echo $EXCL | grep $1` ]] && exit 0
+    #[[ `echo $EXCL | grep $1` ]] && exit 0
     
     echo -n "" > $1_fit
     # Suponemos FUNCS no vacío
@@ -147,10 +147,8 @@ function genajuste() {
         extrae_f $i
         bondadajuste $1 ${func} ${coefs}
         
-        
-        if [[ `echo "($result < $mejor)" | bc -l` -eq 1 ]]
+        if [[ `echo "($result < $mejor)" | bc -l` -eq 1 ]] && [[ $result != -1 ]]
         then
-            
             mejor=$result
             chosen=$i
         fi
@@ -164,19 +162,17 @@ function genajuste() {
 # Genera una tabla de datos a partir del .dat de los algoritmos dados 
 #
 function gentable() {
-    #TEXFILE="table`date +%s`.tex"
-    TEXFILE="table.tex"
+    TEXFILE="table$(echo "$1" | egrep -o "\b[[:alnum:]]{1}" | tr -d "\n").tex"
     touch $TEXFILE || exit -1
 
     echo -n "\\begin{center}
     \\begin{longtabu} to \linewidth{ l | *{`echo $1 | wc -w`}{d{10}}}  % máx 10 decimales
 \rowfont\bfseries Tamaño " > $TEXFILE
 
-    NLINES=0
+    first=0
 
     for file in $1; do
-        l=`cat $file.dat | wc -l`
-        [[ l -gt $NLINES ]] && NLINES=l
+        [[ $first -eq 0 ]] && NLINES=`cat $file.dat | wc -l` && first=1
         echo -n "& \multicolumn{1}{l}{$file} " >> $TEXFILE
     done
 
@@ -214,7 +210,7 @@ PN=${1##*/}
 # Si el argumento del script es 0, hacemos un plot de datos
 # Si es 1, generamos el .dat correspondiente al archivo pasado
 # Si es 2, generamos un plot del ajuste al .dat del archivo pasado
-# Si es 2, generamos una tabla LaTeX a partir de los .dat de los programas dados
+# Si es 3, generamos una tabla LaTeX a partir de los .dat de los programas dados
 
 [[ $2 -eq 0 ]] && genplot $PN && exit 0
 [[ $2 -eq 1 ]] && gendata $PN && exit 0
