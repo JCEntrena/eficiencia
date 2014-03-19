@@ -157,7 +157,11 @@ Que tiene soluciones del tipo $an + bnlog(n)$, el algoritmo es de complejidad $\
 
 \subsection {Sucesión de Fibonacci}
 El algoritmo está escrito recursivamente y sin memoización. La llamada a la función con tamaño $n$ produce 
-dos llamadas recursivas con tamaños $n-1$ y $n-2$.
+dos llamadas recursivas con tamaños $n-1$ y $n-2$. Tendremos la ecuación en diferencias:
+\begin{equation}
+ T(n) = T(n-1) + T(n-2)
+\end{equation}
+con la solución conocida de complejidad $\mathcal{O}(\phi^n)$.
 
 \subsection{Algoritmo de Floyd}
 El algoritmo de Floyd guarda en una matriz los actuales caminos mínimos entre dos vértices de un grafo de $n$ vértices
