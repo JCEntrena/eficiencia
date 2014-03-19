@@ -172,8 +172,13 @@ La complejidad del algoritmo es $\mathcal{O}(n^3)$.
 
 
 \subsection{Torres de Hanoi}
-
-
+El algoritmo de las torres de Hanoi de talla $n$ se llama a sí mismo recursivamente dos veces y cada una de ellas con
+talla $n-1$. Resuelve la torre para los $n-1$ discos superiores, mueve la base, y la resuelve de nuevo para colocarlos sobre ella.
+Tendremos entonces como ecuación principal:
+\begin{equation}
+ T(n) = 2T(n-1) + 1
+\end{equation}
+Con soluciones de complejidad $\mathcal{O}(n^2)$.
 
 \section {Análisis práctico}
 
