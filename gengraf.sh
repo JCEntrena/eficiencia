@@ -22,8 +22,10 @@ FUNCS=( "a0                                                     a0"
         "a0*x*log(x)+a1*x+a2*log(x)+a3                          a0,a1,a2,a3"
         "a0*(2**x)+a1                                           a0,a1"
         "a0*(($aur)**x)+a1*((1/$aur)**x)+a2*(x**2)+a3*x+a4      a0,a1,a2,a3,a4"
+        "a0*exp(a1*x)+a2                                        a0,a1,a2"
+        "a0*exp(a2*x)+a2*x+a3                                   a0,a1,a2,a3"
+        "a0*exp(a1*x)+a2*(x**2)+a3*x+a4                         a0,a1,a3,a4" 
        )
-#EXCL="fibonacci hanoi"
 # Número de ejecuciones con las que se obtendrá el promedio
 N_ITER=5
 
@@ -57,9 +59,8 @@ function gendata() {
     inc=`echo $MAP | grep -o "$1 [[:digit:]]* [[:digit:]]*" | cut -f3 -d" "`
     ini=`[[ $inc -eq 1 ]] && echo 1 || echo 10`
     
-    # Se genera el archivo de datos del problema. 
-    # Sigue el formato: <Talla> <Tiempo consumido>
     echo -n "" > $1.dat
+    
     for i in `seq $ini $inc $lim`; do #(( i = $ini; i < $lim; i += $inc )); do
         echo -n "$i " >> $1.dat
         sum=0
@@ -83,12 +84,17 @@ function gendata() {
 #
 function bondadajuste() {
     echo "f(x)=$2; fit f(x) '$1.dat' via $3" | gnuplot 2> tmp
+    
     result=`cat tmp | grep "rms" | grep -o "[[:digit:]]\+.*$"`
-    result=${result/e/*10^}
+    result=`echo ${result/e/*10^} | tr -d "+"` 
     result=${result:--1}
-    [[ result != -1 ]] && echo -e "Ajuste: f(x)=$2\n" >> $1_fit && cat tmp >> $1_fit
+    
+    [[ result != -1 ]] && echo -e "Ajuste: f(x)=$2\n" >> "$1.fit" && cat tmp >> "$1.fit"
+    
     rm -f tmp
-    echo -e "\n\n##########################################################################\n\n" >> $1_fit
+    
+    echo -e "\n\n##########################################################################\n\n" >> "$1.fit"
+    echo "final de bondad"; sleep 2
 }
 
 
@@ -107,7 +113,7 @@ function plotajuste() {
         f(x)=$2
         fit f(x) '$1.dat' via $3
         plot '$1.dat',f(x) title 'Curva ajustada' with linespoints" > $SCRIPT
-    echo "****   Función de mejor ajuste: $2   *****" >> $1_fit
+    echo "****   Función de mejor ajuste: $2   *****" >> "$1.fit"
     gnuplot $SCRIPT 2> /dev/null
     rm -f $SCRIPT
 }
@@ -120,7 +126,7 @@ function plotajuste() {
 function extrae_f(){
     func=`echo ${FUNCS[$1]} | cut -f1 -d " "`
     coefs=`echo ${FUNCS[$1]}| cut -f2 -d " "`
-} 
+}    
 
 
 # param $1 "nombre del algoritmo (mergesort, heapsort,...)"
@@ -129,9 +135,7 @@ function extrae_f(){
 # para $1.dat
 #
 function genajuste() {
-    #[[ `echo $EXCL | grep $1` ]] && exit 0
-    
-    echo -n "" > $1_fit
+    echo -n "" > "$1.fit"
     # Suponemos FUNCS no vacío
     extrae_f 0
     bondadajuste $1 ${func} ${coefs}
@@ -155,6 +159,7 @@ function genajuste() {
     done
     
     plotajuste $1 $(echo ${FUNCS[$chosen]} | cut -f1 -d " ") $(echo ${FUNCS[$chosen]} | cut -f2 -d " ")
+
 }
 
 # param $1 "nombre del/los algoritmo(s) (mergesort, heapsort,...)"
@@ -213,8 +218,11 @@ PN=${1##*/}
 # Si es 3, generamos una tabla LaTeX a partir de los .dat de los programas dados
 
 [[ $2 -eq 0 ]] && genplot $PN && exit 0
+
 [[ $2 -eq 1 ]] && gendata $PN && exit 0
+
 [[ $2 -eq 2 ]] && genajuste $PN && exit 0
+
 [[ $2 -eq 3 ]] && gentable "$1" && exit 0
 
 exit 1
