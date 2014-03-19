@@ -107,7 +107,7 @@ function plotajuste() {
     echo "set xlabel 'Talla del problema(n)'
         set ylabel 'Tiempo(s)'
         set terminal jpeg size 800,480
-        set output 'regressionPlots/`echo ${1##*/} | rev | cut -f2 -d. | rev`.fit.jpg'
+        set output 'regressionPlots/`echo ${1##*/} | rev | cut -f2 -d. | rev`_fit.jpg'
         f(x)=$2
         fit f(x) '$1' via $3
         plot '$1',f(x) title 'Curva ajustada' with linespoints" > $SCRIPT
