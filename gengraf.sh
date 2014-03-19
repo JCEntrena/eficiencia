@@ -165,7 +165,7 @@ function genajuste() {
 # Genera una tabla de datos a partir del .dat de los algoritmos dados 
 #
 function gentable() {
-    TEXFILE="table$(echo "$1" | egrep -o "\b[[:alnum:]]{1}" | tr -d "\n").tex"
+    TEXFILE="table$(echo "$1" | egrep -o "\b[[:alnum:]]{3}" | tr -d "\n").tex"
     touch $TEXFILE || exit -1
 
     echo -n "\\begin{center}
