@@ -105,7 +105,7 @@ function bondadajuste() {
 # entre las disponibles en FUNCS
 #
 function plotajuste() {
-    echo "$1: $2"
+    # linea de depuración: echo "$1: $2"
     echo "set xlabel 'Talla del problema(n)'
         set ylabel 'Tiempo(s)'
         set terminal jpeg size 800,480
