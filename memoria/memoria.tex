@@ -160,7 +160,11 @@ El algoritmo está escrito recursivamente y sin memoización. La llamada a la fu
 dos llamadas recursivas con tamaños $n-1$ y $n-2$.
 
 \subsection{Algoritmo de Floyd}
+El algoritmo de Floyd guarda en una matriz los actuales caminos mínimos entre dos vértices de un grafo de $n$ vértices
+y realiza un intercambio entre el camino de dos vértices si este puede mejorarse pasando por el vértice $n$. En resumen,
+tendremos tres bucles anidados realizando una operación constante. Cada uno de ellos realizando $n$ iteraciones.
 
+La complejidad del algoritmo es $\mathcal{O}(n^3)$.
 
 
 \subsection{Torres de Hanoi}
