@@ -317,7 +317,7 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
   \subsubsection{Ordenación por mergesort}
   El mejor ajuste práctico ha resultado ser su recta de regresión: 
   
-  $$f(n)=2.38969\cdot 10^{-7} -4.94954\cdot 10 ^{-5}$$
+  $$f(n)=2.38969\cdot 10^{-7}n -4.94954\cdot 10 ^{-5}$$
   
   con una media de residuos cuadráticos de $0.000118196$\\
   
@@ -407,10 +407,8 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     }
 
 \subsection{Algoritmos teóricamente exponenciales}
-  \subsubsection{Teóricamente $\mathcal{O}(2^n)$}
-  \begin{itemize}
-   \item Torres de Hanoi\\
-     El mejor ajuste práctico ha resultado ser: $f(n)=8.95567\cdot 10^{-9}\cdot 2^n+1$
+  \subsubsection{Torres de Hanoi. Teóricamente $\mathcal{O}(2^n)$}
+     El mejor ajuste práctico ha resultado ser: $$f(n)=8.95567\cdot 10^{-9}\cdot 2^n+1$$
      con una media de residuos cuadráticos de $1.19214$\\
      
      \noindent\resizebox{\linewidth}{!}{
@@ -419,18 +417,18 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     \hline
     $f(n)=1.45908\cdot n -16.4852$ & $26.4804$ \\
     \hline
+    $f(n)= 12.8151\cdot n \cdot log(n)-53.0373\cdot n+83.5661 \cdot log(n)+37.3727$ & $21.76$ \\
+    \hline
     $f(n)=0.179462\cdot n^2-4.8221\cdot n+21.2018$ & $21.511$ \\
     \hline
     $f(n)=0.0189069\cdot n^3 -0.813148\cdot n^2+9.27676\cdot n-22.8701$ & $16.0414$\\
     \hline
-    $f(n)= 12.8151\cdot n \cdot log(n)-53.0373\cdot n+83.5661 \cdot log(n)+37.3727$ & $21.76$ \\
+    $f(n)=8.95567\cdot 10^{-9}\cdot 2^n+1$ & $1.19214$
     \end{tabular}
     }
-    \end{itemize}
-  \subsubsection{Teóricamente $\mathcal{O}(\phi^n)$}
-    \begin{itemize}
-   \item Sucesión de Fibonacci\\
-     El mejor ajuste práctico ha resultado ser: $f(n)=4.58634\cdot 10^{-9}\cdot {\phi}^n + 0.132432\cdot {\phi}^{-n}-0.000217194\cdot n^2+0.00894081\cdot n-0.0715831$
+    
+  \subsubsection{Sucesión de Fibonacci. Teóricamente $\mathcal{O}(\phi^n)$}
+     El mejor ajuste práctico ha resultado ser: $$f(n)=4.58634\cdot 10^{-9}\cdot {\phi}^n + 0.132432\cdot {\phi}^{-n}-0.000217194\cdot n^2+0.00894081\cdot n-0.0715831$$
      con una media de residuos cuadráticos de $0.0843499$\\
      
      \noindent\resizebox{\linewidth}{!}{
@@ -439,16 +437,17 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     \hline
     $f(n)=0.474581\cdot n -7.62513$ & $12.3362$ \\
     \hline
+    $f(n)= 3.74306\cdot n \cdot log(n)-16.6338\cdot n+ 31.972 \cdot log(n)+7.3838$ & $10.1398$ \\
+    \hline
     $f(n)=0.0405252\cdot n^2-1.55168\cdot n+9.59809$ & $9.97894$ \\
     \hline
     $f(n)=0.0029623\cdot n^3 -0.181647\cdot n^2+2.9368\cdot n-10.042$ & $7.40489$\\
     \hline
-    $f(n)= 3.74306\cdot n \cdot log(n)-16.6338\cdot n+ 31.972 \cdot log(n)+7.3838$ & $10.1398$ \\
-    \hline
     $f(n)=1.50806\cdot 10^{-13} \cdot 2^n+1$ & $2.37045$\\
+    \hline
+    $f(n)=4.58634\cdot 10^{-9}\cdot {\phi}^n + 0.132432\cdot {\phi}^{-n}-0.000217194\cdot n^2+0.00894081\cdot n-0.0715831$ & $0.0843499$
     \end{tabular}
     }
-  \end{itemize} 
 
 \subsection {Gráficas}
 \imagen{../regressionPlots/burbuja_fit.jpg}{Ordenación por burbuja}
