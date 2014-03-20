@@ -1,0 +1,146 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@file}\textit{\textcolor{Brown}{\ Cálculo\ del\ coste\ de\ los\ caminos\ mínimos.\ Algoritmo\ de\ Floyd.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}iostream\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}ctime\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}cstdlib\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}climits\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}cassert\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}cmath\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{Blue}{using}}\ \textbf{\textcolor{Blue}{namespace}}\ std\textcolor{BrickRed}{;} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{static}}\ \textcolor{ForestGreen}{int}\ \textbf{\textcolor{Blue}{const}}\ MAX$\_$LONG\ \ \textcolor{BrickRed}{=}\ \textcolor{Purple}{10}\textcolor{BrickRed}{;} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Reserva\ espacio\ en\ memoria\ dinámica\ para\ una\ matriz\ cuadrada.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ dim:\ dimensión\ de\ la\ matriz.\ dim\ \textgreater{}\ 0.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@returns}\textit{\textcolor{Brown}{\ puntero\ a\ la\ zona\ de\ memoria\ reservada.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{int}\ \textcolor{BrickRed}{**}\ \textbf{\textcolor{Black}{ReservaMatriz}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ dim\textcolor{BrickRed}{);} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Libera\ el\ espacio\ asignado\ a\ una\ matriz\ cuadrada.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ M:\ puntero\ a\ la\ zona\ de\ memoria\ reservada.\ Es\ MODIFICADO.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ dim:\ dimensión\ de\ la\ matriz.\ dim\ \textgreater{}\ 0.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ Liberar\ la\ zona\ memoria\ asignada\ a\ M\ y\ lo\ pone\ a\ NULL.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{}\textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{LiberaMatriz}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ \textcolor{BrickRed}{**}\ \textcolor{BrickRed}{\&}\ M\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ dim\textcolor{BrickRed}{);} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Rellena\ una\ matriz\ cuadrada\ con\ valores\ aleaotorias.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ M:\ puntero\ a\ la\ zona\ de\ memoria\ reservada.\ Es\ MODIFICADO.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ dim:\ dimensión\ de\ la\ matriz.\ dim\ \textgreater{}\ 0.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ Asigna\ un\ valor\ aleatorio\ entero\ de\ [0,\ MAX$\_$LONG\ -\ 1]\ a\ cada}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ elemento\ de\ la\ matriz\ M,\ salvo\ los\ de\ la\ diagonal\ principal}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ que\ quedan\ a\ 0..}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{RellenaMatriz}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ \textcolor{BrickRed}{**}M\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ dim\textcolor{BrickRed}{);} \\
+\mbox{}\  \\
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Cálculo\ de\ caminos\ mínimos.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ M:\ Matriz\ de\ longitudes\ de\ los\ caminos.\ Es\ MODIFICADO.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ dim:\ dimensión\ de\ la\ matriz.\ dim\ \textgreater{}\ 0.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ Calcula\ la\ longitud\ del\ camino\ mínimo\ entre\ cada\ par\ de\ nodos\ (i,j),}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ que\ se\ almacena\ en\ M[i][j].}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{Floyd}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ \textcolor{BrickRed}{**}M\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ dim\textcolor{BrickRed}{);} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{//\ Implementación\ de\ las\ funciones}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{int}\ \textcolor{BrickRed}{**}\ \textbf{\textcolor{Black}{ReservaMatriz}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ dim\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{int}\ \textcolor{BrickRed}{**}M\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}dim\ \ \textcolor{BrickRed}{\textless{}=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ cerr\textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}}}\texttt{\textcolor{CarnationPink}{\textbackslash{}n}}\texttt{\textcolor{Red}{\ ERROR:\ Dimension\ de\ la\ matriz\ debe\ ser\ mayor\ que\ 0"{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{exit}}\textcolor{BrickRed}{(}\textcolor{Purple}{1}\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ M\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{new}}\ \textcolor{ForestGreen}{int}\textcolor{BrickRed}{*}\ \textcolor{BrickRed}{[}dim\textcolor{BrickRed}{];} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}M\ \textcolor{BrickRed}{==}\ NULL\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ cerr\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}}}\texttt{\textcolor{CarnationPink}{\textbackslash{}n}}\texttt{\textcolor{Red}{\ ERROR:\ No\ puedo\ reservar\ memoria\ para\ un\ matriz\ de\ "{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{BrickRed}{\textless{}\textless{}}\ dim\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}\ x\ "{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ dim\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}elementos"{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{exit}}\textcolor{BrickRed}{(}\textcolor{Purple}{1}\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ dim\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++)} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ M\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]=}\ \textbf{\textcolor{Blue}{new}}\ \textcolor{ForestGreen}{int}\ \textcolor{BrickRed}{[}dim\textcolor{BrickRed}{];} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}M\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{==}\ NULL\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ cerr\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}ERROR:\ No\ puedo\ reservar\ memoria\ para\ un\ matriz\ de\ "{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{\textless{}\textless{}}\ dim\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}\ x\ "{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ dim\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ j\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ j\ \textcolor{BrickRed}{\textless{}}\ i\textcolor{BrickRed}{;}\ j\textcolor{BrickRed}{++)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{delete}}\ \textcolor{BrickRed}{[]}\ M\textcolor{BrickRed}{[}i\textcolor{BrickRed}{];} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{delete}}\ \textcolor{BrickRed}{[]}\ M\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{exit}}\textcolor{BrickRed}{(}\textcolor{Purple}{1}\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{Red}{\}}\  \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ M\textcolor{BrickRed}{;} \\
+\mbox{}\textcolor{Red}{\}}\ \ \  \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{LiberaMatriz}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ \textcolor{BrickRed}{**}\ \textcolor{BrickRed}{\&}\ M\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ dim\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ dim\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++)} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{delete}}\ \textcolor{BrickRed}{[]}\ M\textcolor{BrickRed}{[}i\textcolor{BrickRed}{];} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{delete}}\ \textcolor{BrickRed}{[]}\ M\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ M\ \textcolor{BrickRed}{=}\ NULL\textcolor{BrickRed}{;} \\
+\mbox{}\textcolor{Red}{\}}\ \ \ \ \ \ \  \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{RellenaMatriz}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ \textcolor{BrickRed}{**}M\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ dim\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ dim\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++)} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ j\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ j\ \textcolor{BrickRed}{\textless{}}\ dim\textcolor{BrickRed}{;}\ j\textcolor{BrickRed}{++)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}i\ \textcolor{BrickRed}{!=}\ j\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ M\textcolor{BrickRed}{[}i\textcolor{BrickRed}{][}j\textcolor{BrickRed}{]=}\ \textcolor{BrickRed}{(}\textbf{\textcolor{Black}{rand}}\textcolor{BrickRed}{()}\ \textcolor{BrickRed}{\%}\ MAX$\_$LONG\textcolor{BrickRed}{);} \\
+\mbox{}\textcolor{Red}{\}}\ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \  \\
+\mbox{}\textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{Floyd}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ \textcolor{BrickRed}{**}M\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ dim\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ k\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ k\ \textcolor{BrickRed}{\textless{}}\ dim\textcolor{BrickRed}{;}\ k\textcolor{BrickRed}{++)} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ dim\textcolor{BrickRed}{;}i\textcolor{BrickRed}{++)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ j\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;}\ j\ \textcolor{BrickRed}{\textless{}}\ dim\textcolor{BrickRed}{;}j\textcolor{BrickRed}{++)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{int}\ sum\ \textcolor{BrickRed}{=}\ M\textcolor{BrickRed}{[}i\textcolor{BrickRed}{][}k\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{+}\ M\textcolor{BrickRed}{[}k\textcolor{BrickRed}{][}j\textcolor{BrickRed}{];}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ M\textcolor{BrickRed}{[}i\textcolor{BrickRed}{][}j\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{(}M\textcolor{BrickRed}{[}i\textcolor{BrickRed}{][}j\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textgreater{}}\ sum\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{?}\ sum\ \textcolor{BrickRed}{:}\ M\textcolor{BrickRed}{[}i\textcolor{BrickRed}{][}j\textcolor{BrickRed}{];} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\textcolor{Red}{\}}\ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{int}\ \textbf{\textcolor{Black}{main}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ argc\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{char}\ \textcolor{BrickRed}{*}argv\textcolor{BrickRed}{[])}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{struct}}\ \textcolor{TealBlue}{timespec}\ t$\_$antes\textcolor{BrickRed}{,}\ t$\_$despues\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{int}\ dim\textcolor{BrickRed}{;}\ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//\ Dimensión\ de\ la\ matriz}} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{//Lectura\ de\ los\ parametros\ de\ entrada}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}argc\ \textcolor{BrickRed}{!=}\textcolor{Purple}{2}\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ cerr\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Uso\ del\ programa:\ "{}}}\ \textcolor{BrickRed}{+}\ \textcolor{BrickRed}{(}string\textcolor{BrickRed}{)(}argv\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{])}\ \textcolor{BrickRed}{+}\ \texttt{\textcolor{Red}{"{}\ \textless{}número\ positivo\textgreater{}"{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;}\ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ dim\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{atoi}}\textcolor{BrickRed}{(}argv\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{]);} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}dim\textcolor{BrickRed}{\textless{}}\textcolor{Purple}{0}\textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{return}}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{int}\ \textcolor{BrickRed}{**}\ M\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{ReservaMatriz}}\textcolor{BrickRed}{(}dim\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{RellenaMatriz}}\textcolor{BrickRed}{(}M\textcolor{BrickRed}{,}dim\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{//\ Empieza\ el\ algoritmo\ de\ floyd}} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$antes\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{Floyd}}\ \textcolor{BrickRed}{(}M\textcolor{BrickRed}{,}dim\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$despues\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ cout\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{precision}}\textcolor{BrickRed}{(}\textcolor{Purple}{3}\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{double}\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{(}t$\_$despues\textcolor{BrickRed}{.}tv$\_$sec\textcolor{BrickRed}{-}t$\_$antes\textcolor{BrickRed}{.}tv$\_$sec\textcolor{BrickRed}{)+} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{double}\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{((}t$\_$despues\textcolor{BrickRed}{.}tv$\_$nsec\textcolor{BrickRed}{-}t$\_$antes\textcolor{BrickRed}{.}tv$\_$nsec\textcolor{BrickRed}{)/(}\textcolor{Purple}{1}\textcolor{BrickRed}{.}e\textcolor{BrickRed}{+}\textcolor{Purple}{9}\textcolor{BrickRed}{))}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{LiberaMatriz}}\textcolor{BrickRed}{(}M\textcolor{BrickRed}{,}dim\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;} \\
+\mbox{}\textcolor{Red}{\}}\ \ \  \\
+\mbox{} \\
+\mbox{}

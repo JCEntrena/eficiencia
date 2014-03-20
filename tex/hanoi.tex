@@ -1,0 +1,56 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@file}\textit{\textcolor{Brown}{\ Resolución\ del\ problema\ de\ las\ Torres\ de\ Hanoi}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}iostream\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}cstdlib\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}ctime\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{Blue}{using}}\ \textbf{\textcolor{Blue}{namespace}}\ std\textcolor{BrickRed}{;} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Resuelve\ el\ problema\ de\ las\ Torres\ de\ Hanoi}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ M:\ número\ de\ discos.\ M\ \textgreater{}\ 1.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ i:\ número\ de\ columna\ en\ que\ están\ los\ discos.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ i\ es\ un\ valor\ de\ \{1,\ 2,\ 3\}.\ i\ !=\ j.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ j:\ número\ de\ columna\ a\ que\ se\ llevan\ los\ discos.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ j\ es\ un\ valor\ de\ \{1,\ 2,\ 3\}.\ j\ !=\ i.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ Esta\ función\ imprime\ en\ la\ salida\ estándar\ la\ secuencia\ de}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ movimientos\ necesarios\ para\ desplazar\ los\ M\ discos\ de\ la}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ columna\ i\ a\ la\ j,\ observando\ la\ restricción\ de\ que\ ningún}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ disco\ se\ puede\ situar\ sobre\ otro\ de\ tamaño\ menor.\ Utiliza}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ una\ única\ columna\ auxiliar.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{hanoi}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ M\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ i\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ j\textcolor{BrickRed}{);} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{hanoi}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ M\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ i\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ j\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}M\ \textcolor{BrickRed}{\textgreater{}}\ \textcolor{Purple}{0}\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{hanoi}}\textcolor{BrickRed}{(}M\textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{,}\ i\textcolor{BrickRed}{,}\ \textcolor{Purple}{6}\textcolor{BrickRed}{-}i\textcolor{BrickRed}{-}j\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//cout\ \textless{}\textless{}\ i\ \textless{}\textless{}\ "{}\ -\textgreater{}\ "{}\ \textless{}\textless{}\ j\ \textless{}\textless{}\ endl;}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Black}{hanoi}}\ \textcolor{BrickRed}{(}M\textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{,}\ \textcolor{Purple}{6}\textcolor{BrickRed}{-}i\textcolor{BrickRed}{-}j\textcolor{BrickRed}{,}\ j\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\textcolor{Red}{\}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{int}\ \textbf{\textcolor{Black}{main}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ argc\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{char}\textcolor{BrickRed}{*}\ argv\textcolor{BrickRed}{[])}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}argc\ \textcolor{BrickRed}{!=}\textcolor{Purple}{2}\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ cerr\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Uso\ del\ programa:\ "{}}}\ \textcolor{BrickRed}{+}\ \textcolor{BrickRed}{(}string\textcolor{BrickRed}{)(}argv\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{])}\ \textcolor{BrickRed}{+}\ \texttt{\textcolor{Red}{"{}\ \textless{}número\ positivo\textgreater{}"{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;}\ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{int}\ n\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{atoi}}\textcolor{BrickRed}{(}argv\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{]);}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}n\textcolor{BrickRed}{\textless{}}\textcolor{Purple}{0}\textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{return}}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{struct}}\ \textcolor{TealBlue}{timespec}\ t$\_$antes\textcolor{BrickRed}{,}\ t$\_$despues\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$antes\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{hanoi}}\ \textcolor{BrickRed}{(}n\textcolor{BrickRed}{,}\textcolor{Purple}{1}\textcolor{BrickRed}{,}\textcolor{Purple}{2}\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$despues\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ cout\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{precision}}\textcolor{BrickRed}{(}\textcolor{Purple}{3}\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{double}\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{(}t$\_$despues\textcolor{BrickRed}{.}tv$\_$sec\textcolor{BrickRed}{-}t$\_$antes\textcolor{BrickRed}{.}tv$\_$sec\textcolor{BrickRed}{)+} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{double}\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{((}t$\_$despues\textcolor{BrickRed}{.}tv$\_$nsec\textcolor{BrickRed}{-}t$\_$antes\textcolor{BrickRed}{.}tv$\_$nsec\textcolor{BrickRed}{)/(}\textcolor{Purple}{1}\textcolor{BrickRed}{.}e\textcolor{BrickRed}{+}\textcolor{Purple}{9}\textcolor{BrickRed}{))}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;} \\
+\mbox{}\textcolor{Red}{\}}

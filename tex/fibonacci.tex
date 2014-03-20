@@ -1,0 +1,44 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@file}\textit{\textcolor{Brown}{\ Cálculo\ de\ la\ sucesión\ de\ Fibonacci}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}iostream\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}ctime\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}cstdlib\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{Blue}{using}}\ \textbf{\textcolor{Blue}{namespace}}\ std\textcolor{BrickRed}{;} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Calcula\ el\ término\ n-ésimo\ de\ la\ sucesión\ de\ Fibonacci.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ n:\ número\ de\ orden\ del\ término\ buscado.\ n\ \textgreater{}=\ 1.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@return}\textit{\textcolor{Brown}{:\ término\ n-ésimo\ de\ la\ sucesión\ de\ Fibonacci.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{int}\ \textbf{\textcolor{Black}{fibo}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ n\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}n\ \textcolor{BrickRed}{\textless{}}\ \textcolor{Purple}{2}\textcolor{BrickRed}{)} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{else}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textbf{\textcolor{Black}{fibo}}\textcolor{BrickRed}{(}n\textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{+}\ \textbf{\textcolor{Black}{fibo}}\textcolor{BrickRed}{(}n\textcolor{BrickRed}{-}\textcolor{Purple}{2}\textcolor{BrickRed}{);} \\
+\mbox{}\textcolor{Red}{\}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{int}\ \textbf{\textcolor{Black}{main}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ argc\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{char}\textcolor{BrickRed}{*}\ argv\textcolor{BrickRed}{[])}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}argc\ \textcolor{BrickRed}{!=}\textcolor{Purple}{2}\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ cerr\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Uso\ del\ programa:\ "{}}}\ \textcolor{BrickRed}{+}\ \textcolor{BrickRed}{(}string\textcolor{BrickRed}{)(}argv\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{])}\ \textcolor{BrickRed}{+}\ \texttt{\textcolor{Red}{"{}\ \textless{}número\ positivo\textgreater{}"{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;}\ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{int}\ n\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{atoi}}\textcolor{BrickRed}{(}argv\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{]);}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}n\textcolor{BrickRed}{\textless{}}\textcolor{Purple}{0}\textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{return}}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{struct}}\ \textcolor{TealBlue}{timespec}\ t$\_$antes\textcolor{BrickRed}{,}\ t$\_$despues\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$antes\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{fibo}}\ \textcolor{BrickRed}{(}n\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$despues\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ cout\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{precision}}\textcolor{BrickRed}{(}\textcolor{Purple}{3}\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{double}\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{(}t$\_$despues\textcolor{BrickRed}{.}tv$\_$sec\textcolor{BrickRed}{-}t$\_$antes\textcolor{BrickRed}{.}tv$\_$sec\textcolor{BrickRed}{)+} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{double}\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{((}t$\_$despues\textcolor{BrickRed}{.}tv$\_$nsec\textcolor{BrickRed}{-}t$\_$antes\textcolor{BrickRed}{.}tv$\_$nsec\textcolor{BrickRed}{)/(}\textcolor{Purple}{1}\textcolor{BrickRed}{.}e\textcolor{BrickRed}{+}\textcolor{Purple}{9}\textcolor{BrickRed}{))}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;} \\
+\mbox{}\textcolor{Red}{\}}
