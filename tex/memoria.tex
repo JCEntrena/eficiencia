@@ -309,7 +309,8 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
   Quizás se pueda explicar esta variación ajuste teórico-ajuste práctico en que esta versión de mergesort llama internamente
   a inserción para algunas tallas del problema, lo que la puede hacer más eficiente.\\
   
-    \small
+    
+    \noindent\resizebox{\linewidth}{!}{
     \begin{tabular}{l|l}
     \textbf{Ajuste} & \textbf{$\sigma^2_e$}\\
     \hline
@@ -319,7 +320,8 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     \hline
     $f(n)=3.03488 \cdot 10^{-9} \cdot nlog(n) + 2.13985 \cdot 10^{-7}\cdot n-1.09431\cdot 10^{-5} \cdot log(n) + 3.28662\cdot 10^{-5}$ & $0.000119057$\\
     \end{tabular}
-    \normalsize
+    }
+    
     
   \subsubsection{Ordenación por quicksort}
   El mejor ajuste práctico ha resultado ser: $f(n)=-4.52927\cdot 10^{-16} \cdot n^3+8.28261\cdot 10^{-12}\cdot n^2+1.13041 \cdot 10^{-7}\cdot n-
