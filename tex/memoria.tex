@@ -222,16 +222,40 @@ Se ha añadido a este guión la funcionalidad necesaria para comunicarse con \te
 uno de los programas y crear también la gráfica de la función de ajuste. En cada caso, el Makefile (sección \ref{makefile}) se encarga de proporcionar los parámetros
 necesarios al guión y de redirigir la salida al archivo correcto, de forma que el usuario solo debe ejecutar órdenes sencillas para generar gráficas de datos y ajustes de todos los programas.
 
+
 \subsection{Ejecución de programas}
 Se han realizado ejecuciones con tres máquinas distintas y diferentes optimizaciones:
 \begin{itemize}
-\item Intel Core i7 3612QM (2.1 GHz), sin optimización de GCC.
-\item Intel Core i7 3610QM (2.3 GHz), con optimización \texttt{-O2}.
-\item Intel Core i5 3210M (2.5 GHz), sin optimización de GCC.
+\item Intel Core i7 3612QM (cuatro núcleos, 2.1 GHz), sin optimización de GCC.
+\item Intel Core i7 3610QM (cuatro núcleos, 2.3 GHz), con optimización \texttt{-O2}.
+\item Intel Core i5 3210M (dos núcleos, 2.5 GHz), sin optimización de GCC.
 \end{itemize}
 Los datos obtenidos del primer computador son los utilizados para obtener gráficas y funciones de ajuste en la sección \ref{ajustes}.
 
 Los resultados revelan que de una máquina a otra puede variar la constante oculta de la función del tiempo de ejecución, pero se mantiene el comportamiento asintótico, y los ajustes resultantes son similares.
+
+A continuación mostramos visualmente cómo varían los tiempos de ejecución de varios algoritmos en estas máquinas, observando una clara mejora gracias a la optimización \texttt{-O2} tanto en ordenación por selección como en Fibonacci, y sin embargo en \textit{quicksort} se observa que los dos procesadores de cuatro núcleos se equiparan y el dual-core es notablemente más lento.
+
+% seleccion, quicksort, fibonacci
+\imagen{../compMaquinas/SeleccionMaquinas.jpg}{Ordenación por selección en cada máquina}
+\imagen{../compMaquinas/QuickMaquinas.jpg}{Ordenación \textit{quicksort} en cada máquina}
+\imagen{../compMaquinas/FibMaquinas.jpg}{Sucesión de Fibonacci en cada máquina}
+
+En resumen, observamos que puede no ser tan importante la potencia o la cantidad de núcleos como un código bien optimizado. Es interesante notar que el procesador con núcleos más potentes, el 3210M, alcanza en general resultados peores que los procesadores con más núcleos o en los que se ha optimizado el código.
+
+\subsection{Comparación de algoritmos de ordenación}
+Los algoritmos de ordenación estudiados se dividen en dos grupos, los cuadráticos (burbuja, inserción y selección) y los que son de orden $\mathcal{O}(nlog(n))$ (por mezcla, \textit{heapsort} y \textit{quicksort}). Al mostrar los tiempos de ejecución de todos en la misma gráfica apreciamos claramente la distinción entre los dos órdenes de eficiencia.
+
+\imagen{../comp/Ordenaciones.jpg}{Algoritmos de ordenación}
+
+Para tamaños mayores que 2000, la diferencia en tiempo de ambos grupos resulta notable, y mientras que con tamaños hasta 10000 los cuadráticos superan con creces la décima de segundo (y las 3 décimas en el caso de la burbuja), los de orden $\mathcal{O}(nlog(n))$ ni siquiera llegan a la centésima de segundo.
+
+Observemos una comparación exclusivamente entre los algoritmos de este último orden:
+
+\imagen{../comp/NLogN.jpg}{Ordenaciones $\mathcal{O}(nlog(n))$}
+
+Vemos que el algoritmo de Hoare obtiene los mejores resultados, y \textit{mergesort} tiene una tendencia a crecer más rápidamente, lo que está ocasionado por la diferencia de la constante multiplicativa en la función del tiempo de ejecución, ya que realmente tienen el mismo orden de eficiencia. \textit{Heapsort} se coloca en un punto medio entre ambos.
+
 
 \section {Resultados empíricos}
 \label{ajustes}
