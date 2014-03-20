@@ -95,12 +95,7 @@ Análisis de eficiencia} % Subtitle
 \begin{abstract}
 La eficiencia de los algoritmos se puede medir de forma teórica 
 y empírica. En esta memoria se recogen estudios acerca de la 
-eficiencia de algunos algoritmos muy conocidos, y se exponen 
-implementaciones de los mismos y datos de su ejecución en 
-distintas máquinas y con diferentes niveles de optimización.
-Se representan estos resultados en una serie de gráficas, y por 
-último, se resume la información obtenida en unas conclusiones 
-finales.
+eficiencia de algunos algoritmos muy conocidos, y se extraen datos de la ejecución que permiten aproximar funciones que describan el tiempo de ejecución. Se comparan ejecuciones con distintas máquinas y optimizaciones, se utilizan gráficas para mostrar visualmente la información obtenida y se exponen todos los códigos utilizados y datos resultantes.
 \end{abstract}
 {\parskip=2pt
 \tableofcontents
@@ -111,19 +106,16 @@ finales.
 %Hay un problema con el espacio entre estos párrafos, que no deja separación enre ambos. Vale asi?
 Hemos llevado a cabo análisis teóricos y estudios empíricos de la eficiencia de los algoritmos propuestos. Con motivo de facilitar el trabajo a la hora de realizar esta práctica,
 hemos añadido algunos archivos y realizado ciertas modificaciones en los códigos, que
-introducimos a continuación y detallaremos en las siguientes secciones: 
+introducimos a continuación y detallaremos en las siguientes secciones.
 
 Inicialmente, hemos hecho algunos cambios léxicos en el código de los programas, con el
-objetivo de que sean más legibles y facilitar su comprensión. También hemos
-cambiado la función que se utilizaba para medir el tiempo por una con más precisión, lo 
-que nos permite ejecutar los algoritmos con un volumen de entrada menor. 
-
-Para facilitarnos la compilación y ejecución de los programas, hemos creado un archivo 
+objetivo de que sean más legibles y facilitar su comprensión. Para facilitarnos la compilación y ejecución de los programas, hemos creado un archivo 
 Makefile que compila los códigos y genera los datos y gráficas necesarios para la práctica.
 
-Además, para la generación de dichas gráficas, hemos escrito un guion en Bash que usa 
-\texttt{gnuplot} para obtenerlas, de la misma forma que se obtienen las funciones de ajuste 
-de la eficiencia. 
+Además, hemos escrito un guion en Bash que usa 
+\texttt{gnuplot} para la generación de dichas gráficas. También utilizamos \texttt{gnuplot} para la extracción de funciones de ajuste que muestran el comportamiento del tiempo de ejecución de los algoritmos.
+
+Todo el código utilizado, incluidos el guion en Bash y el Makefile, se encuentran recogidos en el apéndice (sección \ref{apendice}).
 
 \section {Análisis teórico}
 \subsection {Ordenación de la burbuja}
@@ -501,7 +493,7 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
 
 \newpage
 \section{Apéndice}
-
+\label{apendice}
 \subsection{Listados de código}
 A continuación se incluyen los códigos modificados que se han usado en la práctica.
 \scriptsize{
