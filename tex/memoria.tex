@@ -248,16 +248,22 @@ es posible que la función de ajuste no coincida siempre con la que da el compor
 \subsection{Algoritmos teóricamente $\mathcal{O}(n^2)$}
 
   \subsubsection{Ordenación por burbuja}
-  El ajuste que deberíamos haber obtenido era de la forma: $f(n) = a \cdot n^2+b \cdot n+c$\\
-  El mejor ajuste práctico ha resultado ser el de la forma $ax^3+bx^2+cx+d$,
-  con una media de residuos cuadráticos de $0.0037376$. \\
+  El ajuste que deberíamos haber obtenido era de la forma $a n^2+bn+c$.
+  Se obtiene el ajuste con una media de residuos cuadráticos de $0.00391704$ :
+  \begin{center}
+   $f(n)=4.20281\cdot 10^{-9}\cdot n^2-6.17206\cdot 10^{-6}\cdot n +0.00487322$
+  \end{center}
+
+  El mejor ajuste práctico de los probados es de la forma $ax^3+bx^2+cx+d$,
+  con una media de residuos cuadráticos de $0.0037376$. Nótese que es muy similar
+  al teórico cuadrático.
 
     \noindent\resizebox{\linewidth}{!}{
     \begin{tabular}{l|l}
     \textbf{Ajuste} & \textbf{$\sigma^2_e$}\\
     \hline
     $f(n)=3.55198\cdot 10^{-5}\cdot n -0.0635027$ & $0.0318751$ \\ \hline
-    $f(n)=4.0846\cdot 10^{-5}\cdot n \cdot log(n)-0.000353425\cdot n +0.0204474 \cdot log(n)-0.0654402$ & $0.00767502$ \\ \hline
+    $f(n)=4.08460\cdot 10^{-5}\cdot n \cdot log(n)-0.000353425\cdot n +0.0204474 \cdot log(n)-0.0654402$ & $0.00767502$ \\ \hline
     $f(n)=4.20281\cdot 10^{-9}\cdot n^2-6.17206\cdot 10^{-6}\cdot n +0.00487322$ & $0.00391704$ \\ \hline
     $f(n)=-6.82525\cdot 10^{-12} \cdot n^3+1.26402\cdot 10^{7}\cdot n^2-0.000661563 \cdot n+0.999054$ & $0.0037376$
     \end{tabular}
