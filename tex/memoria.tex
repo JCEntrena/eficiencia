@@ -38,17 +38,20 @@
 \usepackage{longtable}
 \usepackage{tabu}
 
+\usepackage{multicol}
+
 \usepackage[section]{placeins} % Para gráficas en su sección.
 \usepackage{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Required for accented characters
 \newenvironment{allintypewriter}{\ttfamily}{\par}
 \setlength{\parindent}{0pt}
+\parskip=8pt
 \linespread{1.05} % Change line spacing here, Palatino benefits from a slight increase by default
 
 \makeatletter
 \renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
 \renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
-\newcommand{\imagen}[2]{\begin{figure*}[ht!] \centering \includegraphics[width=90mm]{#1} \\ #2 \end{figure*}}
+\newcommand{\imagen}[2]{\begin{figure*}[ht!] \centering  \includegraphics[width=90mm]{#1} \\ #2 \end{figure*}}
 
 
 \renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
@@ -93,13 +96,14 @@ Se representan estos resultados en una serie de gráficas, y por
 último, se resume la información obtenida en unas conclusiones 
 finales.
 \end{abstract}
+{\parskip=2pt
 \tableofcontents
-
+}
 \pagebreak
 
 \section {Introducción}
 %Hay un problema con el espacio entre estos párrafos, que no deja separación enre ambos. Vale asi?
-Con motivo de facilitar el trabajo a la hora de realizar esta práctica,
+Hemos llevado a cabo análisis teóricos y estudios empíricos de la eficiencia de los algoritmos propuestos. Con motivo de facilitar el trabajo a la hora de realizar esta práctica,
 hemos añadido algunos archivos y realizado ciertas modificaciones en los códigos, que
 introducimos a continuación y detallaremos en las siguientes secciones: 
 
@@ -197,16 +201,44 @@ Con soluciones de complejidad $\mathcal{O}(2^n)$.
 
 \section {Análisis práctico}
 \subsection{Modificaciones del código}
-A la hora de realizar un análisis empírico de la eficiencia de estos algoritmos, se ha estudiado el tiempo de ejecución de los programas que llevan a cabo cada tarea. Para ello, se ha utilizado la función \texttt{clock\_gettime()} de la biblioteca \texttt{time.h} de C. Esta función proporciona una resolución mayor que otras utilidades como \texttt{clock()} o \texttt{time()}. El código añadido para monitorear el tiempo de ejecución ha sido el siguiente:
+A la hora de realizar un análisis empírico de la eficiencia de estos algoritmos, se ha estudiado el tiempo de ejecución de los programas que llevan a cabo cada tarea.
+Para ello, se ha utilizado la función \texttt{clock\_gettime()} de la biblioteca \texttt{time.h} de C. Esta función proporciona una resolución de $0.001\ \mu s$, mejor que otras utilidades como \texttt{clock()} o \texttt{time()}.
+El código añadido para monitorear el tiempo de ejecución ha sido el siguiente:
 
-\texttt{\mbox{}\ \textbf{\textcolor{Blue}{struct}}\ \textcolor{TealBlue}{timespec}\ t$\_$antes\textcolor{BrickRed}{,}\ t$\_$despues\textcolor{BrickRed}{;} \\
+\texttt{\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{struct}}\ \textcolor{TealBlue}{timespec}\ t$\_$antes\textcolor{BrickRed}{,}\ t$\_$despues\textcolor{BrickRed}{;} \\
 \mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$antes\textcolor{BrickRed}{);} \\
 \mbox{}\ \ \ \ \textbf{\textcolor{Brown}{/*** Ejecución del programa ***/}} \\
 \mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$despues\textcolor{BrickRed}{);} \\}
 
-Una vez obtenidos los tiempos al inicio y finalización de la ejecución, se realiza el cálculo conveniente para hallar, mediante las estructuras \texttt{timespec}, los segundos y nanosegundos transcurridos.
+Una vez obtenidos los tiempos al inicio y finalización de la ejecución, se realiza el cálculo conveniente para hallar, mediante las estructuras \texttt{timespec}, los segundos y nanosegundos transcurridos. Se han modificado los programas para que muestren en la salida únicamente este valor numérico.
 
-\subsection{Códigos modificados}
+Para el tratamiento de los algoritmos con distintos tamaños de entrada, se ha utilizado un guion en Bash (sección \ref{gengraf}) que ejecuta los programas las veces necesarias y con los parámetros convenientes, para obtener todos los tiempos de ejecución requeridos. Permite además ejecutar más de una vez con el mismo tamaño de problema para realizar una media de los tiempos obtenidos (en nuestro caso se ha hecho la media de 5 repeticiones de cada tamaño).
+
+
+\section {Conclusiones}
+\subsection {Gráficas}
+\begin{multicols}{2} % Esto no funciona...?
+\imagen{../regressionPlots/burbuja_fit.jpg}{Ordenación por burbuja}
+
+\imagen{../regressionPlots/fibonacci_fit.jpg}{Serie de Fibonacci}
+
+\imagen{../regressionPlots/floyd_fit.jpg}{Algoritmo de Floyd}
+
+\imagen{../regressionPlots/hanoi_fit.jpg}{Torres de Hanoi}
+
+\imagen{../regressionPlots/heapsort_fit.jpg}{Ordenación por heapsort}
+
+\imagen{../regressionPlots/insercion_fit.jpg}{Ordenación por inserción}
+
+\imagen{../regressionPlots/mergesort_fit.jpg}{Ordenación por mergesort}
+
+\imagen{../regressionPlots/quicksort_fit.jpg}{Ordenación por quicksort}
+
+\imagen{../regressionPlots/seleccion_fit.jpg}{Ordenación por seleccion}
+\end{multicols}
+
+
+\section{Apéndice: Listados de código}
 A continuación se incluyen los códigos modificados que se han usado en la práctica.
 \scriptsize{
 \begin{allintypewriter}
@@ -267,6 +299,10 @@ A continuación se incluyen los códigos modificados que se han usado en la prá
 \newpage
 \section{Apéndice}
 \subsection{script}
+
+%\newpage
+%\section{Apéndice: Guion generador de datos y gráficos}
+%\label{gengraf}
 Para automatizar algunas de las labores que se nos pedían en la práctica
 y facilitar la obtención de datos en distintos equipos, se ha confeccionado
 un script, cuyo código se incluye a continuación, y que se ha llamado desde
