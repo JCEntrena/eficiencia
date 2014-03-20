@@ -116,7 +116,7 @@ que nos permite ejecutar los algoritmos con un volumen de entrada menor.
 Para facilitarnos la compilación y ejecución de los programas, hemos creado un archivo 
 Makefile que compila los códigos y genera los datos y gráficas necesarios para la práctica.
 
-Además, para la generación de dichas gráficas, hemos escrito un guion en \texttt{bash} que usa 
+Además, para la generación de dichas gráficas, hemos escrito un guion en Bash que usa 
 \texttt{gnuplot} para obtenerlas, de la misma forma que se obtienen las funciones de ajuste 
 de la eficiencia. 
 
@@ -212,7 +212,11 @@ El código añadido para monitorear el tiempo de ejecución ha sido el siguiente
 
 Una vez obtenidos los tiempos al inicio y finalización de la ejecución, se realiza el cálculo conveniente para hallar, mediante las estructuras \texttt{timespec}, los segundos y nanosegundos transcurridos. Se han modificado los programas para que muestren en la salida únicamente este valor numérico.
 
+\subsection{Archivos auxiliares}
+
 Para el tratamiento de los algoritmos con distintos tamaños de entrada, se ha utilizado un guion en Bash (sección \ref{gengraf}) que ejecuta los programas las veces necesarias y con los parámetros convenientes, para obtener todos los tiempos de ejecución requeridos. Permite además ejecutar más de una vez con el mismo tamaño de problema para realizar una media de los tiempos obtenidos (en nuestro caso se ha hecho la media de 5 repeticiones de cada tamaño).
+
+Además, se ha añadido a este guion la funcionalidad necesaria para comunicarse con \texttt{gnuplot} y crear una gráfica a partir del archivo de datos generado por uno de los programas, y crear también la gráfica de la función de ajuste. En cada caso, el Makefile se encarga de proporcionar los parámetros necesarios al guion y de redirigir la salida al archivo correcto, de forma que el usuario solo debe ejecutar órdenes del tipo \texttt{make plot} o \texttt{make fit} para generar gráficas de datos y de ajuste, respectivamente, de todos los programas.
 
 
 \section {Conclusiones}
