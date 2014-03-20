@@ -200,21 +200,27 @@ Con soluciones de complejidad $\mathcal{O}(2^n)$.
 \section {Análisis práctico}
 \subsection{Modificaciones del código}
 A la hora de realizar un análisis empírico de la eficiencia de estos algoritmos, se ha estudiado el tiempo de ejecución de los programas que llevan a cabo cada tarea.
-Para ello, se ha utilizado la función \texttt{clock\_gettime()} de la biblioteca \texttt{time.h} de C. Esta función proporciona una resolución de $0.001\ \mu s$, mejor que otras utilidades como \texttt{clock()} o \texttt{time()}.
-El código añadido para monitorear el tiempo de ejecución ha sido el siguiente:
+Para ello, se ha utilizado la función \texttt{clock\_gettime()} de la biblioteca \texttt{time.h} de C. Esta función proporciona una resolución de $0.001\ \mu s$, mejor
+que otras utilidades como \texttt{clock()} o \texttt{time()}. El código añadido para monitorear el tiempo de ejecución ha sido el siguiente:
 
 \texttt{\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{struct}}\ \textcolor{TealBlue}{timespec}\ t$\_$antes\textcolor{BrickRed}{,}\ t$\_$despues\textcolor{BrickRed}{;} \\
 \mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$antes\textcolor{BrickRed}{);} \\
 \mbox{}\ \ \ \ \textbf{\textcolor{Brown}{/*** Ejecución del programa ***/}} \\
 \mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$despues\textcolor{BrickRed}{);} \\}
 
-Una vez obtenidos los tiempos al inicio y finalización de la ejecución, se realiza el cálculo conveniente para hallar, mediante las estructuras \texttt{timespec}, los segundos y nanosegundos transcurridos. Se han modificado los programas para que muestren en la salida únicamente este valor numérico, de forma que se puedan recoger todos los resultados en un único archivo de datos que sirva de entrada para \texttt{gnuplot}.
+Una vez obtenidos los tiempos al inicio y finalización de la ejecución, se realiza el cálculo conveniente para hallar, mediante las estructuras \texttt{timespec},
+los segundos y nanosegundos transcurridos. Se han modificado los programas para que muestren en la salida únicamente este valor numérico, de forma que se puedan recoger
+todos los resultados en un único archivo de datos que sirva de entrada para \texttt{gnuplot}.
 
 \subsection{Archivos auxiliares}
 
-Para el tratamiento de los algoritmos con distintos tamaños de entrada, se ha utilizado un guion en Bash (sección \ref{gengraf}) que ejecuta los programas las veces necesarias y con los parámetros convenientes, para obtener todos los tiempos de ejecución requeridos. Permite además ejecutar más de una vez con el mismo tamaño de problema para realizar una media de los tiempos obtenidos (en nuestro caso se ha hecho la media de 5 repeticiones de cada tamaño).
+Para el tratamiento de los algoritmos con distintos tamaños de entrada, se ha utilizado un guión en Bash (sección \ref{gengraf}) que ejecuta los programas las veces
+necesarias para obtener todos los tiempos de ejecución requeridos. Además, ejecuta los programas más de una vez con el mismo tamaño de
+problema para realizar una media de los tiempos obtenidos (en nuestro caso se ha hecho la media con 5 repeticiones de cada tamaño).
 
-Además, se ha añadido a este guion la funcionalidad necesaria para comunicarse con \texttt{gnuplot} y crear una gráfica a partir del archivo de datos generado por uno de los programas, y crear también la gráfica de la función de ajuste. En cada caso, el Makefile (sección \ref{makefile}) se encarga de proporcionar los parámetros necesarios al guion y de redirigir la salida al archivo correcto, de forma que el usuario solo debe ejecutar órdenes sencillas para generar gráficas de datos y ajustes de todos los programas.
+Se ha añadido a este guión la funcionalidad necesaria para comunicarse con \texttt{gnuplot}, crear una gráfica a partir del archivo de datos generado por
+uno de los programas y crear también la gráfica de la función de ajuste. En cada caso, el Makefile (sección \ref{makefile}) se encarga de proporcionar los parámetros
+necesarios al guión y de redirigir la salida al archivo correcto, de forma que el usuario solo debe ejecutar órdenes sencillas para generar gráficas de datos y ajustes de todos los programas.
 
 \subsection{Ejecución de programas}
 Se han realizado ejecuciones con tres máquinas distintas y diferentes optimizaciones:
@@ -230,14 +236,15 @@ Los resultados revelan que de una máquina a otra puede variar la constante ocul
 \section {Resultados empíricos}
 \label{ajustes}
 \subsection{Análisis práctico de la eficiencia}
-Para realizar un análisis práctico de la eficiencia, el script adjunto en el
-apéndice, para una lista de funciones (lineales, cúbicas, exponenciales,...) 
-calcula el ajuste llamando a \texttt{gnuplot} de cada función, y la media
-de los residuos cuadráticos correspondientes. El mejor ajuste posible sería
-aquel que generase unos residuos menores. Hay que tener en cuenta que la 
-eficiencia es un concepto asintótico, y puesto que se han evaluado los algoritmos
-para los datos que permitían un tiempo de ejecución de los mismos asumible, 
+El script adjunto en el apéndice calcula el ajuste de los datos a una lista de funciones
+(lineales, cúbicas, exponenciales,...) y la media de los residuos cuadráticos correspondientes
+para realizar un análisis práctico de la eficiencia. Utiliza \texttt{gnuplot}.
+
+El mejor ajuste posible es aquel que genera unos residuos menores. Hay que tener en cuenta que la 
+eficiencia es un concepto asintótico y, puesto que se han evaluado los algoritmos
+para los tamaños de entrada que permitían un tiempo de ejecución asumible, 
 es posible que la función de ajuste no coincida siempre con la que da el comportamiento asintótico.
+
 \subsection{Algoritmos teóricamente $\mathcal{O}(n^2)$}
 
   \subsubsection{Ordenación por burbuja}
@@ -458,7 +465,7 @@ sobre la bondad de una serie de ajustes (recta de regresión, ajuste cuadrático
 exponencial,...) a las parejas de datos en los \texttt{.dat}
 \end{itemize}
 
-\scriptsize\texttt{\input{makefile}}\normalsize
+%\scriptsize\texttt{\input{makefile}}\normalsize
 
 \subsection{Tablas de datos}
 Se adjuntan las tablas de datos (talla del problema-tiempo de ejecución) para
