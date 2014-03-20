@@ -364,15 +364,19 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     }
     
   \subsubsection{Ordenación heapsort}
-  El mejor ajuste ha resultado ser: $$f(n)=2.05288 \cdot 10^{-8}\cdot nlog(n) + 4.34162\cdot 10^{-9}\cdot n+a2 \cdot 1.04338 
-  \cdot 10^{-6}log(n)-3.42946 \cdot 10^{-6}$$
-  con una media de residuos cuadráticos de $7.02599 \cdot 10^{-6}$\\
+  El mejor ajuste ha resultado ser el que debíamos obtener teóricamente, de la forma $anlog(n)+bn+clog(n)+d$.
+  Se obtiene con una media de residuos cuadráticos de $7.02599 \cdot 10^{-6}$:
+  $$f(n)=2.05288 \cdot 10^{-8}\cdot nlog(n) + 4.34162\cdot 10^{-9}\cdot n+a2 \cdot 1.04338 \cdot 10^{-6}log(n)-3.42946 \cdot 10^{-6}$$
 
+  El resto de ajustes dan peor resultado.
+  
     \noindent\resizebox{\linewidth}{!}{
     \begin{tabular}{l|l}
     \textbf{Ajuste} & \textbf{$\sigma^2_e$}\\
     \hline
     $f(n)=1.96921\cdot 10^{-7}\cdot n -6.35836 \cdot 10^{-5}$ & $2.09768\cdot 10^{-5}$ \\
+    \hline
+    $f(n)=2.05288 \cdot 10^{-8}\cdot nlog(n) + 4.34162\cdot 10^{-9}\cdot n+ \cdot 1.04338 \cdot 10^{-6}log(n)-3.42946 \cdot 10^{-6}$ &  $7.02599 \cdot 10^{-6}$\\
     \hline
     $f(n)=2.57118\cdot 10^{-12}\cdot n^2+1.71415\cdot 10^{-7}\cdot n-2.17528$ & $8.13131\cdot 10^{-6}$ \\
     \hline
