@@ -302,18 +302,17 @@ A continuación se incluyen los códigos modificados que se han usado en la prá
 
 \newpage
 \section{Apéndice}
-\subsection{script}
-
-%\newpage
-%\section{Apéndice: Guion generador de datos y gráficos}
-%\label{gengraf}
+\subsection{Guion generador de datos y gráficos}
+\label{gengraf}
 Para automatizar algunas de las labores que se nos pedían en la práctica
 y facilitar la obtención de datos en distintos equipos, se ha confeccionado
 un script, cuyo código se incluye a continuación, y que se ha llamado desde
 el \texttt{makefile} para cada algoritmo.
-\scriptsize\input{gengraf}
+
+\scriptsize\texttt{\input{gengraf}}
 \normalsize
-\subsection{makefile}
+
+\subsection{Makefile}
 Para llamar al algoritmo para cada archivo de código fuente y encapsular tareas
 como la generación de ejecutables, de gráficas y de gráficas y funciones de ajuste,
 se ha redactado un makefile.
@@ -325,8 +324,10 @@ en \texttt{./src} y a partir de los \texttt{.dat} correspondientes, las gráfica
 un archivo de la forma \texttt{<nombre-algoritmo>.fit}, que contiene información
 sobre la bondad de una serie de ajustes (recta de regresión, ajuste cuadrático, cúbico, 
 exponencial,...) a las parejas de datos en los \texttt{.dat}
-\input{makefile}
 \end{itemize}
+
+\scriptsize\texttt{\input{makefile}}\normalsize
+
 \subsection{Tablas de datos}
 Se adjuntan las tablas de datos (talla del problema-tiempo de ejecución) para
 cada algoritmo.
