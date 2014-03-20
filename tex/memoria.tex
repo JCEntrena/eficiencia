@@ -313,7 +313,7 @@ es posible que la función de ajuste no coincida siempre con la que da el compor
 Es lógico que en el análisis práctico en los algoritmos $\mathcal{O}(n^2)$
 hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}^3$
 
-\subsection{Algoritmos teóricamente $\mathcal{O}(nlog(n)$}
+\subsection{Algoritmos teóricamente $\mathcal{O}(nlog(n))$}
   \subsubsection{Ordenación por mergesort}
   El mejor ajuste práctico ha resultado ser su recta de regresión: 
   
@@ -341,12 +341,13 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     
     
   \subsubsection{Ordenación por quicksort}
-  El mejor ajuste práctico ha resultado ser: 
-  $$f(n)=-4.52927\cdot 10^{-16} \cdot n^3+8.28261\cdot 10^{-12}\cdot n^2+1.13041 \cdot 10^{-7}\cdot n-
-  1.72007\cdot 10^{-6}$$ 
-  con una media de residuos cuadráticos de $8.29712\cdot 10^{-6}$\\
+  El ajuste que deberíamos haber obtenido era de la forma $anlog(n)+bn+clog(n)+d$.
+  Se obtiene el ajuste con una media de residuos cuadráticos de $1.00822\cdot 10^{-5}$:
+
+   $$f(n)=1.07463\cdot 10^{-8}\cdot n \cdot log(n)+5.59666\cdot 10^{-8}\cdot n-5.16002\cdot 10^{-6} \cdot log(n)+2.0864\cdot 10^{-5}$$
   
-  El ajuste que deberíamos haber obtenido: $$f(n)=a \cdot nlog(n) + b\cdot n+c \cdot log(n) + d$$\\
+  El mejor ajuste práctico de los probados es de la forma $ax^3+bx^2+cx+d$,
+  con una media de residuos cuadráticos de $8.29712\cdot 10^{-6}$.
   
     \noindent\resizebox{\linewidth}{!}{
     \begin{tabular}{l|l}
@@ -354,9 +355,11 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     \hline
     $f(n)=1.54984\cdot 10^{-7}\cdot n -4.84022 \cdot 10^{-5}$ & $1.66434\cdot 10^{-5}$ \\
     \hline
+    $f(n)=1.07463\cdot 10^{-8}\cdot n \cdot log(n)+5.59666\cdot 10^{-8}\cdot n-5.16002\cdot 10^{-6} \cdot log(n)+2.0864\cdot 10^{-5}$ & $1.00822\cdot 10^{-5}$ \\
+    \hline
     $f(n)=1.54306\cdot 10^{-12}\cdot n^2+1.39677\cdot 10^{-7}\cdot n-2.32981\cdot 10^{-5}$ & $1.19816\cdot 10^{-5}$ \\
     \hline
-    $f(n)=1.07463\cdot 10^{-8}\cdot n \cdot log(n)+5.59666\cdot 10^{-8}\cdot n-5.16002\cdot 10^{-6} \cdot log(n)+2.0864\cdot 10^{-5}$ & $1.00822\cdot 10^{-5}$ \\
+    $f(n)=-4.52927\cdot 10^{-16} \cdot n^3+8.28261\cdot 10^{-12}\cdot n^2+1.13041 \cdot 10^{-7}\cdot n-1.72007\cdot 10^{-6}$ & $8.29712\cdot 10^{-6}$ 
     \end{tabular}
     }
     
