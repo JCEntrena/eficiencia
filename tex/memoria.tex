@@ -249,7 +249,7 @@ es posible que la función de ajuste no coincida siempre con la que da el compor
 
   \subsubsection{Ordenación por burbuja}
   El ajuste que deberíamos haber obtenido era de la forma $a n^2+bn+c$.
-  Se obtiene el ajuste con una media de residuos cuadráticos de $0.00391704$ :
+  Se obtiene el ajuste con una media de residuos cuadráticos de $0.00391704$:
   \begin{center}
    $f(n)=4.20281\cdot 10^{-9}\cdot n^2-6.17206\cdot 10^{-6}\cdot n +0.00487322$
   \end{center}
@@ -270,17 +270,24 @@ es posible que la función de ajuste no coincida siempre con la que da el compor
     }
 
   \subsubsection{Ordenación por inserción}
-  El mejor ajuste práctico ha resultado ser: $f(n)=1.03091\cdot 10^{-14} \cdot n^3+1.32572\cdot 10^{-9}\cdot n^2+7.21102 \cdot 10^{-7}\cdot n-0.000351074$
-  con una media de residuos cuadráticos de $0.000877862$\\
-  El ajuste que deberíamos haber obtenido: $f(n)=a \cdot n^2+b \cdot n+c$\\
+  El ajuste que deberíamos haber obtenido era de la forma $a n^2+bn+c$.
+  Se obtiene el ajuste con una media de residuos cuadráticos de $0.000895417$:
+  \begin{center}
+   $f(n)=1.47912\cdot 10^{-9}\cdot n^2-1.1484\cdot 10^{-7}\cdot n+0.000140066$
+  \end{center}
+  
+  El mejor ajuste práctico de los probados es de la forma $ax^3+bx^2+cx+d$,
+  con una media de residuos cuadráticos de $0.000877862$. Nótese que es muy similar
+  al teórico cuadrático.
   
     \noindent\resizebox{\linewidth}{!}{
     \begin{tabular}{l|l}
     \textbf{Ajuste} & \textbf{$\sigma^2_e$}\\
     \hline
     $f(n)=1.47877\cdot 10^{-5}\cdot n -0.0239239$ & $0.0111694$ \\ \hline
+    $f(n)=1.40522\cdot 10^{-5}\cdot n \cdot log(n)-0.000118807\cdot n+0.00635583 \cdot log(n)-0.0200974$ & $0.00230142$ \\ \hline
     $f(n)=1.47912\cdot 10^{-9}\cdot n^2-1.1484\cdot 10^{-7}\cdot n+0.000140066$ & $0.000895417$ \\ \hline
-    $f(n)=1.40522\cdot 10^{-5}\cdot n \cdot log(n)-0.000118807\cdot n+0.00635583 \cdot log(n)-0.0200974$ & $0.00230142$ \\
+    $f(n)=1.03091\cdot 10^{-14} \cdot n^3+1.32572\cdot 10^{-9}\cdot n^2+7.21102 \cdot 10^{-7}\cdot n-0.000351074$ & $0.000877862$
     \end{tabular}
     }
     
