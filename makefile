@@ -43,6 +43,8 @@ $(FIT)/%.fit: $(DATA)/%.dat
 
 $(TEX)/%.tex: $(SRC)/%.cpp
 	source-highlight -f latexcolor -i $< -o $@
+$(TEX)/makefile.tex: makefile
+	source-highlight -f latexcolor -i $< -o $@
 
 # Limpieza de los ejecutables
 clean:
