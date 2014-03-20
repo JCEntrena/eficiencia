@@ -18,7 +18,7 @@ aur=`echo "(1+sqrt(5))/2" | bc -l`
 FUNCS=( 
         "a0                                                     a0"
         "a0*x+a1                                                a0,a1"
-        "a0*(x**2)+a1*x+a0                                      a0,a1,a2"      
+        "a0*(x**2)+a1*x+a2                                      a0,a1,a2"      
         "a0*(x**3)+a1*(x**2)+a2*x+a3                            a0,a1,a2,a3"
         "a0*x*log(x)+a1*x+a2*log(x)+a3                          a0,a1,a2,a3"
         "a0*(2**x)+a1                                           a0,a1"
