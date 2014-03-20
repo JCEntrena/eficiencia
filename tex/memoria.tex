@@ -249,24 +249,20 @@ eficiencia es un concepto asintótico, y puesto que se han evaluado los algoritm
 para los datos que permitían un tiempo de ejecución de los mismos asumible, 
 es posible que la eficiencia práctica no se haya obtenido como debiera.
 \subsection{Algoritmos teóricamente $\mathcal{O}(n^2)$}
-\begin{itemize}
-  \item Ordenación por burbuja\\
+
+  \subsubsection{Ordenación por burbuja}
   El mejor ajuste práctico ha resultado ser: $f(n)=-6.82525\cdot 10^{-12} \cdot n^3+1.26402\cdot 10^{7}\cdot n^2-0.000661563 \cdot n+0.999054$, con
   una media de residuos cuadráticos de $0.0037376$\\
   El ajuste que deberíamos haber obtenido: $f(n)=a \cdot n^2+b \cdot n+c$\\
 
-    \begin{tabular}{|c|c|}
-    \hline
+    \begin{tabular}{l|l}
     Ajuste & Media de los residuos cuadráticos\\
     \hline
-    $f(n)=3.55198\cdot 10^{-5}\cdot n -0.0635027$ & $0.0318751$ \\
-    \hline
-    $f(n)=4.20281\cdot 10^{-9}\cdot n^2-6.17206\cdot 10^{-6}\cdot n+0.00487322$ & $0.00391704$ \\
-    \hline
-    $f(n)=4.0846\cdot 10^{-5}\cdot n \cdot log(n)-0.000353425\cdot n+0.0204474 \cdot log(n)-0.0654402$ & $0.00767502$ \\
-    \hline
+    $f(n)=3.55198\cdot 10^{-5}\cdot n -0.0635027$ & $0.0318751$ \\ \hline
+    $f(n)=4.20281\cdot 10^{-9}\cdot n^2-6.17206\cdot 10^{-6}\cdot n$\\$+0.00487322$ & $0.00391704$ \\ \hline
+    $f(n)=4.0846\cdot 10^{-5}\cdot n \cdot log(n)-0.000353425\cdot n$\\$+0.0204474 \cdot log(n)-0.0654402$ & $0.00767502$ \\
     \end{tabular}
-
+\begin{itemize}
   \item Ordenación por inserción\\
   El mejor ajuste práctico ha resultado ser: $f(n)=1.03091\cdot 10^{-14} \cdot n^3+1.32572\cdot 10^{-9}\cdot n^2+7.21102 \cdot 10^{-7}\cdot n-0.000351074$
   con una media de residuos cuadráticos de $0.000877862$\\
