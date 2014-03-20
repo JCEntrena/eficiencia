@@ -1,0 +1,57 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{\#\ Eficiencia\ de\ algoritmos.}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ makefile.}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Basado\ en:\ http://stackoverflow.com/questions/9787160/makefile-that-compiles-all-cpp-files-in-a-directory-into-separate-executable}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{BIN=}\textcolor{BrickRed}{.}/bin \\
+\mbox{}\textcolor{ForestGreen}{SRC=}\textcolor{BrickRed}{.}/src \\
+\mbox{}\textcolor{ForestGreen}{DATA=}\textcolor{BrickRed}{.}/data \\
+\mbox{}\textcolor{ForestGreen}{PLOT=}\textcolor{BrickRed}{.}/plots \\
+\mbox{}\textcolor{ForestGreen}{FIT=}\textcolor{BrickRed}{.}/regressionPlots \\
+\mbox{}\textcolor{ForestGreen}{TEX=}\textcolor{BrickRed}{.}/tex \\
+\mbox{}\textcolor{ForestGreen}{FLAGS=}-std\textcolor{BrickRed}{=}c\textcolor{BrickRed}{++}0x\ -Wall \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ make\ all:\ Compilar\ todos\ los\ programas\ }} \\
+\mbox{}\textcolor{BrickRed}{all:}\ \textcolor{ForestGreen}{\$(}patsubst\ \textcolor{ForestGreen}{\$(SRC)}\textcolor{BrickRed}{/\%}.cpp\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{\$(BIN)}\textcolor{BrickRed}{/\%,}\ \textcolor{ForestGreen}{\$(}wildcard\ \textcolor{ForestGreen}{\$(SRC)/*.cpp))} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ make\ data:\ Recalcular\ el\ archivo\ .dat\ de\ todos\ los\ programas}} \\
+\mbox{}\textcolor{BrickRed}{data:}\ all\ gengraf.sh\ \textcolor{ForestGreen}{\$(}patsubst\ \textcolor{ForestGreen}{\$(SRC)}\textcolor{BrickRed}{/\%}.cpp\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{\$(DATA)}\textcolor{BrickRed}{/\%}.dat\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{\$(}wildcard\ \textcolor{ForestGreen}{\$(SRC)/*.cpp))} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ make\ plot:\ Generar\ todas\ las\ imágenes\ a\ partir\ de\ los\ archivos\ .dat}} \\
+\mbox{}\textcolor{BrickRed}{plot:}\ gengraf.sh\ \textcolor{ForestGreen}{\$(}patsubst\ \textcolor{ForestGreen}{\$(SRC)}\textcolor{BrickRed}{/\%}.cpp\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{\$(PLOT)}\textcolor{BrickRed}{/\%}.jpg\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{\$(}wildcard\ \textcolor{ForestGreen}{\$(SRC)/*.cpp))} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ make\ fit:\ Crear\ las\ imágenes\ con\ las\ funciones\ de\ ajuste}} \\
+\mbox{}\textcolor{BrickRed}{fit:}\ gengraf.sh\ \textcolor{ForestGreen}{\$(}patsubst\ \textcolor{ForestGreen}{\$(SRC)}\textcolor{BrickRed}{/\%}.cpp\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{\$(FIT)}\textcolor{BrickRed}{/\%}.fit\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{\$(}wildcard\ \textcolor{ForestGreen}{\$(SRC)/*.cpp))} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ make\ codetex:\ Crear\ los\ archivos\ LaTeX\ de\ código\ resaltado}} \\
+\mbox{}\textcolor{BrickRed}{codetex:}\ \textcolor{ForestGreen}{\$(}patsubst\ \textcolor{ForestGreen}{\$(SRC)}\textcolor{BrickRed}{/\%}.cpp\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{\$(TEX)}\textcolor{BrickRed}{/\%}.tex\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{\$(}wildcard\ \textcolor{ForestGreen}{\$(SRC)/*.cpp))} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Opciones\ individuales\ }} \\
+\mbox{}\textcolor{ForestGreen}{\$(BIN)}\textcolor{BrickRed}{/\%:}\ \textcolor{ForestGreen}{\$(SRC)}\textcolor{BrickRed}{/\%}.cpp \\
+\mbox{}\ \ \ \ \ \ \ \ g\textcolor{BrickRed}{++}\ \textcolor{ForestGreen}{\$\textless{}}\ -o\ \textcolor{ForestGreen}{\$@}\ \textcolor{ForestGreen}{\$(FLAGS)} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{\$(DATA)}\textcolor{BrickRed}{/\%}.dat\textcolor{BrickRed}{:}\ \textcolor{ForestGreen}{\$(BIN)}\textcolor{BrickRed}{/\%} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{BrickRed}{.}/gengraf.sh\ \textcolor{ForestGreen}{\$\textless{}}\ \textcolor{Purple}{0}\ \textcolor{BrickRed}{\textgreater{}}\ \textcolor{ForestGreen}{\$@} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{\$(PLOT)}\textcolor{BrickRed}{/\%}.jpg\textcolor{BrickRed}{:}\ \textcolor{ForestGreen}{\$(DATA)}\textcolor{BrickRed}{/\%}.dat \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{BrickRed}{.}/gengraf.sh\ \textcolor{ForestGreen}{\$\textless{}}\ \textcolor{Purple}{1} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{\$(FIT)}\textcolor{BrickRed}{/\%}.fit\textcolor{BrickRed}{:}\ \textcolor{ForestGreen}{\$(DATA)}\textcolor{BrickRed}{/\%}.dat \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{BrickRed}{.}/gengraf.sh\ \textcolor{ForestGreen}{\$\textless{}}\ \textcolor{Purple}{2}\ \textcolor{BrickRed}{\textgreater{}}\ \textcolor{ForestGreen}{\$@} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\$(FIT)/\%.fit.jpg:\ \$(DATA)/\%.dat}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ \ \ \ \ \ \ \ ./gengraf.sh\ \$\textless{}\ 2}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{\$(TEX)}\textcolor{BrickRed}{/\%}.tex\textcolor{BrickRed}{:}\ \textcolor{ForestGreen}{\$(SRC)}\textcolor{BrickRed}{/\%}.cpp \\
+\mbox{}\ \ \ \ \ \ \ \ source-highlight\ -f\ latexcolor\ -i\ \textcolor{ForestGreen}{\$\textless{}}\ -o\ \textcolor{ForestGreen}{\$@} \\
+\mbox{}\textcolor{ForestGreen}{\$(TEX)}/makefile.tex\textcolor{BrickRed}{:}\ makefile \\
+\mbox{}\ \ \ \ \ \ \ \ source-highlight\ -f\ latexcolor\ -i\ \textcolor{ForestGreen}{\$\textless{}}\ -o\ \textcolor{ForestGreen}{\$@} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Limpieza\ de\ los\ ejecutables}} \\
+\mbox{}\textcolor{BrickRed}{clean:} \\
+\mbox{}\ \ \ \ \ \ \ \ rm\ \textcolor{ForestGreen}{\$(BIN)}\textcolor{BrickRed}{/*} \\
+\mbox{} \\
+\mbox{}\textcolor{BrickRed}{cleanall:}\ clean \\
+\mbox{}\ \ \ \ \ \ \ \ rm\ \textcolor{BrickRed}{*}.jpg\ \textcolor{BrickRed}{*}.dat\ tex\textcolor{BrickRed}{/*} \\
+\mbox{}

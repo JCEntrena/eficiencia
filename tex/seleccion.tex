@@ -1,0 +1,112 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@file}\textit{\textcolor{Brown}{\ Ordenación\ por\ selección}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}iostream\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}ctime\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}cstdlib\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}ctime\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}cassert\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{RoyalBlue}{\#include}}\ \texttt{\textcolor{Red}{\textless{}climits\textgreater{}}} \\
+\mbox{}\textbf{\textcolor{Blue}{using}}\ \textbf{\textcolor{Blue}{namespace}}\ std\textcolor{BrickRed}{;} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Ordena\ un\ vector\ por\ el\ método\ de\ selección.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ T:\ vector\ de\ elementos.\ Debe\ tener\ num$\_$elem\ elementos.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ Es\ modificado.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ num$\_$elem:\ número\ de\ elementos.\ num$\_$elem\ \textgreater{}\ 0.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ Cambia\ el\ orden\ de\ los\ elementos\ de\ T\ de\ forma\ que\ los\ dispone}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ en\ sentido\ creciente\ de\ menor\ a\ mayor.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ Aplica\ el\ algoritmo\ de\ selección.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{inline}}\ \textbf{\textcolor{Blue}{static}}\ \textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{seleccion}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ T\textcolor{BrickRed}{[],}\ \textcolor{ForestGreen}{int}\ num$\_$elem\textcolor{BrickRed}{);} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Ordena\ parte\ de\ un\ vector\ por\ el\ método\ de\ selección.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ T:\ vector\ de\ elementos.\ Tiene\ un\ número\ de\ elementos\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ mayor\ o\ igual\ a\ final.\ Es\ MODIFICADO.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ inicial:\ Posición\ que\ marca\ el\ incio\ de\ la\ parte\ del}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ vector\ a\ ordenar.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ final:\ Posición\ detrás\ de\ la\ última\ de\ la\ parte\ del}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ vector\ a\ ordenar.\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@pre}\textit{\textcolor{Brown}{\ inicial\ \textless{}\ final.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ Cambia\ el\ orden\ de\ los\ elementos\ de\ T\ entre\ las\ posiciones}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ inicial\ y\ final\ -\ 1de\ forma\ que\ los\ dispone\ en\ sentido\ creciente}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ de\ menor\ a\ mayor.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ Aplica\ el\ algoritmo\ de\ selección.}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{static}}\ \textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{seleccion$\_$lims}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ T\textcolor{BrickRed}{[],}\ \textcolor{ForestGreen}{int}\ inicial\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ final\textcolor{BrickRed}{);} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{//\ Implementación\ de\ las\ funciones}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{seleccion}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ T\textcolor{BrickRed}{[],}\ \textcolor{ForestGreen}{int}\ num$\_$elem\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{seleccion$\_$lims}}\textcolor{BrickRed}{(}T\textcolor{BrickRed}{,}\ \textcolor{Purple}{0}\textcolor{BrickRed}{,}\ num$\_$elem\textcolor{BrickRed}{);} \\
+\mbox{}\textcolor{Red}{\}} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{static}}\ \textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{seleccion$\_$lims}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ T\textcolor{BrickRed}{[],}\ \textcolor{ForestGreen}{int}\ inicial\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{int}\ final\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{int}\ i\textcolor{BrickRed}{,}\ j\textcolor{BrickRed}{,}\ indice$\_$menor\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{int}\ menor\textcolor{BrickRed}{,}\ aux\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}i\ \textcolor{BrickRed}{=}\ inicial\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}}\ final\ \textcolor{BrickRed}{-}\ \textcolor{Purple}{1}\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++)}\ \textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ indice$\_$menor\ \textcolor{BrickRed}{=}\ i\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \ \ \ \ menor\ \textcolor{BrickRed}{=}\ T\textcolor{BrickRed}{[}i\textcolor{BrickRed}{];} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}j\ \textcolor{BrickRed}{=}\ i\textcolor{BrickRed}{;}\ j\ \textcolor{BrickRed}{\textless{}}\ final\textcolor{BrickRed}{;}\ j\textcolor{BrickRed}{++)} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}T\textcolor{BrickRed}{[}j\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{\textless{}}\ menor\textcolor{BrickRed}{)}\ \textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indice$\_$menor\ \textcolor{BrickRed}{=}\ j\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ menor\ \textcolor{BrickRed}{=}\ T\textcolor{BrickRed}{[}j\textcolor{BrickRed}{];} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ aux\ \textcolor{BrickRed}{=}\ T\textcolor{BrickRed}{[}i\textcolor{BrickRed}{];} \\
+\mbox{}\ \ \ \ \ \ \ \ T\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ T\textcolor{BrickRed}{[}indice$\_$menor\textcolor{BrickRed}{];} \\
+\mbox{}\ \ \ \ \ \ \ \ T\textcolor{BrickRed}{[}indice$\_$menor\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ aux\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\textcolor{Red}{\}} \\
+\mbox{}\  \\
+\mbox{}\textit{\textcolor{Brown}{/**}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@brief}\textit{\textcolor{Brown}{\ Permite\ duplicar\ un\ vector\ de\ enteros}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ T\ puntero\ a\ un\ vector\ de\ enteros}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ U\ puntero\ a\ otro\ vector\ de\ enteros}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@param}\textit{\textcolor{Brown}{\ n\ tamanio\ de\ ambos\ vectores}} \\
+\mbox{}\textit{\textcolor{Brown}{\ *\ }}\textcolor{ForestGreen}{@pre}\textit{\textcolor{Brown}{\ Han\ de\ tener\ el\ mismo\ tamanio}} \\
+\mbox{}\textit{\textcolor{Brown}{\ */}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{void}\ \textbf{\textcolor{Black}{duplicaVector}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\textcolor{BrickRed}{*}\ T\textcolor{BrickRed}{,}\textcolor{ForestGreen}{int}\textcolor{BrickRed}{*}\ U\textcolor{BrickRed}{,}\textcolor{ForestGreen}{int}\ tam\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\textcolor{BrickRed}{=}\textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{\textless{}}tam\textcolor{BrickRed}{;}\ \textcolor{BrickRed}{++}i\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ U\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]=}T\textcolor{BrickRed}{[}i\textcolor{BrickRed}{];} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\textcolor{Red}{\}} \\
+\mbox{} \\
+\mbox{}\textcolor{ForestGreen}{int}\ \textbf{\textcolor{Black}{main}}\textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ argc\textcolor{BrickRed}{,}\ \textcolor{ForestGreen}{char}\textcolor{BrickRed}{*}\ argv\textcolor{BrickRed}{[])}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}argc\ \textcolor{BrickRed}{!=}\textcolor{Purple}{2}\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ cerr\ \textcolor{BrickRed}{\textless{}\textless{}}\ \texttt{\textcolor{Red}{"{}Uso\ del\ programa:\ "{}}}\ \textcolor{BrickRed}{+}\ \textcolor{BrickRed}{(}string\textcolor{BrickRed}{)(}argv\textcolor{BrickRed}{[}\textcolor{Purple}{0}\textcolor{BrickRed}{])}\ \textcolor{BrickRed}{+}\ \texttt{\textcolor{Red}{"{}\ \textless{}número\ positivo\textgreater{}"{}}}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;}\ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{int}\ n\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{atoi}}\textcolor{BrickRed}{(}argv\textcolor{BrickRed}{[}\textcolor{Purple}{1}\textcolor{BrickRed}{]);}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{(}n\textcolor{BrickRed}{\textless{}}\textcolor{Purple}{0}\textcolor{BrickRed}{)}\ \textbf{\textcolor{Blue}{return}}\ \textcolor{BrickRed}{-}\textcolor{Purple}{1}\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{int}\ \textcolor{BrickRed}{*}\ T\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Blue}{new}}\ \textcolor{ForestGreen}{int}\textcolor{BrickRed}{[}n\textcolor{BrickRed}{];} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{struct}}\ \textcolor{TealBlue}{timespec}\ t$\_$antes\textcolor{BrickRed}{,}\ t$\_$despues\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{srandom}}\textcolor{BrickRed}{(}\textbf{\textcolor{Black}{time}}\textcolor{BrickRed}{(}\textcolor{Purple}{0}\textcolor{BrickRed}{));} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{int}\ i\textcolor{BrickRed}{=}\textcolor{Purple}{0}\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{\textless{}}n\textcolor{BrickRed}{;}\ \textcolor{BrickRed}{++}i\textcolor{BrickRed}{)}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \ T\textcolor{BrickRed}{[}i\textcolor{BrickRed}{]}\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{random}}\textcolor{BrickRed}{();} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$antes\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{seleccion}}\ \textcolor{BrickRed}{(}T\textcolor{BrickRed}{,}n\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Black}{clock$\_$gettime}}\textcolor{BrickRed}{(}CLOCK$\_$REALTIME\textcolor{BrickRed}{,\&}t$\_$despues\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ cout\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{precision}}\textcolor{BrickRed}{(}\textcolor{Purple}{3}\textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ cout\ \textcolor{BrickRed}{\textless{}\textless{}}\ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{double}\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{(}t$\_$despues\textcolor{BrickRed}{.}tv$\_$sec\textcolor{BrickRed}{-}t$\_$antes\textcolor{BrickRed}{.}tv$\_$sec\textcolor{BrickRed}{)+} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{BrickRed}{(}\textcolor{ForestGreen}{double}\textcolor{BrickRed}{)}\ \textcolor{BrickRed}{((}t$\_$despues\textcolor{BrickRed}{.}tv$\_$nsec\textcolor{BrickRed}{-}t$\_$antes\textcolor{BrickRed}{.}tv$\_$nsec\textcolor{BrickRed}{)/(}\textcolor{Purple}{1}\textcolor{BrickRed}{.}e\textcolor{BrickRed}{+}\textcolor{Purple}{9}\textcolor{BrickRed}{))}\ \textcolor{BrickRed}{\textless{}\textless{}}\ endl\textcolor{BrickRed}{;} \\
+\mbox{} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{delete}}\ \textcolor{BrickRed}{[]}\ T\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{return}}\ \textcolor{Purple}{0}\textcolor{BrickRed}{;} \\
+\mbox{}\textcolor{Red}{\}}
