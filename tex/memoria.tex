@@ -223,7 +223,7 @@ Además, se ha añadido a este guion la funcionalidad necesaria para comunicarse
 \subsection {Gráficas}
 \imagen{../regressionPlots/burbuja_fit.jpg}{Ordenación por burbuja}
 
-\imagen{../regressionPlots/fibonacci_fit.jpg}{Serie de Fibonacci}
+\imagen{../regressionPlots/fibonacci_fit.jpg}{Sucesión de Fibonacci}
 
 \imagen{../regressionPlots/floyd_fit.jpg}{Algoritmo de Floyd}
 
@@ -250,80 +250,143 @@ para los datos que permitían un tiempo de ejecución de los mismos asumible,
 es posible que la eficiencia práctica no se haya obtenido como debiera.
 \subsection{Algoritmos teóricamente $\mathcal{O}(n^2)$}
 \begin{itemize}
-\item Ordenación por burbuja\\
-El mejor ajuste práctico ha resultado ser: $f(n)=-6.82525\cdot 10^{-12} \cdot n^3+1.26402\cdot 10^{7}\cdot n^2-0.000661563 \cdot n+0.999054$
-El ajuste que deberíamos haber obtenido: $f(n)=a0 \cdot n^2+a1 \cdot n+a0$
+  \item Ordenación por burbuja\\
+  El mejor ajuste práctico ha resultado ser: $f(n)=-6.82525\cdot 10^{-12} \cdot n^3+1.26402\cdot 10^{7}\cdot n^2-0.000661563 \cdot n+0.999054$, con
+  una media de residuos cuadráticos de $0.0037376$\\
+  El ajuste que deberíamos haber obtenido: $f(n)=a \cdot n^2+b \cdot n+c$\\
 
-\begin{tabular}{|c|c|}
-\hline
-Ajuste & Media de los residuos cuadráticos\\
-\hline
-$f(n)=3.55198\cdot 10^{-5}\cdot n -0.0635027$ & $0.0318751$ \\
-\hline
-$f(n)=4.20281\cdot 10^{-9}\cdot n^2-6.17206\cdot 10^{-6}\cdot n+0.00487322$ & $0.00391704$ \\
-\hline
-$f(n)=4.0846\cdot 10^{-5}\cdot n \cdot log(n)-0.000353425\cdot n+0.0204474 \cdot log(n)-0.0654402$ & $0.00767502$ \\
-\hline
-\end{tabular}
+    \begin{tabular}{|c|c|}
+    \hline
+    Ajuste & Media de los residuos cuadráticos\\
+    \hline
+    $f(n)=3.55198\cdot 10^{-5}\cdot n -0.0635027$ & $0.0318751$ \\
+    \hline
+    $f(n)=4.20281\cdot 10^{-9}\cdot n^2-6.17206\cdot 10^{-6}\cdot n+0.00487322$ & $0.00391704$ \\
+    \hline
+    $f(n)=4.0846\cdot 10^{-5}\cdot n \cdot log(n)-0.000353425\cdot n+0.0204474 \cdot log(n)-0.0654402$ & $0.00767502$ \\
+    \hline
+    \end{tabular}
 
-\item Ordenación por inserción\\
-El mejor ajuste práctico ha resultado ser: $f(n)=1.03091\cdot 10^{-14} \cdot n^3+1.32572\cdot 10^{-9}\cdot n^2+7.21102 \cdot 10^{-7}\cdot n-0.000351074$
-con una media de residuos cuadráticos de $0.000877862$
-El ajuste que deberíamos haber obtenido: $f(n)=a0 \cdot n^2+a1 \cdot n+a0$
+  \item Ordenación por inserción\\
+  El mejor ajuste práctico ha resultado ser: $f(n)=1.03091\cdot 10^{-14} \cdot n^3+1.32572\cdot 10^{-9}\cdot n^2+7.21102 \cdot 10^{-7}\cdot n-0.000351074$
+  con una media de residuos cuadráticos de $0.000877862$\\
+  El ajuste que deberíamos haber obtenido: $f(n)=a \cdot n^2+b \cdot n+c$\\
+  
+    \begin{tabular}{|c|c|}
+    \hline
+    Ajuste & Media de los residuos cuadráticos\\
+    \hline
+    $f(n)=1.47877\cdot 10^{-5}\cdot n -0.0239239$ & $0.0111694$ \\
+    \hline
+    $f(n)=1.47912\cdot 10^{-9}\cdot n^2-1.1484\cdot 10^{-7}\cdot n+0.000140066$ & $0.000895417$ \\
+    \hline
+    $f(n)=1.40522\cdot 10^{-5}\cdot n \cdot log(n)-0.000118807\cdot n+0.00635583 \cdot log(n)-0.0200974$ & $0.00230142$ \\
+    \hline
+    \end{tabular}
 
-\begin{tabular}{|c|c|}
-\hline
-Ajuste & Media de los residuos cuadráticos\\
-\hline
-$f(n)=1.47877\cdot 10^{-5}\cdot n -0.0239239$ & $0.0111694$ \\
-\hline
-$f(n)=1.47912\cdot 10^{-9}\cdot n^2-1.1484\cdot 10^{-7}\cdot n+0.000140066$ & $0.000895417$ \\
-\hline
-$f(n)=1.40522\cdot 10^{-5}\cdot n \cdot log(n)-0.000118807\cdot n+0.00635583 \cdot log(n)-0.0200974$ & $0.00230142$ \\
-\hline
-\end{tabular}
+  \item Ordenación por selección\\
+  El mejor ajuste práctico ha resultado ser: $f(n)=-3.91702\cdot 10^{-14} \cdot n^3+2.20218\cdot 10^{-9}\cdot n^2-1.39687 \cdot 10^{-6}\cdot n+0.00102057$
+  con una media de residuos cuadráticos de $0.0043292$\\
+  El ajuste que deberíamos haber obtenido: $f(n)=a \cdot n^2+b \cdot n+c$\\
+  
+    \begin{tabular}{|c|c|}
+    \hline
+    Ajuste & Media de los residuos cuadráticos\\
+    \hline
+    $f(n)=1.69704\cdot 10^{-5}\cdot n -0.0271906$ & $0.012942$ \\
+    \hline
+    $f(n)= 1.61933\cdot 10^{-9}\cdot n^2+9.06663\cdot 10^{-7}\cdot n+-0.000845545$ & $0.00437183$ \\
+    \hline
+    $f(n)= 1.52761\cdot 10^{-5}\cdot n \cdot log(n)-0.000128103\cdot n0.00641101 \cdot log(n)-0.0197314$ & $0.00463731$ \\
+    \hline
+    \end{tabular}
+  \end{itemize}
 
-\item Ordeanción por selección\\
-El mejor ajuste práctico ha resultado ser: 
-
-% rellenar
 Es lógico que el análisis práctico en los algoritmos $\mathcal{O}(n^2)$
 hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}^3$
 
 \subsection{Algoritmos teóricamente $\mathcal{O}(nlog(n)$}
 \begin{itemize}
-\item Ordenación por mergesort\\
-El mejor ajuste práctico ha resultado ser su recta de regresión: $f(n)=2.38969\cdot 10^{-7} -4.94954\cdot 10 ^{-5}$
-con una media de residuos cuadráticos de $0.000118196$
-El ajuste que deberíamos haber obtenido: $f(n)=a0 \cdot nlog(n) + a1\cdot n+a2 \cdot log(n) + a3$
+  \item Ordenación por mergesort\\
+  El mejor ajuste práctico ha resultado ser su recta de regresión: $f(n)=2.38969\cdot 10^{-7} -4.94954\cdot 10 ^{-5}$
+  con una media de residuos cuadráticos de $0.000118196$\\
+  El ajuste que deberíamos haber obtenido: $f(n)=a \cdot nlog(n) + b\cdot n+c \cdot log(n) + d$\\
 
-\begin{tabular}{|c|c|}
-\hline
-Ajuste & Media de los residuos cuadráticos\\
-\hline
-$f(n)=1.10858\cdot 10^{-12}\cdot n^2+2.27971\cdot 10^{-7}\cdot n-3.14598\cdot 10^{-5}$ & $0.000118507$ \\
-\hline
-$f(n)=4.74472\cdot 10^{-16} \cdot n^3-5.95156\cdot 10^{-12}\cdot n^2+2.55874 \cdot 10^{-7}\cdot n-5.40642 \cdot 10^{-5}$  & $0.000118771$ \\
-\hline
-$f(n)=3.03488 \cdot 10^{-9} \cdot nlog(n) + 2.13985 \cdot 10^{-7}\cdot n-1.09431\cdot 10^{-5} \cdot log(n) + 3.28662\cdot 10^{-5}$ & $0.000119057$\\
-\hline
-\end{tabular}
+  Quizás se pueda explicar esta variación ajuste teórico-ajuste práctico en que esta versión de mergesort llama internamente
+  a inserción para algunas tallas del problema, lo que la puede hacer más eficiente.\\
 
-\item Ordenación por quicksort\\
-El mejor ajuste práctico ha resultado ser: $f(n)=-4.52927\cdot 10^{-16} \cdot n^3+8.28261\cdot 10^{-12}\cdot n^2+1.13041 \cdot 10^{-7}\cdot n-
-1.72007\cdot 10^{-6}$ con una media de residuos cuadráticos de $8.29712\cdot 10^{-6}$
-El ajuste que deberíamos haber obtenido: $f(n)=a0 \cdot nlog(n) + a1\cdot n+a2 \cdot log(n) + a3$
-\begin{tabular}{|c|c|}
-\hline
-Ajuste & Media de los residuos cuadráticos\\
-\hline
-$f(n)=1.54984\cdot 10^{-7}\cdot n -4.84022 \cdot 10^{-5}$ & $1.66434\cdot 10^{-5}$ \\
-\hline
-$f(n)=1.54306\cdot 10^{-12}\cdot n^2+1.39677\cdot 10^{-7}\cdot n-2.32981\cdot 10^{-5}$ & $1.19816\cdot 10^{-5}$ \\
-\hline
-$f(n)=1.07463\cdot 10^{-8}\cdot n \cdot log(n)+5.59666\cdot 10^{-8}\cdot n-5.16002\cdot 10^{-6} \cdot log(n)+2.0864\cdot 10^{-5}$ & $1.00822\cdot 10^{-5}$ \\
-\hline
-\end{tabular}
+    \begin{tabular}{|c|c|}
+    \hline
+    Ajuste & Media de los residuos cuadráticos\\
+    \hline
+    $f(n)=1.10858\cdot 10^{-12}\cdot n^2+2.27971\cdot 10^{-7}\cdot n-3.14598\cdot 10^{-5}$ & $0.000118507$ \\
+    \hline
+    $f(n)=4.74472\cdot 10^{-16} \cdot n^3-5.95156\cdot 10^{-12}\cdot n^2+2.55874 \cdot 10^{-7}\cdot n-5.40642 \cdot 10^{-5}$  & $0.000118771$ \\
+    \hline
+    $f(n)=3.03488 \cdot 10^{-9} \cdot nlog(n) + 2.13985 \cdot 10^{-7}\cdot n-1.09431\cdot 10^{-5} \cdot log(n) + 3.28662\cdot 10^{-5}$ & $0.000119057$\\
+    \hline
+    \end{tabular}
+
+  \item Ordenación por quicksort\\
+  El mejor ajuste práctico ha resultado ser: $f(n)=-4.52927\cdot 10^{-16} \cdot n^3+8.28261\cdot 10^{-12}\cdot n^2+1.13041 \cdot 10^{-7}\cdot n-
+  1.72007\cdot 10^{-6}$ con una media de residuos cuadráticos de $8.29712\cdot 10^{-6}$\\
+  El ajuste que deberíamos haber obtenido: $f(n)=a \cdot nlog(n) + b\cdot n+c \cdot log(n) + d$\\
+  
+    \begin{tabular}{|c|c|}
+    \hline
+    Ajuste & Media de los residuos cuadráticos\\
+    \hline
+    $f(n)=1.54984\cdot 10^{-7}\cdot n -4.84022 \cdot 10^{-5}$ & $1.66434\cdot 10^{-5}$ \\
+    \hline
+    $f(n)=1.54306\cdot 10^{-12}\cdot n^2+1.39677\cdot 10^{-7}\cdot n-2.32981\cdot 10^{-5}$ & $1.19816\cdot 10^{-5}$ \\
+    \hline
+    $f(n)=1.07463\cdot 10^{-8}\cdot n \cdot log(n)+5.59666\cdot 10^{-8}\cdot n-5.16002\cdot 10^{-6} \cdot log(n)+2.0864\cdot 10^{-5}$ & $1.00822\cdot 10^{-5}$ \\
+    \hline
+    \end{tabular}
+
+  \item Ordenación heapsort\\
+  El mejor ajuste ha resultado ser: $f(n)=2.05288 \cdot 10^{-8}\cdot nlog(n) + 4.34162\cdot 10^{-9}\cdot n+a2 \cdot 1.04338 
+  \cdot 10^{-6}log(n)-3.42946 \cdot 10^{-6}$, con una media de residuos cuadráticos de $7.02599 \cdot 10^{-6}$\\
+
+    \begin{tabular}{|c|c|}
+    \hline
+    Ajuste & Media de los residuos cuadráticos\\
+    \hline
+    $f(n)=1.96921\cdot 10^{-7}\cdot n -6.35836 \cdot 10^{-5}$ & $2.09768\cdot 10^{-5}$ \\
+    \hline
+    $f(n)=2.57118\cdot 10^{-12}\cdot n^2+1.71415\cdot 10^{-7}\cdot n-2.17528$ & $8.13131\cdot 10^{-6}$ \\
+    \hline
+    $f(n)=-1.77474\cdot 10^{-16} \cdot n^3+5.21199\cdot 10^{-12}\cdot n^2+1.60978 \cdot 10^{-7}\cdot n-1.32978\cdot 10^{-5}$ & $7.42333\cdot 10^{-6}$ \\
+    \hline
+    \end{tabular}
+    \end{itemize}
+
+\subsection{Algoritmos teóricamente $\mathcal{O}(n^3)$}
+\begin{itemize}
+  \item Floyd\\
+  El mejor ajuste práctico ha resultado ser: $f(n)=7.30452\cdot 10^{-9} \cdot n^3+3.41994\cdot 10^{-7}\cdot n^2+8.33203 \cdot 10^{-5}\cdot n-0.0120107$,
+  con una media de residuos cuadráticos de $0.0411334$\\
+    \begin{tabular}{|c|c|}
+    \hline
+    Ajuste & Media de los residuos cuadráticos\\
+    \hline
+    $f(n)=0.00703414\cdot n -1.56434$ & $0.84536$ \\
+    \hline
+    $f(n)=1.13536\cdot 10^{-5}\cdot n^2-0.00437618 n+0.375229$ & $0.141044$ \\
+    \hline
+    $f(n)= 0.0150877\cdot n \cdot log(n)-0.104723\cdot n+1.69894 \cdot log(n)-4.06597$ & $0.205186$ \\
+    \hline
+    \end{tabular}
+\end{itemize}
+
+\subsection{Algoritmos teóricamente exponenciales}
+  \subsubsection{Teóricamente $\mathcal{O}(2^n)$}
+  \begin{itemize}
+   \item Torres de Hanoi\\
+   
+   
+  \end{itemize}
+
 
 \newpage
 \section{Apéndice}
