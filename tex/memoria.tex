@@ -247,14 +247,16 @@ para generar gráficas de datos y de ajuste, respectivamente, de todos los progr
 \imagen{../regressionPlots/seleccion_fit.jpg}{Ordenación por selección}
 
 \subsection{Análisis práctico de la eficiencia}
-Para realizar un análisis práctico de la eficiencia, el script adjunto en el
-apéndice, para una lista de funciones (lineales, cúbicas, exponenciales,...) 
-calcula el ajuste llamando a \texttt{gnuplot} de cada función, y la media
-de los residuos cuadráticos correspondientes. El mejor ajuste posible sería
-aquel que generase unos residuos menores. Hay que tener en cuenta que la 
-eficiencia es un concepto asintótico, y puesto que se han evaluado los algoritmos
-para los datos que permitían un tiempo de ejecución de los mismos asumible, 
-es posible que la eficiencia práctica no se haya obtenido como debiera.
+El script adjunto en el apéndice calcula el ajuste de los datos a una lista de funciones
+(lineales, cúbicas, exponenciales,...) y la media de los residuos cuadráticos correspondientes
+para realizar un análisis práctico de la eficiencia. Utiliza \texttt{gnuplot}.
+
+El mejor ajuste posible es aquel que genera unos residuos menores. Hay que tener en cuenta que la 
+eficiencia es un concepto asintótico y, puesto que se han evaluado los algoritmos
+para los tamaños de entrada que permitían un tiempo de ejecución asumible, 
+es posible que la eficiencia práctica no se corresponda con la teórica.
+
+
 \subsection{Algoritmos teóricamente $\mathcal{O}(n^2)$}
 
   \subsubsection{Ordenación por burbuja}
