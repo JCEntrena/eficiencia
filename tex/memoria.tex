@@ -29,12 +29,19 @@
 \usepackage{graphicx} % Required for including pictures
 \usepackage[usenames,dvipsnames]{color} % Coloring code
 \usepackage{wrapfig} % Allows in-line images
-% sudo apt-get install texlive-lang-spanish
-%\usepackage[spanish]{babel} % English language/hyphenation
-%\selectlanguage{spanish}
 \usepackage[utf8]{inputenc}
-\usepackage{dcolumn} % Para el alineamiento del punto decimal
-\newcolumntype{d}[1]{D{.}{.}{#1} } % Idem
+
+% sudo apt-get install texlive-lang-spanish
+\usepackage[spanish]{babel} % English language/hyphenation
+\selectlanguage{spanish}
+% Hay que pelearse con babel-spanish para el alineamiento del punto decimal
+\decimalpoint
+\usepackage{dcolumn}
+\newcolumntype{d}[1]{D{.}{\esperiod}{#1}}
+\makeatletter
+\addto\shorthandsspanish{\let\esperiod\es@period@code}
+\makeatother
+
 \usepackage{longtable}
 \usepackage{tabu}
 
