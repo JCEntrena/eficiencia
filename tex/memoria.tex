@@ -29,7 +29,7 @@
 \usepackage{graphicx} % Required for including pictures
 \usepackage[usenames,dvipsnames]{color} % Coloring code
 \usepackage{wrapfig} % Allows in-line images
-% Sorry, no me compila el LaTeX con estas opciones, descomentadlas para compilarlo vosotros si queréis -David
+% sudo apt-get install texlive-lang-spanish
 %\usepackage[spanish]{babel} % English language/hyphenation
 %\selectlanguage{spanish}
 \usepackage[utf8]{inputenc}
@@ -37,6 +37,8 @@
 \newcolumntype{d}[1]{D{.}{.}{#1} } % Idem
 \usepackage{longtable}
 \usepackage{tabu}
+
+\usepackage{multicol}
 
 \usepackage[section]{placeins} % Para gráficas en su sección.
 \usepackage{mathpazo} % Use the Palatino font
@@ -104,7 +106,6 @@ Hemos llevado a cabo análisis teóricos y estudios empíricos de la eficiencia 
 hemos añadido algunos archivos y realizado ciertas modificaciones en los códigos, que
 introducimos a continuación y detallaremos en las siguientes secciones: 
 
-\medskip
 Inicialmente, hemos hecho algunos cambios léxicos en el código de los programas, con el
 objetivo de que sean más legibles y facilitar su comprensión. También hemos
 cambiado la función que se utilizaba para medir el tiempo por una con más precisión, lo 
