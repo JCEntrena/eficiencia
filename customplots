@@ -2,6 +2,10 @@ set xlabel 'Talla del problema(n)'
 set ylabel 'Tiempo(s)'
 set terminal jpeg size 800,480
 
+set xrange [0:1000]
+set output 'comparacionTodos.jpg'
+plot 'data/burbuja.dat' title "Burbuja" with linespoints,'data/insercion.dat' title "Inserción" with linespoints,'data/seleccion.dat' title "Selección" with linespoints, 'data/mergesort.dat' title "Mergesort" with linespoints,'data/heapsort.dat' title "Heapsort" with linespoints,'data/quicksort.dat' title "Quicksort" with linespoints, 'data/floyd.dat' title "Floyd" with linespoints, 'data/fibonacci.dat' title "Fibonacci" with linespoints, 'data/hanoi.dat' title "Hanoi" with linespoints
+
 set output 'comparacionOrdenaciones.jpg'
 plot 'data/burbuja.dat' title "Burbuja" with linespoints,'data/insercion.dat' title "Inserción" with linespoints,'data/seleccion.dat' title "Selección" with linespoints, 'data/mergesort.dat' title "Mergesort" with linespoints,'data/heapsort.dat' title "Heapsort" with linespoints,'data/quicksort.dat' title "Quicksort" with linespoints
 
