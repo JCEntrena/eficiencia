@@ -1,0 +1,36 @@
+set xlabel 'Talla del problema(n)'
+set ylabel 'Tiempo(s)'
+set terminal jpeg size 800,480
+
+set output 'comparacionOrdenaciones.jpg'
+plot 'data/burbuja.dat' title "Burbuja" with linespoints,'data/insercion.dat' title "Inserción" with linespoints,'data/seleccion.dat' title "Selección" with linespoints, 'data/mergesort.dat' title "Mergesort" with linespoints,'data/heapsort.dat' title "Heapsort" with linespoints,'data/quicksort.dat' title "Quicksort" with linespoints
+
+set output 'comparacionNLogN.jpg'
+plot 'data/mergesort.dat' title "Mergesort" with linespoints,'data/heapsort.dat' title "Heapsort" with linespoints,'data/quicksort.dat' title "Quicksort" with linespoints
+
+set output 'comparacionBurbujaMaquinas.jpg'
+plot 'resultados_nacho/burbuja.dat' title "3612QM (2.1 GHz)" with linespoints,'resultados_david/burbuja.dat' title "3610QM (2.3 GHz), -O2" with linespoints,'resultados_oscar/burbuja.dat' title "3210M (2.5 GHz)" with linespoints
+
+set output 'comparacionInsercionMaquinas.jpg'
+plot 'resultados_nacho/insercion.dat' title "3612QM (2.1 GHz)" with linespoints,'resultados_david/insercion.dat' title "3610QM (2.3 GHz), -O2" with linespoints,'resultados_oscar/insercion.dat' title "3210M (2.5 GHz)" with linespoints
+
+set output 'comparacionSeleccionMaquinas.jpg'
+plot 'resultados_nacho/seleccion.dat' title "3612QM (2.1 GHz)" with linespoints,'resultados_david/seleccion.dat' title "3610QM (2.3 GHz), -O2" with linespoints,'resultados_oscar/seleccion.dat' title "3210M (2.5 GHz)" with linespoints
+
+set output 'comparacionMergeMaquinas.jpg'
+plot 'resultados_nacho/mergesort.dat' title "3612QM (2.1 GHz)" with linespoints,'resultados_david/mergesort.dat' title "3610QM (2.3 GHz), -O2" with linespoints,'resultados_oscar/mergesort.dat' title "3210M (2.5 GHz)" with linespoints
+
+set output 'comparacionHeapMaquinas.jpg'
+plot 'resultados_nacho/heapsort.dat' title "3612QM (2.1 GHz)" with linespoints,'resultados_david/heapsort.dat' title "3610QM (2.3 GHz), -O2" with linespoints,'resultados_oscar/heapsort.dat' title "3210M (2.5 GHz)" with linespoints
+
+set output 'comparacionQuickMaquinas.jpg'
+plot 'resultados_nacho/quicksort.dat' title "3612QM (2.1 GHz)" with linespoints,'resultados_david/quicksort.dat' title "3610QM (2.3 GHz), -O2" with linespoints,'resultados_oscar/quicksort.dat' title "3210M (2.5 GHz)" with linespoints
+
+set output 'comparacionFloydMaquinas.jpg'
+plot 'resultados_nacho/floyd.dat' title "3612QM (2.1 GHz)" with linespoints,'resultados_david/floyd.dat' title "3610QM (2.3 GHz), -O2" with linespoints,'resultados_oscar/floyd.dat' title "3210M (2.5 GHz)" with linespoints
+
+set output 'comparacionFibMaquinas.jpg'
+plot 'resultados_nacho/fibonacci.dat' title "3612QM (2.1 GHz)" with linespoints,'resultados_david/fibonacci.dat' title "3610QM (2.3 GHz), -O2" with linespoints,'resultados_oscar/fibonacci.dat' title "3210M (2.5 GHz)" with linespoints
+
+set output 'comparacionHanoiMaquinas.jpg'
+plot 'resultados_nacho/hanoi.dat' title "3612QM (2.1 GHz)" with linespoints,'resultados_david/hanoi.dat' title "3610QM (2.3 GHz), -O2" with linespoints,'resultados_oscar/hanoi.dat' title "3210M (2.5 GHz)" with linespoints
