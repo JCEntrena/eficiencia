@@ -275,7 +275,7 @@ es posible que la función de ajuste no coincida siempre con la que da el compor
 
 \subsection{Algoritmos teóricamente $\mathcal{O}(n^2)$}
 
-  \subsubsection{Ordenación por burbuja}
+  \subsubsection{Ordenación de la burbuja}
   El ajuste que deberíamos haber obtenido era de la forma $a n^2+bn+c$.
   Se obtiene el ajuste con una media de residuos cuadráticos de $0.00391704$:
  
@@ -342,7 +342,7 @@ Es lógico que en el análisis práctico en los algoritmos $\mathcal{O}(n^2)$
 hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}^3$
 
 \subsection{Algoritmos teóricamente $\mathcal{O}(nlog(n))$}
-  \subsubsection{Ordenación por mergesort}
+  \subsubsection{Ordenación por mezcla (\textit{mergesort})}
   El mejor ajuste práctico ha resultado ser su recta de regresión: 
   
   $$f(n)=2.38969\cdot 10^{-7}n -4.94954\cdot 10 ^{-5}$$
@@ -368,7 +368,7 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     }
     
     
-  \subsubsection{Ordenación por quicksort}
+  \subsubsection{Algoritmo de Hoare (\textit{quicksort})}
   El ajuste que deberíamos haber obtenido era de la forma $anlog(n)+bn+clog(n)+d$.
   Se obtiene el ajuste con una media de residuos cuadráticos de $1.00822\cdot 10^{-5}$:
 
@@ -391,7 +391,7 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     \end{tabular}
     }
     
-  \subsubsection{Ordenación heapsort}
+  \subsubsection{Ordenación \textit{heapsort}}
   El mejor ajuste ha resultado ser el que debíamos obtener teóricamente, de la forma $anlog(n)+bn+clog(n)+d$.
   Se obtiene con una media de residuos cuadráticos de $7.02599 \cdot 10^{-6}$:
   $$f(n)=2.05288 \cdot 10^{-8}\cdot nlog(n) + 4.34162\cdot 10^{-9}\cdot n+a2 \cdot 1.04338 \cdot 10^{-6}log(n)-3.42946 \cdot 10^{-6}$$
@@ -513,13 +513,13 @@ A continuación se incluyen los códigos modificados que se han usado en la prá
 \subsubsection{Ordenación por selección}
 \input{seleccion}
 
-\subsubsection{Ordenación heapsort}
+\subsubsection{Ordenación \textit{heapsort}}
 \input{heapsort}
 
-\subsubsection{Ordenación mergesort}
+\subsubsection{Ordenación por mezcla (\textit{mergesort})}
 \input{mergesort}
 
-\subsubsection{Algoritmo de Hoare}
+\subsubsection{Algoritmo de Hoare (\textit{quicksort})}
 \input{quicksort}
 
 \subsubsection{Sucesión de Fibonacci}
