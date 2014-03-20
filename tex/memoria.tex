@@ -244,7 +244,7 @@ Además, se ha añadido a este guion la funcionalidad necesaria para comunicarse
 
 \section{Apéndice: Listados de código}
 A continuación se incluyen los códigos modificados que se han usado en la práctica.
-\scriptsize {
+\scriptsize{
 \begin{allintypewriter}
 
 \subsubsection{Ordenación de la burbuja}
@@ -278,17 +278,58 @@ A continuación se incluyen los códigos modificados que se han usado en la prá
 }
 
 
+\normalsize
+
+\section {Conclusiones}
+\subsection {Gráficas}
+\imagen{../regressionPlots/burbuja_fit.jpg}{Ordenación por burbuja}
+
+\imagen{../regressionPlots/fibonacci_fit.jpg}{Serie de Fibonacci}
+
+\imagen{../regressionPlots/floyd_fit.jpg}{Algoritmo de Floyd}
+
+\imagen{../regressionPlots/hanoi_fit.jpg}{Torres de Hanoi}
+
+\imagen{../regressionPlots/heapsort_fit.jpg}{Ordenación por heapsort}
+
+\imagen{../regressionPlots/insercion_fit.jpg}{Ordenación por inserción}
+
+\imagen{../regressionPlots/mergesort_fit.jpg}{Ordenación por mergesort}
+
+\imagen{../regressionPlots/quicksort_fit.jpg}{Ordenación por quicksort}
+
+\imagen{../regressionPlots/seleccion_fit.jpg}{Ordenación por seleccion}
+
 \newpage
-\section{Apéndice: Guion generador de datos y gráficos}
-\label{gengraf}
+\section{Apéndice}
+\subsection{script}
+
+%\newpage
+%\section{Apéndice: Guion generador de datos y gráficos}
+%\label{gengraf}
 Para automatizar algunas de las labores que se nos pedían en la práctica
 y facilitar la obtención de datos en distintos equipos, se ha confeccionado
 un script, cuyo código se incluye a continuación, y que se ha llamado desde
-el \texttt{makefile} para cada algoritmo:
-\input{gengraf}
-
-\section{Apéndice: Tablas de datos}
-Se adjuntan las tablas generadas
+el \texttt{makefile} para cada algoritmo.
+\scriptsize\input{gengraf}
+\normalsize
+\subsection{makefile}
+Para llamar al algoritmo para cada archivo de código fuente y encapsular tareas
+como la generación de ejecutables, de gráficas y de gráficas y funciones de ajuste,
+se ha redactado un makefile.
+\begin{itemize}
+\item \texttt{make data} genera los archivos de datos del apéndice posterior.
+\item \texttt{make plot} genera para los algoritmos cuyo código fuente se incluye 
+en \texttt{./src} y a partir de los \texttt{.dat} correspondientes, las gráficas
+\item \texttt{make fit} genera para los \texttt{.dat} correspondientes a los algoritmos
+un archivo de la forma \texttt{<nombre-algoritmo>.fit}, que contiene información
+sobre la bondad de una serie de ajustes (recta de regresión, ajuste cuadrático, cúbico, 
+exponencial,...) a las parejas de datos en los \texttt{.dat}
+\input{makefile}
+\end{itemize}
+\subsection{Tablas de datos}
+Se adjuntan las tablas de datos (talla del problema-tiempo de ejecución) para
+cada algoritmo.
 \input{tableburinssel}
 \input{tableflo}
 \input{tablehan}
