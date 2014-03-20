@@ -290,21 +290,23 @@ es posible que la función de ajuste no coincida siempre con la que da el compor
     }
     
   \subsubsection{Ordenación por selección}
-  El mejor ajuste práctico ha resultado ser: 
-  $$f(n)=-3.91702\cdot 10^{-14} \cdot n^3+2.20218\cdot 10^{-9}\cdot n^2-1.39687 \cdot 10^{-6}\cdot n+0.00102057$$
-  con una media de residuos cuadráticos de $0.0043292$\\
+  El ajuste que deberíamos haber obtenido era de la forma $a n^2+bn+c$.
+  Se obtiene el ajuste con una media de residuos cuadráticos de $0.00437183$:
+
+   $$f(n)= 1.61933\cdot 10^{-9}\cdot n^2+9.06663\cdot 10^{-7}\cdot n+-0.000845545$$
   
-  El ajuste que deberíamos haber obtenido: $$f(n)=a \cdot n^2+b \cdot n+c$$
+  El mejor ajuste práctico de los probados es de la forma $ax^3+bx^2+cx+d$,
+  con una media de residuos cuadráticos de $0.0043292$. Nótese que es muy similar
+  al teórico cuadrático.
     
     \noindent\resizebox{\linewidth}{!}{
     \begin{tabular}{l|l}
     \textbf{Ajuste} & \textbf{$\sigma^2_e$}\\
     \hline
-    $f(n)=1.69704\cdot 10^{-5}\cdot n -0.0271906$ & $0.012942$ \\
-    \hline
-    $f(n)= 1.61933\cdot 10^{-9}\cdot n^2+9.06663\cdot 10^{-7}\cdot n+-0.000845545$ & $0.00437183$ \\
-    \hline
-    $f(n)= 1.52761\cdot 10^{-5}\cdot n \cdot log(n)-0.000128103\cdot n0.00641101 \cdot log(n)-0.0197314$ & $0.00463731$ \\
+    $f(n)= 1.69704\cdot 10^{-5}\cdot n -0.0271906$ & $0.012942$ \\ \hline
+    $f(n)= 1.52761\cdot 10^{-5}\cdot n \cdot log(n)-0.000128103\cdot n0.00641101 \cdot log(n)-0.0197314$ & $0.00463731$ \\ \hline
+    $f(n)= 1.61933\cdot 10^{-9}\cdot n^2+9.06663\cdot 10^{-7}\cdot n+-0.000845545$ & $0.00437183$ \\ \hline
+    $f(n)=-3.91702\cdot 10^{-14} \cdot n^3+2.20218\cdot 10^{-9}\cdot n^2-1.39687 \cdot 10^{-6}\cdot n+0.00102057$ & $0.0043292$
     \end{tabular}
     }
     
