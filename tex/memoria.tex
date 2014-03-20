@@ -38,8 +38,6 @@
 \usepackage{longtable}
 \usepackage{tabu}
 
-\usepackage{multicol}
-
 \usepackage[section]{placeins} % Para gráficas en su sección.
 \usepackage{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Required for accented characters
@@ -52,7 +50,6 @@
 \renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
 \renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
 \newcommand{\imagen}[2]{\begin{figure*}[ht!] \centering  \includegraphics[width=90mm]{#1} \\ #2 \end{figure*}}
-
 
 \renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
 \begin{flushright} % Right align
@@ -221,7 +218,6 @@ Además, se ha añadido a este guion la funcionalidad necesaria para comunicarse
 
 \section {Conclusiones}
 \subsection {Gráficas}
-\begin{multicols}{2} % Esto no funciona...?
 \imagen{../regressionPlots/burbuja_fit.jpg}{Ordenación por burbuja}
 
 \imagen{../regressionPlots/fibonacci_fit.jpg}{Serie de Fibonacci}
@@ -239,7 +235,6 @@ Además, se ha añadido a este guion la funcionalidad necesaria para comunicarse
 \imagen{../regressionPlots/quicksort_fit.jpg}{Ordenación por quicksort}
 
 \imagen{../regressionPlots/seleccion_fit.jpg}{Ordenación por seleccion}
-\end{multicols}
 
 
 \newpage
