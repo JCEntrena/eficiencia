@@ -180,7 +180,7 @@ a1             -0.864  1.000
 ##########################################################################
 
 
-Ajuste: f(x)=a0*(x**2)+a1*x+a0
+Ajuste: f(x)=a0*(x**2)+a1*x+a2
 
 
 
@@ -203,105 +203,152 @@ a2              = 1
 
 resultant parameter values
 
-a0              = 0.00319719
+a0              = 0.00319717
 a1              = 0.999875
 a2              = 1
 /
 
  Iteration 2
- WSSR        : 2.0575e+08        delta(WSSR)/WSSR   : -10517.9
+ WSSR        : 2.05915e+08       delta(WSSR)/WSSR   : -10509.4
  delta(WSSR) : -2.16404e+12      limit for stopping : 1e-05
  lambda	  : 255614
 
 resultant parameter values
 
-a0              = -0.000125374
+a0              = -0.000125391
 a1              = 0.999843
 a2              = 1
 /
 
  Iteration 3
- WSSR        : 2.04457e+08       delta(WSSR)/WSSR   : -0.00632156
- delta(WSSR) : -1.29249e+06      limit for stopping : 1e-05
+ WSSR        : 2.04621e+08       delta(WSSR)/WSSR   : -0.00632155
+ delta(WSSR) : -1.29352e+06      limit for stopping : 1e-05
  lambda	  : 25561.4
 
 resultant parameter values
 
-a0              = -0.000125091
-a1              = 0.996703
-a2              = 1
+a0              = -0.000125108
+a1              = 0.996702
+a2              = 0.999999
 /
 
  Iteration 4
- WSSR        : 1.18237e+08       delta(WSSR)/WSSR   : -0.729208
- delta(WSSR) : -8.62197e+07      limit for stopping : 1e-05
+ WSSR        : 1.18332e+08       delta(WSSR)/WSSR   : -0.729209
+ delta(WSSR) : -8.6289e+07       limit for stopping : 1e-05
  lambda	  : 2556.14
 
 resultant parameter values
 
-a0              = -9.51263e-05
-a1              = 0.757953
-a2              = 1
+a0              = -9.51309e-05
+a1              = 0.757856
+a2              = 0.999903
 /
 
  Iteration 5
- WSSR        : 111945            delta(WSSR)/WSSR   : -1055.21
- delta(WSSR) : -1.18125e+08      limit for stopping : 1e-05
+ WSSR        : 112046            delta(WSSR)/WSSR   : -1055.1
+ delta(WSSR) : -1.1822e+08       limit for stopping : 1e-05
  lambda	  : 255.614
 
 resultant parameter values
 
-a0              = -2.92559e-06
-a1              = 0.0233222
-a2              = 1
+a0              = -2.89318e-06
+a1              = 0.0229302
+a2              = 0.999606
 /
 
  Iteration 6
- WSSR        : 0.0113532         delta(WSSR)/WSSR   : -9.86019e+06
- delta(WSSR) : -111945           limit for stopping : 1e-05
+ WSSR        : 11.4639           delta(WSSR)/WSSR   : -9772.89
+ delta(WSSR) : -112035           limit for stopping : 1e-05
  lambda	  : 25.5614
 
 resultant parameter values
 
-a0              = 5.45464e-10
-a1              = 7.57272e-06
-a2              = 1
+a0              = 3.41286e-08
+a1              = -0.000393804
+a2              = 0.999421
 /
 
  Iteration 7
- WSSR        : 7.79969e-05       delta(WSSR)/WSSR   : -144.56
- delta(WSSR) : -0.0112752        limit for stopping : 1e-05
+ WSSR        : 11.0609           delta(WSSR)/WSSR   : -0.0364344
+ delta(WSSR) : -0.402996         limit for stopping : 1e-05
  lambda	  : 2.55614
 
 resultant parameter values
 
-a0              = 1.47441e-09
-a1              = 1.71115e-07
-a2              = 1
+a0              = 3.44787e-08
+a1              = -0.000394285
+a2              = 0.982183
 /
 
  Iteration 8
- WSSR        : 7.79969e-05       delta(WSSR)/WSSR   : -1.45694e-09
- delta(WSSR) : -1.13637e-13      limit for stopping : 1e-05
+ WSSR        : 1.45702           delta(WSSR)/WSSR   : -6.59142
+ delta(WSSR) : -9.60383          limit for stopping : 1e-05
  lambda	  : 0.255614
 
 resultant parameter values
 
-a0              = 1.47441e-09
-a1              = 1.71092e-07
-a2              = 1
+a0              = 1.34558e-08
+a1              = -0.000143027
+a2              = 0.356558
+/
 
-After 8 iterations the fit converged.
-final sum of squares of residuals : 7.79969e-05
-rel. change during last iteration : -1.45694e-09
+ Iteration 9
+ WSSR        : 0.000124524       delta(WSSR)/WSSR   : -11699.8
+ delta(WSSR) : -1.4569           limit for stopping : 1e-05
+ lambda	  : 0.0255614
+
+resultant parameter values
+
+a0              = 1.54697e-09
+a1              = -6.96014e-07
+a2              = 0.00215907
+/
+
+ Iteration 10
+ WSSR        : 7.77719e-05       delta(WSSR)/WSSR   : -0.601138
+ delta(WSSR) : -4.67517e-05      limit for stopping : 1e-05
+ lambda	  : 0.00255614
+
+resultant parameter values
+
+a0              = 1.47913e-09
+a1              = 1.14794e-07
+a2              = 0.000140181
+/
+
+ Iteration 11
+ WSSR        : 7.77719e-05       delta(WSSR)/WSSR   : -1.95081e-09
+ delta(WSSR) : -1.51718e-13      limit for stopping : 1e-05
+ lambda	  : 0.000255614
+
+resultant parameter values
+
+a0              = 1.47912e-09
+a1              = 1.1484e-07
+a2              = 0.000140066
+
+After 11 iterations the fit converged.
+final sum of squares of residuals : 7.77719e-05
+rel. change during last iteration : -1.95081e-09
 
 degrees of freedom    (FIT_NDF)                        : 97
-rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000896712
-variance of residuals (reduced chisquare) = WSSR/ndf   : 8.04092e-07
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000895417
+variance of residuals (reduced chisquare) = WSSR/ndf   : 8.01772e-07
 
-         Singular matrix in Invert_RtR
-         line 0: error during fit
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
 
+a0              = 1.47912e-09      +/- 1.202e-11    (0.8124%)
+a1              = 1.1484e-07       +/- 1.232e-07    (107.3%)
+a2              = 0.000140066      +/- 0.0002644    (188.8%)
+
+
+correlation matrix of the fit parameters:
+
+               a0     a1     a2     
+a0              1.000 
+a1             -0.968  1.000 
+a2              0.739 -0.862  1.000 
 
 
 ##########################################################################
