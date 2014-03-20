@@ -386,9 +386,12 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
 
 \subsection{Algoritmos teóricamente $\mathcal{O}(n^3)$}
   \subsubsection{Algoritmo de Floyd}
-  El mejor ajuste práctico ha resultado ser: $$f(n)=7.30452\cdot 10^{-9} \cdot n^3+3.41994\cdot 10^{-7}\cdot n^2+8.33203 \cdot 10^{-5}\cdot n-0.0120107$$,
-  con una media de residuos cuadráticos de $0.0411334$\\
-    
+  El mejor ajuste ha resultado ser el que debíamos obtener teóricamente, de la forma $an^3+bn^2+cn+d$.
+  Se obtiene con una media de residuos cuadráticos de $0.0411334$:
+  $$f(n)=7.30452\cdot 10^{-9} \cdot n^3+3.41994\cdot 10^{-7}\cdot n^2+8.33203 \cdot 10^{-5}\cdot n-0.0120107$$
+  
+  El resto de ajustes dan peor resultado.
+  
     \noindent\resizebox{\linewidth}{!}{
     \begin{tabular}{l|l}
     \textbf{Ajuste} & \textbf{$\sigma^2_e$}\\
@@ -398,6 +401,8 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     $f(n)=1.13536\cdot 10^{-5}\cdot n^2-0.00437618 n+0.375229$ & $0.141044$ \\
     \hline
     $f(n)= 0.0150877\cdot n \cdot log(n)-0.104723\cdot n+1.69894 \cdot log(n)-4.06597$ & $0.205186$ \\
+    \hline
+    $f(n)=7.30452\cdot 10^{-9} \cdot n^3+3.41994\cdot 10^{-7}\cdot n^2+8.33203 \cdot 10^{-5}\cdot n-0.0120107$ & $0.0411334$
     \end{tabular}
     }
 
