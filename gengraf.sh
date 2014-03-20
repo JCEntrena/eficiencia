@@ -15,7 +15,8 @@ seleccion 10000 200"
 # Constante del número áureo
 aur=`echo "(1+sqrt(5))/2" | bc -l`
 # Funciones de ajuste posibles
-FUNCS=( "a0                                                     a0"
+FUNCS=( 
+        "a0                                                     a0"
         "a0*x+a1                                                a0,a1"
         "a0*(x**2)+a1*x+a0                                      a0,a1,a2"      
         "a0*(x**3)+a1*(x**2)+a2*x+a3                            a0,a1,a2,a3"

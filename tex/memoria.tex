@@ -105,15 +105,16 @@ introducimos a continuación y detallaremos en las siguientes secciones:
 
 \medskip
 Inicialmente, hemos hecho algunos cambios léxicos en el código de los programas, con el
-objetivo de que sean más legibles y poder comprenderlos mejor. También hemos
+objetivo de que sean más legibles y facilitar su comprensión. También hemos
 cambiado la función que se utilizaba para medir el tiempo por una con más precisión, lo 
 que nos permite ejecutar los algoritmos con un volumen de entrada menor. 
 
 Para facilitarnos la compilación y ejecución de los programas, hemos creado un archivo 
 Makefile que compila los códigos y genera los datos y gráficas necesarios para la práctica.
 
-Además, para la generación de dichas gráficas, hemos escrito un guion en bash que usa gnuplot 
-para obtenerlas, de la misma forma que se obtienen las funciones de ajuste de la eficiencia. 
+Además, para la generación de dichas gráficas, hemos escrito un guion en \texttt{bash} que usa 
+\texttt{gnuplot} para obtenerlas, de la misma forma que se obtienen las funciones de ajuste 
+de la eficiencia. 
 
 \section {Análisis teórico}
 \subsection {Ordenación de la burbuja}
@@ -264,8 +265,15 @@ A continuación se incluyen los códigos modificados que se han usado en la prá
 \imagen{../regressionPlots/seleccion_fit.jpg}{Ordenación por seleccion}
 
 \newpage
-\section{Apéndice: Tablas de datos}
+\section{Apéndice: script}
+Para automatizar algunas de las labores que se nos pedían en la práctica
+y facilitar la obtención de datos en distintos equipos, se ha confeccionado
+un script, cuyo código se incluye a continuación, y que se ha llamado desde
+el \texttt{makefile} para cada algoritmo:
+\input{gengraf}
 
+\section{Apéndice: Tablas de datos}
+Se adjuntan las tablas generadas
 \input{tableburinssel}
 \input{tableflo}
 \input{tablehan}

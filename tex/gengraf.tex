@@ -1,0 +1,227 @@
+% Generator: GNU source-highlight, by Lorenzo Bettini, http://www.gnu.org/software/src-highlite
+\noindent
+\mbox{}\textit{\textcolor{Brown}{\#!/bin/bash}} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Variables\ de\ ejecución}} \\
+\mbox{}\textcolor{ForestGreen}{SCRIPT}\textcolor{BrickRed}{=}plot \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Límite\ e\ incremento\ de\ tamaño.}} \\
+\mbox{}\textcolor{ForestGreen}{MAP}\textcolor{BrickRed}{=}\texttt{\textcolor{Red}{"{}burbuja\ 10000\ 200}} \\
+\mbox{}\texttt{\textcolor{Red}{fibonacci\ 50\ 1}} \\
+\mbox{}\texttt{\textcolor{Red}{floyd\ 1000\ 5}} \\
+\mbox{}\texttt{\textcolor{Red}{hanoi\ 35\ 1}} \\
+\mbox{}\texttt{\textcolor{Red}{heapsort\ 10000\ 100}} \\
+\mbox{}\texttt{\textcolor{Red}{insercion\ 10000\ 200}} \\
+\mbox{}\texttt{\textcolor{Red}{mergesort\ 10000\ 100}} \\
+\mbox{}\texttt{\textcolor{Red}{quicksort\ 10000\ 100}} \\
+\mbox{}\texttt{\textcolor{Red}{seleccion\ 10000\ 200"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Constante\ del\ número\ áureo}} \\
+\mbox{}\textcolor{ForestGreen}{aur}\textcolor{BrickRed}{=}`echo\ \texttt{\textcolor{Red}{"{}(1+sqrt(5))/2"{}}}\ \textcolor{BrickRed}{$|$}\ bc\ -l` \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Funciones\ de\ ajuste\ posibles}} \\
+\mbox{}\textcolor{ForestGreen}{FUNCS}\textcolor{BrickRed}{=(}\  \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{"{}a0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a0"{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{"{}a0*x+a1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a0,a1"{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{"{}a0*(x**2)+a1*x+a0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a0,a1,a2"{}}}\ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{"{}a0*(x**3)+a1*(x**2)+a2*x+a3\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a0,a1,a2,a3"{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{"{}a0*x*log(x)+a1*x+a2*log(x)+a3\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a0,a1,a2,a3"{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{"{}a0*(2**x)+a1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a0,a1"{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{"{}a0*((\$aur)**x)+a1*((1/\$aur)**x)+a2*(x**2)+a3*x+a4\ \ \ \ \ \ a0,a1,a2,a3,a4"{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{"{}a0*exp(a1*x)+a2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a0,a1,a2"{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{"{}a0*exp(a2*x)+a2*x+a3\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a0,a1,a2,a3"{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \texttt{\textcolor{Red}{"{}a0*exp(a1*x)+a2*(x**2)+a3*x+a4\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a0,a1,a3,a4"{}}}\  \\
+\mbox{}\ \ \ \ \ \ \ \textcolor{BrickRed}{)} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Número\ de\ ejecuciones\ con\ las\ que\ se\ obtendrá\ el\ promedio}} \\
+\mbox{}\textcolor{ForestGreen}{N$\_$ITER}\textcolor{BrickRed}{=}\textcolor{Purple}{5} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ param\ \$1\ "{}programa\ a\ ejecutar"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Genera\ un\ archivo\ de\ datos\ donde\ la\ primera\ columna\ correponde\ a\ tallas\ del\ problema,}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ y\ la\ segunda\ a\ tiempo\ que\ necesita\ el\ algoritmo\ para\ resolver\ un\ problema\ de\ esa}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ talla}} \\
+\mbox{}\textit{\textcolor{Brown}{\#}} \\
+\mbox{}\textbf{\textcolor{Black}{function\ gendata()}}\ \{ \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Se\ extraen\ los\ valores\ de\ talla\ máxima\ del\ problema\ e\ incremento\ del\ número}} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ de\ datos\ que\ se\ introducirán\ al\ algoritmo,\ así\ como\ la\ talla\ inicial}} \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{lim}\textcolor{BrickRed}{=}`echo\ \textcolor{ForestGreen}{\$MAP}\ \textcolor{BrickRed}{$|$}\ grep\ -o\ \texttt{\textcolor{Red}{"{}\$\{1\#\#*/\}\ [[:digit:]]*\ [[:digit:]]*"{}}}\textcolor{BrickRed}{$|$}\ cut\ -f\textcolor{Purple}{2}\ -d\texttt{\textcolor{Red}{"{}\ "{}}}` \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{inc}\textcolor{BrickRed}{=}`echo\ \textcolor{ForestGreen}{\$MAP}\ \textcolor{BrickRed}{$|$}\ grep\ -o\ \texttt{\textcolor{Red}{"{}\$\{1\#\#*/\}\ [[:digit:]]*\ [[:digit:]]*"{}}}\ \textcolor{BrickRed}{$|$}\ cut\ -f\textcolor{Purple}{3}\ -d\texttt{\textcolor{Red}{"{}\ "{}}}` \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{ini}\textcolor{BrickRed}{=}`\textcolor{BrickRed}{[[}\ \textcolor{ForestGreen}{\$inc}\ -eq\ \textcolor{Purple}{1}\ \textcolor{BrickRed}{]]}\ \textcolor{BrickRed}{\&\&}\ echo\ \textcolor{Purple}{1}\ \textcolor{BrickRed}{$|$$|$}\ echo\ \textcolor{Purple}{10}` \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ echo\ -n\ \texttt{\textcolor{Red}{"{}"{}}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ i\ \textbf{\textcolor{Blue}{in}}\ `seq\ \textcolor{ForestGreen}{\$ini}\ \textcolor{ForestGreen}{\$inc}\ \textcolor{ForestGreen}{\$lim}`\textcolor{BrickRed}{;}\ \textbf{\textcolor{Blue}{do}}\ \textit{\textcolor{Brown}{\#((\ i\ =\ \$ini;\ i\ \textless{}\ \$lim;\ i\ +=\ \$inc\ ));\ do}} \\
+\mbox{}\ \ \ \ \ \ \ \ echo\ -n\ \texttt{\textcolor{Red}{"{}\$i\ "{}}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{sum}\textcolor{BrickRed}{=}\textcolor{Purple}{0} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{\#\ Se\ obtiene\ un\ promedio\ en\ N$\_$ITER\ ejecuciones\ para\ la\ talla\ dada}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ k\ \textbf{\textcolor{Blue}{in}}\ `seq\ \textcolor{Purple}{0}\ \textcolor{ForestGreen}{\$N$\_$ITER}` \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{do}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{exc}\textcolor{BrickRed}{=}`\textcolor{ForestGreen}{\$1}\ \textcolor{ForestGreen}{\$i}` \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{sum}\textcolor{BrickRed}{=}`echo\ \texttt{\textcolor{Red}{"{}\$sum+\$\{exc/e/*10\textasciicircum{}\}"{}}}\ \textcolor{BrickRed}{$|$}\ bc\ -l` \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{done}} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ echo\ `echo\ \textcolor{ForestGreen}{\$sum}\textcolor{BrickRed}{/}\textcolor{ForestGreen}{\$N$\_$ITER}\ \textcolor{BrickRed}{$|$}\ bc\ -l` \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{done}} \\
+\mbox{}\} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ param\ \$1\ "{}nombre\ del\ algoritmo\ (mergesort,\ heapsort,...)"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Función\ que\ permite\ hacer\ un\ plot\ de\ un\ archivo\ \$1.dat\ ya\ generado}} \\
+\mbox{}\textit{\textcolor{Brown}{\#}} \\
+\mbox{}\textbf{\textcolor{Black}{function\ genplot()}}\ \{ \\
+\mbox{}\ \ \ \ echo\ \texttt{\textcolor{Red}{'set\ xlabel\ "{}Talla\ del\ problema(n)"{}}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ \ \ \ \ set\ ylabel\ "{}Tiempo(s)"{}}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ \ \ \ \ set\ terminal\ jpeg\ size\ 800,480}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ \ \ \ \ set\ output\ "{}plots/"{}.basename."{}.jpg"{}}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ \ \ \ \ plot\ "{}data/"{}.basename."{}.dat"{}\ title\ "{}Eficiencia\ "{}\ .basename\ with\ linespoints'}}\ \textcolor{BrickRed}{\textgreater{}}\ \textcolor{ForestGreen}{\$SCRIPT} \\
+\mbox{}\ \ \ \ gnuplot\ -e\ \texttt{\textcolor{Red}{"{}basename='\$1'"{}}}\ \textcolor{ForestGreen}{\$SCRIPT} \\
+\mbox{}\ \ \ \ rm\ \textcolor{ForestGreen}{\$SCRIPT} \\
+\mbox{}\} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ param\ \$1\ "{}nombre\ del\ algoritmo\ (mergesort,\ heapsort,...)"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ param\ \$2\ "{}función\ de\ ajuste"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ param\ \$3\ "{}coeficientes\ de\ la\ función\ de\ ajuste\ correspondiente"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ return\ result\ "{}Residuos\ del\ ajuste"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#}} \\
+\mbox{}\textbf{\textcolor{Black}{function\ bondadajuste()}}\ \{ \\
+\mbox{}\ \ \ \ echo\ \texttt{\textcolor{Red}{"{}f(x)=\$2;\ fit\ f(x)\ '\$1'\ via\ \$3"{}}}\ \textcolor{BrickRed}{$|$}\ gnuplot\ \textcolor{Purple}{2}\textcolor{BrickRed}{\textgreater{}}\ tmp \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{result}\textcolor{BrickRed}{=}`cat\ tmp\ \textcolor{BrickRed}{$|$}\ grep\ \texttt{\textcolor{Red}{"{}rms"{}}}\ \textcolor{BrickRed}{$|$}\ grep\ -o\ \texttt{\textcolor{Red}{"{}[[:digit:]]}}\texttt{\textcolor{CarnationPink}{\textbackslash{}+}}\texttt{\textcolor{Red}{.*\$"{}}}` \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{result}\textcolor{BrickRed}{=}`echo\ \textcolor{ForestGreen}{\$\{result/e/*10\textasciicircum{}\}}\ \textcolor{BrickRed}{$|$}\ tr\ -d\ \texttt{\textcolor{Red}{"{}+"{}}}`\  \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{result}\textcolor{BrickRed}{=}\textcolor{ForestGreen}{\$\{result:-\/-1\}} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textcolor{BrickRed}{[[}\ result\ \textcolor{BrickRed}{!=}\ -\textcolor{Purple}{1}\ \textcolor{BrickRed}{]]}\ \textcolor{BrickRed}{\&\&}\ echo\ -e\ \texttt{\textcolor{Red}{"{}Ajuste:\ f(x)=\$2}}\texttt{\textcolor{CarnationPink}{\textbackslash{}n}}\texttt{\textcolor{Red}{"{}}}\ \textcolor{BrickRed}{\&\&}\ cat\ tmp \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ rm\ -f\ tmp \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ echo\ -e\ \texttt{\textcolor{Red}{"{}}}\texttt{\textcolor{CarnationPink}{\textbackslash{}n\textbackslash{}n}}\texttt{\textcolor{Red}{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}\texttt{\textcolor{CarnationPink}{\textbackslash{}n\textbackslash{}n}}\texttt{\textcolor{Red}{"{}}} \\
+\mbox{}\} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ param\ \$1\ "{}nombre\ del\ algoritmo\ (mergesort,\ heapsort,...)"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ param\ \$2\ "{}función\ de\ ajuste"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ param\ \$3\ "{}coeficientes\ de\ la\ función\ de\ ajuste\ correspondiente"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Hace\ un\ plot\ del\ .dat\ junto\ a\ la\ función\ que\ más\ se\ le\ ajusta\ de}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ entre\ las\ disponibles\ en\ FUNCS}} \\
+\mbox{}\textit{\textcolor{Brown}{\#}} \\
+\mbox{}\textbf{\textcolor{Black}{function\ plotajuste()}}\ \{ \\
+\mbox{}\ \ \ \ echo\ \texttt{\textcolor{Red}{"{}set\ xlabel\ 'Talla\ del\ problema(n)'}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ \ \ \ \ set\ ylabel\ 'Tiempo(s)'}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ \ \ \ \ set\ terminal\ jpeg\ size\ 800,480}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ \ \ \ \ set\ output\ 'regressionPlots/`echo\ \$\{1\#\#*/\}\ $|$\ rev\ $|$\ cut\ -f2\ -d.\ $|$\ rev`$\_$fit.jpg'}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ \ \ \ \ f(x)=\$2}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ \ \ \ \ fit\ f(x)\ '\$1'\ via\ \$3}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ \ \ \ \ plot\ '\$1',f(x)\ title\ 'Curva\ ajustada'\ with\ linespoints"{}}}\ \textcolor{BrickRed}{\textgreater{}}\ \textcolor{ForestGreen}{\$SCRIPT} \\
+\mbox{}\ \ \ \ echo\ \texttt{\textcolor{Red}{"{}****\ \ \ Función\ de\ mejor\ ajuste:\ \$2\ \ \ *****"{}}} \\
+\mbox{}\ \ \ \ gnuplot\ \textcolor{ForestGreen}{\$SCRIPT}\ \textcolor{Purple}{2}\textcolor{BrickRed}{\textgreater{}}\ /dev/null \\
+\mbox{}\ \ \ \ rm\ -f\ \textcolor{ForestGreen}{\$SCRIPT} \\
+\mbox{}\} \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ param\ \$1\ "{}índice(válido)\ de\ FUNCS"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ return\ func\ "{}función\ de\ ajuste\ i-ésima\ de\ FUNCS"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ return\ coefs\ "{}coeficientes\ de\ ajuste\ de\ la\ función\ i-ésima"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#}} \\
+\mbox{}\textbf{\textcolor{Black}{function\ extrae$\_$f()}}\{ \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{func}\textcolor{BrickRed}{=}`echo\ \textcolor{ForestGreen}{\$\{FUNCS[\$1]\}}\ \textcolor{BrickRed}{$|$}\ cut\ -f\textcolor{Purple}{1}\ -d\ \texttt{\textcolor{Red}{"{}\ "{}}}` \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{coefs}\textcolor{BrickRed}{=}`echo\ \textcolor{ForestGreen}{\$\{FUNCS[\$1]\}}\textcolor{BrickRed}{$|$}\ cut\ -f\textcolor{Purple}{2}\ -d\ \texttt{\textcolor{Red}{"{}\ "{}}}` \\
+\mbox{}\}\ \ \ \  \\
+\mbox{} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ param\ \$1\ "{}archivo\ de\ datos\ (mergesort.dat,\ heapsort.dat,...)"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Genera\ el\ plot\ del\ mejor\ ajuste\ posible\ de\ entre\ los\ de\ FUNCS}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ para\ \$1.dat}} \\
+\mbox{}\textit{\textcolor{Brown}{\#}} \\
+\mbox{}\textbf{\textcolor{Black}{function\ genajuste()}}\ \{ \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#echo\ -n\ "{}"{}\ \textgreater{}\ "{}\$1.fit"{}}} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Suponemos\ FUNCS\ no\ vacío}} \\
+\mbox{}\ \ \ \ extrae$\_$f\ \textcolor{Purple}{0} \\
+\mbox{}\ \ \ \ bondadajuste\ \textcolor{ForestGreen}{\$1}\ \textcolor{ForestGreen}{\$\{func\}}\ \textcolor{ForestGreen}{\$\{coefs\}} \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{mejor}\textcolor{BrickRed}{=}\textcolor{ForestGreen}{\$result} \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{chosen}\textcolor{BrickRed}{=}\textcolor{Purple}{0} \\
+\mbox{}\ \ \ \  \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Para\ cada\ ajuste\ en\ FUNCS}} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Calcula\ sus\ residuos}} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ Si\ es\ mejor\ ajuste\ que\ el\ mejor\ hasta\ el\ momento}} \\
+\mbox{}\ \ \ \ \textit{\textcolor{Brown}{\#\ \ \ \ \ \ \ Actualizar\ mejor\ ajuste}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ i\ \textbf{\textcolor{Blue}{in}}\ `seq\ \textcolor{Purple}{1}\ \textcolor{ForestGreen}{\$((\$\{\#FUNCS[*]\}-1))}` \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{do}} \\
+\mbox{}\ \ \ \ \ \ \ \ extrae$\_$f\ \textcolor{ForestGreen}{\$i} \\
+\mbox{}\ \ \ \ \ \ \ \ bondadajuste\ \textcolor{ForestGreen}{\$1}\ \textcolor{ForestGreen}{\$\{func\}}\ \textcolor{ForestGreen}{\$\{coefs\}} \\
+\mbox{}\ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{if}}\ \textcolor{BrickRed}{[[}\ `echo\ \texttt{\textcolor{Red}{"{}(\$result\ \textless{}\ \$mejor)"{}}}\ \textcolor{BrickRed}{$|$}\ bc\ -l`\ -eq\ \textcolor{Purple}{1}\ \textcolor{BrickRed}{]]}\ \textcolor{BrickRed}{\&\&}\ \textcolor{BrickRed}{[[}\ \textcolor{ForestGreen}{\$result}\ \textcolor{BrickRed}{!=}\ -\textcolor{Purple}{1}\ \textcolor{BrickRed}{]]} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{then}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{mejor}\textcolor{BrickRed}{=}\textcolor{ForestGreen}{\$result} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{chosen}\textcolor{BrickRed}{=}\textcolor{ForestGreen}{\$i} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{fi}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{done}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ plotajuste\ \textcolor{ForestGreen}{\$1}\ \textcolor{ForestGreen}{\$(}echo\ \textcolor{ForestGreen}{\$\{FUNCS[\$chosen]\}}\ \textcolor{BrickRed}{$|$}\ cut\ -f\textcolor{Purple}{1}\ -d\ \texttt{\textcolor{Red}{"{}\ "{}}}\textcolor{BrickRed}{)}\ \textcolor{ForestGreen}{\$(}echo\ \textcolor{ForestGreen}{\$\{FUNCS[\$chosen]\}}\ \textcolor{BrickRed}{$|$}\ cut\ -f\textcolor{Purple}{2}\ -d\ \texttt{\textcolor{Red}{"{}\ "{}}}\textcolor{BrickRed}{)} \\
+\mbox{} \\
+\mbox{}\} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ param\ \$1\ "{}nombre\ del/los\ algoritmo(s)\ (mergesort,\ heapsort,...)"{}}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Genera\ una\ tabla\ de\ datos\ a\ partir\ del\ .dat\ de\ los\ algoritmos\ dados\ }} \\
+\mbox{}\textit{\textcolor{Brown}{\#}} \\
+\mbox{}\textbf{\textcolor{Black}{function\ gentable()}}\ \{ \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{TEXFILE}\textcolor{BrickRed}{=}\texttt{\textcolor{Red}{"{}table\$(echo\ "{}}}\textcolor{ForestGreen}{\$1}\texttt{\textcolor{Red}{"{}\ $|$\ egrep\ -o\ "{}}}\textcolor{BrickRed}{\textbackslash{}}b\textcolor{BrickRed}{[[:}alnum\textcolor{BrickRed}{:]]}\{\textcolor{Purple}{3}\}\texttt{\textcolor{Red}{"{}\ $|$\ tr\ -d\ "{}}}\textcolor{BrickRed}{\textbackslash{}}n\texttt{\textcolor{Red}{"{}).tex"{}}} \\
+\mbox{}\ \ \ \ touch\ \textcolor{ForestGreen}{\$TEXFILE}\ \textcolor{BrickRed}{$|$$|$}\ \textbf{\textcolor{Blue}{exit}}\ -\textcolor{Purple}{1} \\
+\mbox{} \\
+\mbox{}\ \ \ \ echo\ -n\ \texttt{\textcolor{Red}{"{}}}\texttt{\textcolor{CarnationPink}{\textbackslash{}\textbackslash{}}}\texttt{\textcolor{Red}{begin\{center\}}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ }}\texttt{\textcolor{CarnationPink}{\textbackslash{}\textbackslash{}}}\texttt{\textcolor{Red}{begin\{longtabu\}\ to\ }}\texttt{\textcolor{CarnationPink}{\textbackslash{}l}}\texttt{\textcolor{Red}{inewidth\{\ l\ $|$\ *\{`echo\ \$1\ $|$\ wc\ -w`\}\{d\{10\}\}\}\ \ \%\ máx\ 10\ decimales}} \\
+\mbox{}\texttt{\textcolor{CarnationPink}{\textbackslash{}r}}\texttt{\textcolor{Red}{owfont}}\texttt{\textcolor{CarnationPink}{\textbackslash{}b}}\texttt{\textcolor{Red}{fseries\ Tamaño\ "{}}}\ \textcolor{BrickRed}{\textgreater{}}\ \textcolor{ForestGreen}{\$TEXFILE} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textcolor{ForestGreen}{first}\textcolor{BrickRed}{=}\textcolor{Purple}{0} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ file\ \textbf{\textcolor{Blue}{in}}\ \textcolor{ForestGreen}{\$1}\textcolor{BrickRed}{;}\ \textbf{\textcolor{Blue}{do}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{BrickRed}{[[}\ \textcolor{ForestGreen}{\$first}\ -eq\ \textcolor{Purple}{0}\ \textcolor{BrickRed}{]]}\ \textcolor{BrickRed}{\&\&}\ \textcolor{ForestGreen}{NLINES}\textcolor{BrickRed}{=}`cat\ \textcolor{ForestGreen}{\$file}\textcolor{BrickRed}{.}dat\ \textcolor{BrickRed}{$|$}\ wc\ -l`\ \textcolor{BrickRed}{\&\&}\ \textcolor{ForestGreen}{first}\textcolor{BrickRed}{=}\textcolor{Purple}{1} \\
+\mbox{}\ \ \ \ \ \ \ \ echo\ -n\ \texttt{\textcolor{Red}{"{}\&\ }}\texttt{\textcolor{CarnationPink}{\textbackslash{}m}}\texttt{\textcolor{Red}{ulticolumn\{1\}\{l\}\{\$file\}\ "{}}}\ \textcolor{BrickRed}{\textgreater{}\textgreater{}}\ \textcolor{ForestGreen}{\$TEXFILE} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{done}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ echo\ \texttt{\textcolor{Red}{"{}}}\texttt{\textcolor{CarnationPink}{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}}\texttt{\textcolor{Red}{\ }}\texttt{\textcolor{CarnationPink}{\textbackslash{}\textbackslash{}}}\texttt{\textcolor{Red}{hline}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ }}\texttt{\textcolor{CarnationPink}{\textbackslash{}e}}\texttt{\textcolor{Red}{ndhead}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ }}\texttt{\textcolor{CarnationPink}{\textbackslash{}e}}\texttt{\textcolor{Red}{ndfoot}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ }}\texttt{\textcolor{CarnationPink}{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}}\texttt{\textcolor{Red}{\ }}\texttt{\textcolor{CarnationPink}{\textbackslash{}\textbackslash{}}}\texttt{\textcolor{Red}{hline}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ }}\texttt{\textcolor{CarnationPink}{\textbackslash{}e}}\texttt{\textcolor{Red}{ndlastfoot"{}}}\ \textcolor{BrickRed}{\textgreater{}\textgreater{}}\ \textcolor{ForestGreen}{\$TEXFILE} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{for}}\ \textcolor{BrickRed}{((}\ i\ \textcolor{BrickRed}{=}\ \textcolor{Purple}{1}\textcolor{BrickRed}{;}\ i\ \textcolor{BrickRed}{\textless{}=}\ \textcolor{ForestGreen}{\$NLINES}\textcolor{BrickRed}{;}\ i\textcolor{BrickRed}{++}\ \textcolor{BrickRed}{));}\ \textbf{\textcolor{Blue}{do}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textcolor{ForestGreen}{first}\textcolor{BrickRed}{=}\textcolor{Purple}{0}\ \textit{\textcolor{Brown}{\#\ true}} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{for}}\ file\ \textbf{\textcolor{Blue}{in}}\ \textcolor{ForestGreen}{\$1}\textcolor{BrickRed}{;}\ \textbf{\textcolor{Blue}{do}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{line}\textcolor{BrickRed}{=}`sed\ \texttt{\textcolor{Red}{"{}\$i\ q;d"{}}}\ \textcolor{ForestGreen}{\$file}\textcolor{BrickRed}{.}dat` \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{time}\textcolor{BrickRed}{=}`echo\ \textcolor{ForestGreen}{\$line}\ \textcolor{BrickRed}{$|$}\ cut\ -d\texttt{\textcolor{Red}{"{}\ "{}}}\ -f\textcolor{Purple}{2}\ \textcolor{BrickRed}{$|$}\ sed\ \texttt{\textcolor{Red}{"{}s/0}}\texttt{\textcolor{CarnationPink}{\textbackslash{}\{}}\texttt{\textcolor{Red}{1,}}\texttt{\textcolor{CarnationPink}{\textbackslash{}\}}}\texttt{\textcolor{Red}{\$//;s/\textasciicircum{}}}\texttt{\textcolor{CarnationPink}{\textbackslash{}.}}\texttt{\textcolor{Red}{/0}}\texttt{\textcolor{CarnationPink}{\textbackslash{}.}}\texttt{\textcolor{Red}{/"{}}}` \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \  \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{BrickRed}{[[}\ \textcolor{ForestGreen}{\$first}\ -eq\ \textcolor{Purple}{0}\ \textcolor{BrickRed}{]]}\ \textcolor{BrickRed}{\&\&}\ \{ \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{tam}\textcolor{BrickRed}{=}`echo\ \textcolor{ForestGreen}{\$line}\ \textcolor{BrickRed}{$|$}\ cut\ -d\texttt{\textcolor{Red}{"{}\ "{}}}\ -f\textcolor{Purple}{1}` \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ echo\ -n\ \texttt{\textcolor{Red}{"{}\$tam\ "{}}}\ \textcolor{BrickRed}{\textgreater{}\textgreater{}}\ \textcolor{ForestGreen}{\$TEXFILE} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{ForestGreen}{first}\textcolor{BrickRed}{=}\textcolor{Purple}{1}\ \textit{\textcolor{Brown}{\#\ false}} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ \} \\
+\mbox{} \\
+\mbox{}\ \ \ \ \ \ \ \ \ \ \ \ echo\ -n\ \texttt{\textcolor{Red}{"{}\&\ \$time\ "{}}}\ \textcolor{BrickRed}{\textgreater{}\textgreater{}}\ \textcolor{ForestGreen}{\$TEXFILE} \\
+\mbox{}\ \ \ \ \ \ \ \ \textbf{\textcolor{Blue}{done}} \\
+\mbox{}\ \ \ \ \ \ \ \ echo\ \texttt{\textcolor{Red}{"{}}}\texttt{\textcolor{CarnationPink}{\textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}}}\texttt{\textcolor{Red}{"{}}}\ \textcolor{BrickRed}{\textgreater{}\textgreater{}}\ \textcolor{ForestGreen}{\$TEXFILE} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{done}} \\
+\mbox{} \\
+\mbox{}\ \ \ \ echo\ \texttt{\textcolor{Red}{"{}}} \\
+\mbox{}\texttt{\textcolor{Red}{\ \ \ \ }}\texttt{\textcolor{CarnationPink}{\textbackslash{}\textbackslash{}}}\texttt{\textcolor{Red}{end\{longtabu\}}} \\
+\mbox{}\texttt{\textcolor{CarnationPink}{\textbackslash{}\textbackslash{}}}\texttt{\textcolor{Red}{end\{center\}"{}}}\ \textcolor{BrickRed}{\textgreater{}\textgreater{}}\ \textcolor{ForestGreen}{\$TEXFILE} \\
+\mbox{}\} \\
+\mbox{} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Si\ el\ argumento\ del\ script\ es\ 0,\ generamos\ el\ .dat\ correspondiente\ al\ archivo\ pasado}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Si\ es\ 1,\ hacemos\ un\ plot\ de\ datos}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Si\ es\ 2,\ generamos\ un\ plot\ del\ ajuste\ al\ .dat\ del\ archivo\ pasado}} \\
+\mbox{}\textit{\textcolor{Brown}{\#\ Si\ es\ 3,\ generamos\ una\ tabla\ LaTeX\ a\ partir\ de\ los\ .dat\ de\ los\ programas\ dados}} \\
+\mbox{} \\
+\mbox{}\textcolor{BrickRed}{[[}\ \textcolor{ForestGreen}{\$2}\ -eq\ \textcolor{Purple}{0}\ \textcolor{BrickRed}{]]}\ \textcolor{BrickRed}{\&\&}\ gendata\ \textcolor{ForestGreen}{\$1}\ \textcolor{BrickRed}{\&\&}\ \textbf{\textcolor{Blue}{exit}}\ \textcolor{Purple}{0} \\
+\mbox{} \\
+\mbox{}\textcolor{BrickRed}{[[}\ \textcolor{ForestGreen}{\$2}\ -eq\ \textcolor{Purple}{1}\ \textcolor{BrickRed}{]]}\ \textcolor{BrickRed}{\&\&}\ genplot\ `echo\ \textcolor{ForestGreen}{\$\{1\#\#*/\}}\ \textcolor{BrickRed}{$|$}\ rev\ \textcolor{BrickRed}{$|$}\ cut\ -f\textcolor{Purple}{2}\ -d\textcolor{BrickRed}{.}\ \textcolor{BrickRed}{$|$}\ rev`\ \textcolor{BrickRed}{\&\&}\ \textbf{\textcolor{Blue}{exit}}\ \textcolor{Purple}{0} \\
+\mbox{} \\
+\mbox{}\textcolor{BrickRed}{[[}\ \textcolor{ForestGreen}{\$2}\ -eq\ \textcolor{Purple}{2}\ \textcolor{BrickRed}{]]}\ \textcolor{BrickRed}{\&\&}\ genajuste\ \textcolor{ForestGreen}{\$1}\ \textcolor{BrickRed}{\&\&}\ \textbf{\textcolor{Blue}{exit}}\ \textcolor{Purple}{0} \\
+\mbox{} \\
+\mbox{}\textcolor{BrickRed}{[[}\ \textcolor{ForestGreen}{\$2}\ -eq\ \textcolor{Purple}{3}\ \textcolor{BrickRed}{]]}\ \textcolor{BrickRed}{\&\&}\ gentable\ \texttt{\textcolor{Red}{"{}\$1"{}}}\ \textcolor{BrickRed}{\&\&}\ \textbf{\textcolor{Blue}{exit}}\ \textcolor{Purple}{0} \\
+\mbox{} \\
+\mbox{}\textbf{\textcolor{Blue}{exit}}\ \textcolor{Purple}{1} \\
+\mbox{}
