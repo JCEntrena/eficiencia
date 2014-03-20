@@ -259,8 +259,9 @@ es posible que la función de ajuste no coincida siempre con la que da el compor
     $f(n)=4.20281\cdot 10^{-9}\cdot n^2-6.17206\cdot 10^{-6}\cdot n$\\$+0.00487322$ & $0.00391704$ \\ \hline
     $f(n)=4.0846\cdot 10^{-5}\cdot n \cdot log(n)-0.000353425\cdot n$\\$+0.0204474 \cdot log(n)-0.0654402$ & $0.00767502$ \\
     \end{tabular}
-\begin{itemize}
-  \item Ordenación por inserción\\
+    
+
+  \subsubsection{Ordenación por inserción}
   El mejor ajuste práctico ha resultado ser: $f(n)=1.03091\cdot 10^{-14} \cdot n^3+1.32572\cdot 10^{-9}\cdot n^2+7.21102 \cdot 10^{-7}\cdot n-0.000351074$
   con una media de residuos cuadráticos de $0.000877862$\\
   El ajuste que deberíamos haber obtenido: $f(n)=a \cdot n^2+b \cdot n+c$\\
@@ -277,7 +278,7 @@ es posible que la función de ajuste no coincida siempre con la que da el compor
     \hline
     \end{tabular}
 
-  \item Ordenación por selección\\
+  \subsubsection{Ordenación por selección}
   El mejor ajuste práctico ha resultado ser: $f(n)=-3.91702\cdot 10^{-14} \cdot n^3+2.20218\cdot 10^{-9}\cdot n^2-1.39687 \cdot 10^{-6}\cdot n+0.00102057$
   con una media de residuos cuadráticos de $0.0043292$\\
   El ajuste que deberíamos haber obtenido: $f(n)=a \cdot n^2+b \cdot n+c$\\
@@ -293,14 +294,12 @@ es posible que la función de ajuste no coincida siempre con la que da el compor
     $f(n)= 1.52761\cdot 10^{-5}\cdot n \cdot log(n)-0.000128103\cdot n0.00641101 \cdot log(n)-0.0197314$ & $0.00463731$ \\
     \hline
     \end{tabular}
-  \end{itemize}
 
 Es lógico que el análisis práctico en los algoritmos $\mathcal{O}(n^2)$
 hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}^3$
 
 \subsection{Algoritmos teóricamente $\mathcal{O}(nlog(n)$}
-\begin{itemize}
-  \item Ordenación por mergesort\\
+  \subsubsection{Ordenación por mergesort}
   El mejor ajuste práctico ha resultado ser su recta de regresión: $f(n)=2.38969\cdot 10^{-7} -4.94954\cdot 10 ^{-5}$
   con una media de residuos cuadráticos de $0.000118196$\\
   El ajuste que deberíamos haber obtenido: $f(n)=a \cdot nlog(n) + b\cdot n+c \cdot log(n) + d$\\
@@ -320,7 +319,7 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     \hline
     \end{tabular}
 
-  \item Ordenación por quicksort\\
+  \subsubsection{Ordenación por quicksort}
   El mejor ajuste práctico ha resultado ser: $f(n)=-4.52927\cdot 10^{-16} \cdot n^3+8.28261\cdot 10^{-12}\cdot n^2+1.13041 \cdot 10^{-7}\cdot n-
   1.72007\cdot 10^{-6}$ con una media de residuos cuadráticos de $8.29712\cdot 10^{-6}$\\
   El ajuste que deberíamos haber obtenido: $f(n)=a \cdot nlog(n) + b\cdot n+c \cdot log(n) + d$\\
@@ -337,7 +336,7 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     \hline
     \end{tabular}
 
-  \item Ordenación heapsort\\
+  \subsubsection{Ordenación heapsort}
   El mejor ajuste ha resultado ser: $f(n)=2.05288 \cdot 10^{-8}\cdot nlog(n) + 4.34162\cdot 10^{-9}\cdot n+a2 \cdot 1.04338 
   \cdot 10^{-6}log(n)-3.42946 \cdot 10^{-6}$, con una media de residuos cuadráticos de $7.02599 \cdot 10^{-6}$\\
 
@@ -352,11 +351,9 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     $f(n)=-1.77474\cdot 10^{-16} \cdot n^3+5.21199\cdot 10^{-12}\cdot n^2+1.60978 \cdot 10^{-7}\cdot n-1.32978\cdot 10^{-5}$ & $7.42333\cdot 10^{-6}$ \\
     \hline
     \end{tabular}
-    \end{itemize}
 
 \subsection{Algoritmos teóricamente $\mathcal{O}(n^3)$}
-\begin{itemize}
-  \item Floyd\\
+  \subsubsection{Algoritmo de Floyd}
   El mejor ajuste práctico ha resultado ser: $f(n)=7.30452\cdot 10^{-9} \cdot n^3+3.41994\cdot 10^{-7}\cdot n^2+8.33203 \cdot 10^{-5}\cdot n-0.0120107$,
   con una media de residuos cuadráticos de $0.0411334$\\
     \begin{tabular}{|c|c|}
@@ -370,7 +367,6 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
     $f(n)= 0.0150877\cdot n \cdot log(n)-0.104723\cdot n+1.69894 \cdot log(n)-4.06597$ & $0.205186$ \\
     \hline
     \end{tabular}
-\end{itemize}
 
 \subsection{Algoritmos teóricamente exponenciales}
   \subsubsection{Teóricamente $\mathcal{O}(2^n)$}
