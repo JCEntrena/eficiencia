@@ -1,10 +1,12 @@
 \begin{center}
-    \begin{longtabu} to \linewidth{ l | *{1}{d{10}}}  % máx 10 decimales
-\rowfont\bfseries Tamaño & \multicolumn{1}{l}{hanoi} \\ \hline
-    \endhead
-    \endfoot
-    \\ \hline
-    \endlastfoot
+\tablehead{\bfseries Tamaño & \multicolumn{1}{l}{\bfseries hanoi} \\ \hline}
+    \begin{supertabular}{ l | *{1}{d{10}}}
+%        \begin{supertabular} to \linewidth{ l | *{1}{d{10}}}  % máx 10 decimales
+%\rowfont\bfseries Tamaño & \multicolumn{1}{l}{hanoi} \\ \hline
+%    \endhead
+%    \endfoot
+%    \\ \hline
+%    \endlastfoot
 1 & 0.0000001792 \\
 2 & 0.0000001948 \\
 3 & 0.0000002414 \\
@@ -40,5 +42,5 @@
 33 & 75.6 \\
 34 & 156.8 \\
 
-    \end{longtabu}
-\end{center}
+    \end{supertabular}
+    \end{center}

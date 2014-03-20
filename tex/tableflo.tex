@@ -1,11 +1,6 @@
-\begin{center}
-    \begin{longtabu} to \linewidth{ l | *{1}{d{10}}}  % máx 10 decimales
-\rowfont\bfseries Tamaño & \multicolumn{1}{l}{floyd} \\ \hline
-    \endhead
-    \endfoot
-    \\ \hline
-    \endlastfoot
-10 & 0.000013586 \\
+
+\tablehead{\bfseries Tamaño & \multicolumn{1}{l}{\bfseries floyd} \\ \hline}
+    \begin{supertabular}{ l | *{1}{d{10}}}
 15 & 0.0000337 \\
 20 & 0.00009132 \\
 25 & 0.0001544 \\
@@ -204,5 +199,4 @@
 990 & 7.488 \\
 995 & 7.76 \\
 
-    \end{longtabu}
-\end{center}
+    \end{supertabular}

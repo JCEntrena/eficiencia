@@ -44,8 +44,10 @@
 
 \usepackage{longtable}
 \usepackage{tabu}
+\usepackage{supertabular}
 
 \usepackage{multicol}
+\newsavebox\ltmcbox
 
 \usepackage[section]{placeins} % Para gráficas en su sección.
 \usepackage{mathpazo} % Use the Palatino font
@@ -568,8 +570,11 @@ exponencial,...) a las parejas de datos en los \texttt{.dat}
 Se adjuntan las tablas de datos (talla del problema-tiempo de ejecución) para
 cada algoritmo.
 \input{tableburinssel}
+\twocolumn
 \input{tableflo}
+\onecolumn
 \input{tablehan}
+\onecolumn
 \input{tablemerquihea}
 
 
