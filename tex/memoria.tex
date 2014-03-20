@@ -214,31 +214,21 @@ Una vez obtenidos los tiempos al inicio y finalización de la ejecución, se rea
 
 Para el tratamiento de los algoritmos con distintos tamaños de entrada, se ha utilizado un guion en Bash (sección \ref{gengraf}) que ejecuta los programas las veces necesarias y con los parámetros convenientes, para obtener todos los tiempos de ejecución requeridos. Permite además ejecutar más de una vez con el mismo tamaño de problema para realizar una media de los tiempos obtenidos (en nuestro caso se ha hecho la media de 5 repeticiones de cada tamaño).
 
-Además, se ha añadido a este guion la funcionalidad necesaria para comunicarse con \texttt{gnuplot} y crear una gráfica a partir del archivo de datos generado por uno de los programas, y crear también la gráfica de la función de ajuste. En cada caso, el Makefile (sección \ref{makefile}) se encarga de proporcionar los parámetros necesarios al guion y de redirigir la salida al archivo correcto, de forma que el usuario solo debe ejecutar órdenes del tipo \texttt{make plot} o \texttt{make fit} para generar gráficas de datos y de ajuste, respectivamente, de todos los programas.
+Además, se ha añadido a este guion la funcionalidad necesaria para comunicarse con \texttt{gnuplot} y crear una gráfica a partir del archivo de datos generado por uno de los programas, y crear también la gráfica de la función de ajuste. En cada caso, el Makefile (sección \ref{makefile}) se encarga de proporcionar los parámetros necesarios al guion y de redirigir la salida al archivo correcto, de forma que el usuario solo debe ejecutar órdenes sencillas para generar gráficas de datos y ajustes de todos los programas.
 
+\subsection{Ejecución de programas}
+Se han realizado ejecuciones con tres máquinas distintas y diferentes optimizaciones:
+\begin{itemize}
+\item Intel Core i7 3612QM (2.1 GHz), sin optimización de GCC.
+\item Intel Core i7 3610QM (2.3 GHz), con optimización \texttt{-O2}.
+\item Intel Core i5 3210M (2.5 GHz), sin optimización de GCC.
+\end{itemize}
+Los datos obtenidos del primer computador son los utilizados para obtener gráficas y funciones de ajuste en la sección \ref{ajustes}.
 
-\normalsize
+Los resultados revelan que de una máquina a otra puede variar la constante oculta de la función del tiempo de ejecución, pero se mantiene el comportamiento asintótico, y los ajustes resultantes son similares.
 
-\section {Conclusiones}
-\subsection {Gráficas}
-\imagen{../regressionPlots/burbuja_fit.jpg}{Ordenación por burbuja}
-
-\imagen{../regressionPlots/fibonacci_fit.jpg}{Sucesión de Fibonacci}
-
-\imagen{../regressionPlots/floyd_fit.jpg}{Algoritmo de Floyd}
-
-\imagen{../regressionPlots/hanoi_fit.jpg}{Torres de Hanoi}
-
-\imagen{../regressionPlots/heapsort_fit.jpg}{Ordenación por heapsort}
-
-\imagen{../regressionPlots/insercion_fit.jpg}{Ordenación por inserción}
-
-\imagen{../regressionPlots/mergesort_fit.jpg}{Ordenación por mergesort}
-
-\imagen{../regressionPlots/quicksort_fit.jpg}{Ordenación por quicksort}
-
-\imagen{../regressionPlots/seleccion_fit.jpg}{Ordenación por seleccion}
-
+\section {Resultados empíricos}
+\label{ajustes}
 \subsection{Análisis práctico de la eficiencia}
 Para realizar un análisis práctico de la eficiencia, el script adjunto en el
 apéndice, para una lista de funciones (lineales, cúbicas, exponenciales,...) 
@@ -247,7 +237,7 @@ de los residuos cuadráticos correspondientes. El mejor ajuste posible sería
 aquel que generase unos residuos menores. Hay que tener en cuenta que la 
 eficiencia es un concepto asintótico, y puesto que se han evaluado los algoritmos
 para los datos que permitían un tiempo de ejecución de los mismos asumible, 
-es posible que la eficiencia práctica no se haya obtenido como debiera.
+es posible que la función de ajuste no coincida siempre con la que da el comportamiento asintótico.
 \subsection{Algoritmos teóricamente $\mathcal{O}(n^2)$}
 
   \subsubsection{Ordenación por burbuja}
@@ -383,6 +373,24 @@ hayamos obtenido un polinomio cúbico, ya que $\mathbb{P}^2 \subseteq \mathbb{P}
    
   \end{itemize}
 
+\subsection {Gráficas}
+\imagen{../regressionPlots/burbuja_fit.jpg}{Ordenación por burbuja}
+
+\imagen{../regressionPlots/fibonacci_fit.jpg}{Sucesión de Fibonacci}
+
+\imagen{../regressionPlots/floyd_fit.jpg}{Algoritmo de Floyd}
+
+\imagen{../regressionPlots/hanoi_fit.jpg}{Torres de Hanoi}
+
+\imagen{../regressionPlots/heapsort_fit.jpg}{Ordenación por heapsort}
+
+\imagen{../regressionPlots/insercion_fit.jpg}{Ordenación por inserción}
+
+\imagen{../regressionPlots/mergesort_fit.jpg}{Ordenación por mergesort}
+
+\imagen{../regressionPlots/quicksort_fit.jpg}{Ordenación por quicksort}
+
+\imagen{../regressionPlots/seleccion_fit.jpg}{Ordenación por seleccion}
 
 \newpage
 \section{Apéndice}
